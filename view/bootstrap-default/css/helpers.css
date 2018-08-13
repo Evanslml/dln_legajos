@@ -1,0 +1,501 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.text-12{
+    font-size: 12px;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+.btn-accion{
+    padding: 4px 8px;
+    margin-right: 5px;
+    color: #fff;
+    background: #3c8dbc;
+    cursor: pointer;
+/*  vertical-align: bottom; */
+}
+.pad-top-10{
+    padding-top: 10px; 
+}
+.pad-bot-10{
+    padding-bottom: 10px; 
+}
+.mar-bot-0{
+    margin-bottom: 0px; 
+}
+.btn-accion:hover{
+    background: #777777;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+}
+.btn-accion:focus{
+    color: #fff;
+}
+/*LOADING*/
+
+.loading{
+    position: fixed;
+    top: calc(50% - 40px);
+    left: calc(50% - 40px);
+    z-index: 9999;
+    width: 80px;
+    height: 80px;
+    display: none;
+}
+.loading img{
+    width: 80px
+}
+.relative{
+  position: relative;
+}
+.absolute{
+  position: absolute;
+}
+.danger{
+  color: red;
+}
+/***************************************************************************************************************************/
+/* BOTON TOP
+/***************************************************************************************************************************/
+ .ir-arriba {
+  display:none;
+  padding:20px;
+  background:#024959;
+  font-size:20px;
+  color:#fff;
+  cursor:pointer;
+  position: fixed;
+  bottom:20px;
+  right:20px;
+  height: 60px;
+  width: 50px;
+}
+/***************************************************************************************************************************/
+/* MENU LEGAJOS
+/***************************************************************************************************************************/
+ .panel-tools{
+    float: right;
+    display: inline-block;
+    height: 56px;
+    margin: -1px;
+    padding: 0;
+}
+.panel-tools>.button{
+    height: 56px;
+    line-height: 56px;
+    position: relative;
+    width: 60px;
+    display: inline-block;
+    margin-right: -3px;
+    transition: all 0.2s ease-in-out;
+}
+.panel-tools>.button:hover{
+    width: 180px;
+}
+.panel-tools>.button:nth-child(1){
+    background: #27ae60;
+}
+.panel-tools>.button:nth-child(1):hover{
+    background: #1b7541;
+}
+.panel-tools>.button:nth-child(2){
+    background: #9b59b6;
+}
+.panel-tools>.button:nth-child(2):hover{
+    background: #c28bd8;
+}
+.panel-tools>.button:nth-child(3){
+    background: #8f4449;
+}
+.panel-tools>.button:nth-child(3):hover{
+    background: #db635a;
+}
+.panel-tools>.button>a{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.panel-tools>.button>a>i{
+    font-size: 25px;
+    display: inline-block;
+    margin-left: 20px;
+    line-height: 56px;
+    color: #fff;
+}
+.panel-tools>.button>a>span{
+    display: none;
+    color: #fff;
+    margin-left: 15px;
+    font-size: 17px;
+}
+.panel-tools>.button:hover>a>span{
+    display: inline-block;
+}
+.panel-tools.sticky {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    right: 0;
+    height: 45px;
+}
+.panel-tools.sticky>.button {
+    height: 45px;
+    line-height: 45px;
+    width: 50px;
+}
+.panel-tools.sticky>.button>a>i {
+    font-size: 15px;
+    margin-left: 20px;
+    line-height: 45px;
+}
+.panel-tools.sticky>.button>a>span{
+    font-size: 14px;
+}
+.panel-tools.sticky>.button:hover{
+    width: 150px;
+}
+/***************************************************************************************************************************/
+/*                                                                                                      */
+/***************************************************************************************************************************/
+.subtitle-form{
+    color: #2a3f54;
+    margin: 15px 0 15px 0;
+    text-transform: uppercase;
+    border-bottom: 1px dashed #2a3f54;
+    border-top: 1px dashed #2a3f54;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+}
+/***************************************************************************************************************************/
+/*                                                                                                      */
+/***************************************************************************************************************************/
+
+.heading-inline{
+    display: inline-block;
+    margin-right: 5px;
+}
+.bold{
+    font-weight: bold;
+}
+
+/***************************************************************************************************************************/
+/*                                                                                                      */
+/***************************************************************************************************************************/
+.lista-resumen li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+}
+.lista-resumen li:after{
+    content: '|';
+    position: absolute;
+    right: -10px;
+}
+.lista-resumen li:last-child:after{
+    content: '';
+}
+
+.lista-menu-legajos{
+    justify-content: space-between;
+    flex-wrap: wrap;
+    display: flex;
+}
+.lista-menu-legajos li{
+    padding: 10px;
+    background: #20969c;
+    width: 19%;
+    margin-bottom: 1%;
+    list-style: none;
+    position: relative;
+    height: 60px;
+}
+.lista-menu-legajos li.active{
+    background: #9c2020;
+}
+.lista-menu-legajos li a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+.lista-menu-legajos li i,
+.lista-menu-legajos li h5{
+    display: inline;
+    color: #fff;
+}
+.lista-menu-legajos li i{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/***************************************************************************************************************************/
+/*                                                                                                      */
+/***************************************************************************************************************************/
+.subtitle-collapse i{
+  transition-duration: 0.5s;
+    transition-property: transform;
+}
+.subtitle-collapse i.rotate{
+  transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+}
+
+
+/***************************************************************************************************************************/
+/*                                                                                                      */
+/***************************************************************************************************************************/
+
+/*.formulario-legajos{
+    border: 1px solid #3c8dbc
+}*/
+.formulario-legajos .subtitle{
+    font-size: 14px;
+    margin: 3px;
+    color: #3399FF;
+}
+.border-seccion{
+    border: 1px solid #3c8dbc;
+    padding-bottom: 10px;
+}
+.border-seccion-left{
+    border-left: 1px solid #3c8dbc;
+}
+.border-seccion-right{
+    border-right: 1px solid #3c8dbc;
+}
+.border-seccion-top{
+    border-top: 1px solid #3c8dbc;
+}
+.border-seccion-bottom{
+    border-bottom: 1px solid #3c8dbc;
+}    
+.formulario-legajos .group {
+  position: relative;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.formulario-legajos .inputMaterial {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #757575;
+  text-transform: uppercase;
+}
+
+.formulario-legajos .inputMaterial:focus {
+  outline: none;
+}
+
+/* LABEL ======================================= */
+.formulario-legajos label {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+.formulario-legajos .inputMaterial:focus ~ label, .formulario-legajos .inputMaterial:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #3399FF;
+}
+
+/* BOTTOM BARS ================================= */
+.formulario-legajos .bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.formulario-legajos .bar:before, .formulario-legajos .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #3399FF;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.formulario-legajos .bar:before {
+  left: 50%;
+}
+
+.formulario-legajos .bar:after {
+  right: 50%;
+}
+
+/* active state */
+.formulario-legajos .inputMaterial:focus ~ .bar:before, .formulario-legajos .inputMaterial:focus ~ .bar:after {
+  width: 50%;
+}
+
+/* active state */
+.formulario-legajos .inputMaterial:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+/* INPUT FILE ================ */
+.input-file-title{
+    color: #3399FF;
+}
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 100%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+
+/* style 6 */
+
+.inputfile-6 + label {
+    color: #225d77;
+}
+
+.inputfile-6 + label {
+    border: 1px solid #225d77;
+    background-color: #f1f1f1;
+    padding: 0;
+}
+
+.inputfile-6:focus + label,
+.inputfile-6.has-focus + label,
+.inputfile-6 + label:hover {
+    border-color: #143f52;
+}
+
+.inputfile-6 + label span,
+.inputfile-6 + label strong {
+    padding: 1rem 1.25rem;
+    /* 10px 20px */
+}
+
+.inputfile-6 + label span {
+    width: 200px;
+    min-height: 2em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.inputfile-6 + label strong {
+    height: 100%;
+    color: #f1f1f1;
+    background-color: #225d77;
+    display: inline-block;
+}
+
+.inputfile-6:focus + label strong,
+.inputfile-6.has-focus + label strong,
+.inputfile-6 + label:hover strong {
+    background-color: #143f52;
+}
+/*
+@media screen and (max-width: 50em) {
+  .inputfile-6 + label strong {
+    display: block;
+  }
+}*/
