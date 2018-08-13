@@ -157,7 +157,7 @@ require_once 'public/overall/header.php';
                         <select data-placeholder="GRADO INSTRUCCION" class="chosen-select-deselect" tabindex="2" name="grado_instruccion" id="grado_instruccion">
                             <option value=""></option>
                             <?php 
-                              $_ListaGraInstruccion= Tabla::Lista(9);
+                              $_ListaGraInstruccion= Tabla::Lista(16);
                               foreach ($_ListaGraInstruccion as $key => $value) {
                                 echo "<option value='".$value['MTABL_ID']."'>".$value['MTABL_DESCRIP']."</option>";
                               }
@@ -205,7 +205,7 @@ require_once 'public/overall/header.php';
                     <select data-placeholder="REGIMEN DE PENSIONES" class="chosen-select-deselect" tabindex="2" name="cbx_reg_pensiones" id="cbx_reg_pensiones">
                         <option value=""></option>
                         <?php 
-                          $_ListaGraInstruccion= Tabla::Lista(20);
+                          $_ListaGraInstruccion= Tabla::Lista(9);
                           foreach ($_ListaGraInstruccion as $key => $value) {
                             echo "<option value='".$value['MTABL_ID']."'>".$value['MTABL_DESCRIP']."</option>";
                           }
@@ -217,7 +217,7 @@ require_once 'public/overall/header.php';
                     <select data-placeholder="REGIMEN LABORAL" class="chosen-select-deselect" tabindex="2" name="cbx_reg_laboral" id="cbx_reg_laboral">
                         <option value=""></option>
                         <?php 
-                          $_ListaGraInstruccion= Tabla::Lista(23);
+                          $_ListaGraInstruccion= Tabla::Lista(12);
                           foreach ($_ListaGraInstruccion as $key => $value) {
                             echo "<option value='".$value['MTABL_ID']."'>".$value['MTABL_DESCRIP']."</option>";
                           }

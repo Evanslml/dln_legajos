@@ -3,9 +3,9 @@
  date_default_timezone_set('America/Lima');
   
  //definimos ruta y titulo del sitio
- define('URL_VIEW','http://192.168.1.126:8080/dln_legajos/view/');
+ define('URL_VIEW','http://172.16.20.19:8080/dln_legajos/view/');
  define('TITLE_WEB','LEGAJOS DIRIS');
- define('URL_WEB','http://192.168.1.126:8080/dln_legajos/');
+ define('URL_WEB','http://172.16.20.19:8080/dln_legajos/');
  define('NOMBRE_WEB','LEGAJOS');
  
  define('WWW','http://dirislimanorte.gob.pe/');
