@@ -202,7 +202,9 @@ $( document ).ready(function() {
     By Osvaldas Valutis, www.osvaldas.info
     Available for use under the MIT License
 */
+habilitar_subida_archivo();
 
+function habilitar_subida_archivo(){
 
 'use strict';
 
@@ -237,7 +239,7 @@ $( document ).ready(function() {
 })( jQuery, window, document );
 
 
-
+}
 
 
 

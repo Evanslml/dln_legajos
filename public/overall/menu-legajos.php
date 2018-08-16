@@ -33,13 +33,13 @@
 					<a href="./seccionii"><i class="fa fa-edit"></i><h5>Nivel Educativo</h5></a>
 				</li>
 				<li <?php if($vista_seccion=='seccioniii'){ echo 'class="active"'; }?>>
-					<a href="#"><i class="fa fa-edit"></i><h5>Capacitación</h5></a>
+					<a href="./seccioniii"><i class="fa fa-edit"></i><h5>Capacitación</h5></a>
 				</li>
 				<li <?php if($vista_seccion=='seccioniv'){ echo 'class="active"'; }?>>
-					<a href="#"><i class="fa fa-edit"></i><h5>Contratos y Nombramientos</h5></a>
+					<a href="./seccioniv"><i class="fa fa-edit"></i><h5>Contratos y Nombramientos</h5></a>
 				</li>
 				<li <?php if($vista_seccion=='seccionv'){ echo 'class="active"'; }?>>
-					<a href="#"><i class="fa fa-edit"></i><h5>Renuncia y Liquidaciones</h5></a>
+					<a href="./seccionv"><i class="fa fa-edit"></i><h5>Renuncia y Liquidaciones</h5></a>
 				</li>
 				<!--
 				<li><a href="#"><i class="fa fa-edit"></i><h5>Filiación E Identificación de Personal</h5></a></li>

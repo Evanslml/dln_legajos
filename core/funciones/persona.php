@@ -248,6 +248,66 @@ class Filial extends Persona
 
 }
 
+
+class Estudio extends Persona
+{
+	
+	protected $MTABL_ID;
+	protected $MESTU_DESC;
+	protected $MESTU_ESPE;
+	protected $MESTU_UBIC;
+	protected $MESTU_ESTADO;
+	protected $MESTU_TIPO;
+
+	function __construct($MPERS_NUMDOC,$MTABL_ID,$MESTU_DESC,$MESTU_ESPE,$MESTU_UBIC,$MESTU_ESTADO,$MESTU_TIPO)
+	{
+		$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+		$this->MTABL_ID=$MTABL_ID;
+		$this->MESTU_DESC=$MESTU_DESC;
+		$this->MESTU_ESPE=$MESTU_ESPE;
+		$this->MESTU_UBIC=$MESTU_UBIC;
+		$this->MESTU_ESTADO=$MESTU_ESTADO;
+		$this->MESTU_TIPO=$MESTU_TIPO;
+	}
+
+	public function IngresarEstudios(){
+	    $db = new Conexion();
+	    $query="INSERT INTO MESTUDIOS(MPERS_NUMDOC,MTABL_ID,MESTU_DESC,MESTU_ESPE,MESTU_UBIC,MESTU_ESTADO,MESTU_TIPO)
+		VALUES (
+		'$this->MPERS_NUMDOC',
+		'$this->MTABL_ID',
+		'$this->MESTU_DESC',
+		'$this->MESTU_ESPE',
+		'$this->MESTU_UBIC',
+		'$this->MESTU_ESTADO',
+		'$this->MESTU_TIPO'
+		)";
+
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+
+	public static function Busqueda_estudios_dni($dni,$tipo){
+		$db = new Conexion();
+		$query="SELECT * FROM dbo.MESTUDIOS WHERE MPERS_NUMDOC='$dni' AND MESTU_TIPO='$tipo' ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MESTU_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+}
+
+
 class Adjunto extends Persona
 {
 
@@ -284,6 +344,68 @@ class Adjunto extends Persona
 }
 
 
+class Contrato extends Persona
+{
+
+	protected $MCON_FECHA;
+	protected $MCON_NUMERO;
+	protected $MCON_MODALIDAD;
+	protected $MTABLA_ID;
+	protected $MCON_ORIGEN;
+	//protected $MPERS_NIVREMUN;
+	protected $MCON_TIPO;
+	protected $MCON_ESTADO;
+
+	function __construct($MPERS_NUMDOC,$MCON_FECHA,$MCON_NUMERO,$MCON_MODALIDAD,$MTABLA_ID,$MCON_ORIGEN,$MPERS_NIVREMUN,$MCON_TIPO,$MCON_ESTADO)
+	{
+		$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+		$this->MCON_FECHA=$MCON_FECHA;
+		$this->MCON_NUMERO=$MCON_NUMERO;
+		$this->MCON_MODALIDAD=$MCON_MODALIDAD;
+		$this->MTABLA_ID=$MTABLA_ID;
+		$this->MCON_ORIGEN=$MCON_ORIGEN;
+		$this->MPERS_NIVREMUN=$MPERS_NIVREMUN;
+		$this->MCON_TIPO=$MCON_TIPO;
+		$this->MCON_ESTADO=$MCON_ESTADO;
+	}
+
+	public function IngresarContrato(){
+	    $db = new Conexion();
+	    $query="INSERT INTO MCONTRATO(MPERS_NUMDOC,MCON_FECHA,MCON_NUMERO,MCON_MODALIDAD,MTABLA_ID,MCON_ORIGEN,MPERS_NIVREMUN,MCON_TIPO,MCON_ESTADO)
+		VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MCON_FECHA',
+			'$this->MCON_NUMERO',
+			'$this->MCON_MODALIDAD',
+			'$this->MTABLA_ID',
+			'$this->MCON_ORIGEN',
+			'$this->MPERS_NIVREMUN',
+			'$this->MCON_TIPO',
+			'$this->MCON_ESTADO')";
+
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+
+	public static function Busqueda_contratos_dni($dni){
+		$db = new Conexion();
+		$query="SELECT * FROM dbo.MCONTRATO WHERE MPERS_NUMDOC='$dni' ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MCON_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+}
 
 
 

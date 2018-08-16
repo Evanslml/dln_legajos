@@ -30,23 +30,20 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		$TMESTUDIOS = array_slice($data, $ME_i, $ME_f);
 		$MTABL_ID = array();
 		$MESTU_DESC = array();
-		$MESTU_ESPE = array();
 		$MESTU_UBIC = array();
 
 		foreach($TMESTUDIOS  as $key=>$val){
-    	 	if(($key+4)%4 == 0){
+    	 	if(($key+3)%3 == 0){
     	 			$MTABL_ID[]= $val;
-    	 	}if(($key+3)%4 == 0){
+    	 	}if(($key+2)%3 == 0){
     	 			$MESTU_DESC[]= $val;
-    	 	}if(($key+2)%4 == 0){
-    	 			$MESTU_ESPE[]= $val;
-    	 	}if(($key+1)%4 == 0){
+    	 	}if(($key+1)%3 == 0){
     	 			$MESTU_UBIC[]= $val;
     	 	}
 	    }
 
 /*PROCESO DE GUARDADO*/
-		$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'E');
+		$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'C');
 		if($Existe_Persona ==''){
 
 		for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
@@ -55,10 +52,10 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 					$MPERS_NUMDOC,
 					$MTABL_ID[$i],
 					$MESTU_DESC[$i],
-					$MESTU_ESPE[$i],
+					'',
 					$MESTU_UBIC[$i],
 					1,
-					'E'
+					'C'
 				);
 				$estudios1->IngresarEstudios();
 		}	

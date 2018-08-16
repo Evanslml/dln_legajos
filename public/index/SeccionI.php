@@ -493,7 +493,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-4" class="inputfile inputfile-6"/>
                               <label for="file-4" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -504,7 +504,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-5" class="inputfile inputfile-6" />
                               <label for="file-5" class="mar-bot-0" style="height: 40px">
                               <span class="demo"></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -515,7 +515,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-6" class="inputfile inputfile-6" />
                               <label for="file-6" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -526,7 +526,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-7" class="inputfile inputfile-6" />
                               <label for="file-7" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -537,7 +537,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-8" class="inputfile inputfile-6" />
                               <label for="file-8" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -548,7 +548,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-9" class="inputfile inputfile-6" />
                               <label for="file-9" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -559,7 +559,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-10" class="inputfile inputfile-6" />
                               <label for="file-10" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -570,7 +570,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-11" class="inputfile inputfile-6" />
                               <label for="file-11" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -581,7 +581,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-12" class="inputfile inputfile-6" />
                               <label for="file-12" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -592,7 +592,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-13" class="inputfile inputfile-6" />
                               <label for="file-13" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
@@ -603,7 +603,7 @@ require_once 'public/overall/header.php';
                               <input name="archivo" type="file" id="file-14" class="inputfile inputfile-6" />
                               <label for="file-14" class="mar-bot-0" style="height: 40px">
                               <span></span>
-                              <strong><i class="fa fa-plus"></i> Choose a file&hellip;</strong></label>
+                              <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
