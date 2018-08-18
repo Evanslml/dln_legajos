@@ -13,6 +13,36 @@
         format: 'dd-mm-yyyy'
     }).datepicker('update', '01-01-1970');
 
+    $("#fecha_ingreso3").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker('update', '01-01-1970');
+
+    $("#fecha_ingreso4").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker("setDate", new Date());
+
+    $("#fecha_ingreso5").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker("setDate", new Date());
+
+    $("#fecha_ingreso6").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker("setDate", new Date());
+
+    $("#fecha_ingreso7").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker("setDate", new Date());
+
    $('.btn-save').click(function(evt){
       evt.preventDefault();
       get_data_form();
@@ -31,14 +61,18 @@
 
 function get_data_form(){
 
-    var MPERS_NUMDOC=$('#dni').val();
+    var MPERS_NUMDOC=$('#dni1').val();
+
+    var MTABLA_ID1 =$('#cbx_reg_pension_chosen').find('option:selected').prop('value');
+
+
     var MCON_FECHA1 =$('#fecha_ingreso1 input').val();
     var MCON_NUMERO1 =$('#txt_num_contrato1').val().toUpperCase();
     var MCON_MODALIDAD1 =$('#txt_modalidad1').val().toUpperCase();
     
     var MCON_FECHA2 =$('#fecha_ingreso2 input').val();
     var MCON_NUMERO2 =$('#txt_num_contrato2').val().toUpperCase();
-    var MCON_MODALIDAD2 =$('#cbx_modalidad2').find('option:selected').prop('value');
+    
     var MCON_ORIGEN =$('#txt_lugar_origen').val().toUpperCase();
     var MPERS_NIVREMUN =$('#txt_niv').val().toUpperCase();
 
