@@ -60,7 +60,7 @@ require_once 'public/overall/header.php';
                         </div>
                     </div>
                     <div class="col-md-2 border-seccion">
-                        <h5>FECHA DE INCORPOR.<i class="danger">*</i></h5>
+                        <h5>FECHA DE INCORPOR.</h5>
                         <div id="fecha_ingreso2" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
                             <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> 
                             <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -100,7 +100,7 @@ require_once 'public/overall/header.php';
                         </div>
                     </div>
                     <div class="col-md-2 border-seccion">
-                        <h5>FECHA DE CESE<i class="danger">*</i></h5>
+                        <h5>FECHA DE CESE</h5>
                         <div id="fecha_ingreso4" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
                             <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> 
                             <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>

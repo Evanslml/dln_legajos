@@ -59,62 +59,54 @@
 //FUNCIONES 
 /*********************************************************************************************************************************/
 
-function get_data_form(){
+function get_data_form() {
 
-    var MPERS_NUMDOC=$('#dni1').val();
-
-    var MTABLA_ID1 =$('#cbx_reg_pension_chosen').find('option:selected').prop('value');
-
-
-    var MCON_FECHA1 =$('#fecha_ingreso1 input').val();
-    var MCON_NUMERO1 =$('#txt_num_contrato1').val().toUpperCase();
-    var MCON_MODALIDAD1 =$('#txt_modalidad1').val().toUpperCase();
+    var MPERS_NUMDOC1     =$('#dni1').val();
+    var MREN_FECRESOL1    =$('#fecha_ingreso1 input').val();
+    var MREN_FECINIRESOL1 =$('#fecha_ingreso2 input').val();
+    var MREN_NUMRESOL1    =$('#txt_num_res1').val().toUpperCase();
+    var MTABLA_ID1        =$('#cbx_reg_pension').find('option:selected').prop('value');
     
-    var MCON_FECHA2 =$('#fecha_ingreso2 input').val();
-    var MCON_NUMERO2 =$('#txt_num_contrato2').val().toUpperCase();
-    
-    var MCON_ORIGEN =$('#txt_lugar_origen').val().toUpperCase();
-    var MPERS_NIVREMUN =$('#txt_niv').val().toUpperCase();
+    var MPERS_NUMDOC2     =$('#dni2').val();
+    var MREN_FECRESOL2    =$('#fecha_ingreso3 input').val();
+    var MREN_FECCESE2     =$('#fecha_ingreso4 input').val();
+    var MREN_NUMRESOL2    =$('#txt_num_res2').val().toUpperCase();
+    var MTABLA_ID2        =$('#cbx_moti_cese').find('option:selected').prop('value');  
 
-    
+    var MPERS_NUMDOC3     =$('#dni3').val();
+    var MREN_FECRESOL3    =$('#fecha_ingreso5 input').val();
+    var MREN_NUMRESOL3    =$('#txt_num_res3').val().toUpperCase();
+    var MREN_MOTIVO3      =$('#txt_motivo').val().toUpperCase();
 
-    if(MPERS_NUMDOC ==''){
-      var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); return false;
-    }else if(!isNumeric(MPERS_NUMDOC) || MPERS_NUMDOC.length != 8 ){
-      var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
-    }else{
+    var MPERS_NUMDOC4     =$('#dni4').val();
+    var MREN_FECRESOL4    =$('#fecha_ingreso6 input').val();
+    var MREN_FECINIRESOL4 =$('#fecha_ingreso7 input').val();
+    var MREN_NUMRESOL4    =$('#txt_num_res4').val().toUpperCase();
+
+/*    */
+/*    if(MPERS_NUMDOC1 ==''){*/
+/*      var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); return false;*/
+/*    }else if(!isNumeric(MPERS_NUMDOC1) || MPERS_NUMDOC1.length != 8 ){*/
+/*      var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;*/
+/*    }else if(MTABLA_ID1 == ''){*/
+/*      var mensaje = 'Seleccione el Regimen de Pensiones'; swal_mensaje_error(mensaje); return false;*/
+/*    }else if(MREN_FECRESOL1 == ''){*/
+/*      var mensaje = 'Seleccione la fecha de Resolucón'; swal_mensaje_error(mensaje); return false;*/
+/*    }else if(MREN_NUMRESOL1 == ''){*/
+/*      var mensaje = 'Seleccione el número de Resolucón'; swal_mensaje_error(mensaje); return false;*/
+/*    }*/
+
+    //else{
 
       var array = new Array();
+      array.push(MPERS_NUMDOC1,MREN_FECRESOL1,MREN_FECINIRESOL1,'',MREN_NUMRESOL1,MTABLA_ID1,'','CONTRATO DE REGIMEN PENSIONARIO','1','1');
+      array.push(MPERS_NUMDOC2,MREN_FECRESOL2,'',MREN_FECCESE2,MREN_NUMRESOL2,MTABLA_ID2,'','RESOLUCIÓN DE CESE','2','1');
+      array.push(MPERS_NUMDOC3,MREN_FECRESOL3,'','',MREN_NUMRESOL3,'',MREN_MOTIVO3,'RESOLUCIÓN DE BENEFICIOS SOCIALES','3','1');
+      array.push(MPERS_NUMDOC4,MREN_FECRESOL4,MREN_FECINIRESOL4,'',MREN_NUMRESOL4,'','','RESOLUCIÓN DE PENSION','4','1');
 
-      if(MCON_NUMERO1.length == 0 && MCON_NUMERO2.length != 0){
-          if(MCON_MODALIDAD2 ==''){
-              var mensaje = 'Debe ingresar la modalidad del ingreso'; swal_mensaje_error(mensaje); return false;
-          }else if(MCON_ORIGEN ==''){
-              var mensaje = 'Debe ingresar el lugar de origen'; swal_mensaje_error(mensaje); return false;
-          }else if(MPERS_NIVREMUN ==''){
-              var mensaje = 'Debe ingresar el nivel remunerativo'; swal_mensaje_error(mensaje); return false;
-          }else{
-              array.push(MPERS_NUMDOC,MCON_FECHA2,MCON_NUMERO2,'',MCON_MODALIDAD2,MCON_ORIGEN,MPERS_NIVREMUN,'2','1');
-              console.log(array);
-              subida_ajax(array);
-          }
+      subida_ajax(array);
 
-          
-      }else if(MCON_NUMERO2.length == 0 && MCON_NUMERO1.length != 0){
-          if(MCON_MODALIDAD1 ==''){
-              var mensaje = 'Debe ingresar la modalidad del ingreso1'; swal_mensaje_error(mensaje); return false;
-          }else{
-              array.push(MPERS_NUMDOC,MCON_FECHA1,MCON_NUMERO1,MCON_MODALIDAD1,'','','','1','1');
-              console.log(array);
-              subida_ajax(array);
-          }
-      }else{
-          var mensaje = 'Debe ingresar sólo un número de contrato'; swal_mensaje_error(mensaje); return false;
-      }
-
-
-
-    }//ELSE
+   // }//ELSE
 
 
 
@@ -124,7 +116,7 @@ function subida_ajax($parameter){
 
   $.ajax({
           type: 'POST',
-          url: './public/user/ajax/secciones/seccioniv.php?action=formulario',
+          url: './public/user/ajax/secciones/seccionv.php?action=formulario',
           data: { 'data1':JSON.stringify($parameter) } ,
           beforeSend: function(objeto){
               before_process();
@@ -132,12 +124,12 @@ function subida_ajax($parameter){
           success: function (response) {
               if(response ==0){
                   subida_realizada(0);
+                  console.log("listo");
               } else{
                   after_process();
                   var mensaje = 'El usuario ya ha sido registrado';
                   swal_mensaje_error(mensaje); return false;
               }
-
           },
          error: function () {
               alert("error");
@@ -150,7 +142,13 @@ function subida_ajax($parameter){
 /*********************************************************************************************************************************/
 
 function subida_realizada(i){
-  var MPERS_NUMDOC=$('#dni').val();    
+
+  var MPERS_NUMDOC1=$('#dni1').val();    
+  var MPERS_NUMDOC2=$('#dni2').val();    
+  var MPERS_NUMDOC3=$('#dni3').val();    
+  var MPERS_NUMDOC4=$('#dni4').val();    
+
+//
   var MOBJ_ID='5';
 
   var archivos = [ 

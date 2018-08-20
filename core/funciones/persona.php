@@ -409,4 +409,130 @@ class Contrato extends Persona
 
 
 
+class Renuncia extends Persona
+{
+
+	protected $MREN_FECRESOL;
+	protected $MREN_FECINIRESOL;
+	protected $MREN_FECCESE;
+	protected $MREN_NUMRESOL;
+	protected $MTABLA_ID;
+	protected $MREN_MOTIVO;
+	protected $MREN_TIPO;
+	protected $MREN_IDTIPO;
+	protected $MREN_ESTADO;
+
+	function __construct($MPERS_NUMDOC, $MREN_FECRESOL, $MREN_FECINIRESOL, $MREN_FECCESE, $MREN_NUMRESOL, $MTABLA_ID, $MREN_MOTIVO, $MREN_TIPO, $MREN_IDTIPO, $MREN_ESTADO)
+	{
+		$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+		$this->MREN_FECRESOL=$MREN_FECRESOL;
+		$this->MREN_FECINIRESOL=$MREN_FECINIRESOL;
+		$this->MREN_FECCESE=$MREN_FECCESE;
+		$this->MREN_NUMRESOL=$MREN_NUMRESOL;
+		$this->MTABLA_ID=$MTABLA_ID;
+		$this->MREN_MOTIVO=$MREN_MOTIVO;
+		$this->MREN_TIPO=$MREN_TIPO;
+		$this->MREN_IDTIPO=$MREN_IDTIPO;
+		$this->MREN_ESTADO=$MREN_ESTADO;
+	}
+
+	public function IngresarRenuncia(){
+	    $db = new Conexion();
+
+	    
+	   	$fecha1=$this->MREN_FECINIRESOL;
+	   	$fecha2=$this->MREN_FECCESE;
+
+	    if ($fecha1=='' && $fecha2==''){
+
+		    $query="INSERT INTO MRENUNCIA(MPERS_NUMDOC,MREN_FECRESOL,MREN_FECINIRESOL,MREN_FECCESE,MREN_NUMRESOL,MTABLA_ID,MREN_MOTIVO,MREN_TIPO,MREN_IDTIPO,MREN_ESTADO)
+			VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MREN_FECRESOL',
+			NULL,
+			NULL,
+			'$this->MREN_NUMRESOL',
+			'$this->MTABLA_ID',
+			'$this->MREN_MOTIVO',
+			'$this->MREN_TIPO',
+			'$this->MREN_IDTIPO',
+			'$this->MREN_ESTADO'
+			)";
+
+		}else if ($fecha1==''){
+
+		    $query="INSERT INTO MRENUNCIA(MPERS_NUMDOC,MREN_FECRESOL,MREN_FECINIRESOL,MREN_FECCESE,MREN_NUMRESOL,MTABLA_ID,MREN_MOTIVO,MREN_TIPO,MREN_IDTIPO,MREN_ESTADO)
+			VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MREN_FECRESOL',
+			NULL,
+			'$this->MREN_FECCESE',
+			'$this->MREN_NUMRESOL',
+			'$this->MTABLA_ID',
+			'$this->MREN_MOTIVO',
+			'$this->MREN_TIPO',
+			'$this->MREN_IDTIPO',
+			'$this->MREN_ESTADO'
+			)";
+
+		}else if ($fecha2==''){
+
+		    $query="INSERT INTO MRENUNCIA(MPERS_NUMDOC,MREN_FECRESOL,MREN_FECINIRESOL,MREN_FECCESE,MREN_NUMRESOL,MTABLA_ID,MREN_MOTIVO,MREN_TIPO,MREN_IDTIPO,MREN_ESTADO)
+			VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MREN_FECRESOL',
+			'$this->MREN_FECINIRESOL',
+			NULL,
+			'$this->MREN_NUMRESOL',
+			'$this->MTABLA_ID',
+			'$this->MREN_MOTIVO',
+			'$this->MREN_TIPO',
+			'$this->MREN_IDTIPO',
+			'$this->MREN_ESTADO'
+			)";
+			
+		}else{
+
+			$query="INSERT INTO MRENUNCIA(MPERS_NUMDOC,MREN_FECRESOL,MREN_FECINIRESOL,MREN_FECCESE,MREN_NUMRESOL,MTABLA_ID,MREN_MOTIVO,MREN_TIPO,MREN_IDTIPO,MREN_ESTADO)
+			VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MREN_FECRESOL',
+			'$this->MREN_FECINIRESOL',
+			'$this->MREN_FECCESE',
+			'$this->MREN_NUMRESOL',
+			'$this->MTABLA_ID',
+			'$this->MREN_MOTIVO',
+			'$this->MREN_TIPO',
+			'$this->MREN_IDTIPO',
+			'$this->MREN_ESTADO'
+			)";
+
+		}
+
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+
+	public static function Busqueda_renuncia_dni($dni){
+		$db = new Conexion();
+		$query="SELECT * FROM dbo.MRENUNCIA WHERE MPERS_NUMDOC='$dni' ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MREN_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+}
+
+
+
 ?>
