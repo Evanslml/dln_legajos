@@ -6,6 +6,7 @@ require_once 'public/overall/header.php';
  else { ?>
 <?php include 'public/overall/menu-header.php'; ?>
 <?php include 'public/overall/menu-aside.php'; ?>
+<script src="./view/bootstrap-default/js/busqueda_legajos.js"></script>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -23,9 +24,13 @@ require_once 'public/overall/header.php';
 		  			<?php if($a_cre=='1'){ echo '<a href="./seccioni" class="btn-accion"><i class="fa fa-plus"></i> Agregar Nuevo</a>'; }?>
 		  		</div>
 		  		<div class="col-md-8 text-right">
-		  			<h4 class="heading-inline bold "></h4>
-		  			<input type="hol" name="">
-		  			<a href="#" class="btn-accion"><i class="fa fa-search"></i> Buscar Legajo</a>
+		  			<select name="cbx_busqueda" id="cbx_busqueda" style="padding: 5px;margin: 3px 5px 4px 3px;">
+		  				<option value="0">Seleccione</option>
+		  				<option value="1">DNI</option>
+		  				<option value="2">Nombres</option>
+		  			</select>
+		  			<input type="type" name="txt_datos" id="txt_datos" style="padding: 4px; margin-right: 3px;">
+		  			<a href="#" class="btn-accion" style="padding: 6px;"><i class="fa fa-search"></i> Buscar Legajo</a>
 		  		</div>
 		  	</div>
 		  	<div class="row">
@@ -40,7 +45,13 @@ require_once 'public/overall/header.php';
 		  	</div>
         </div>
 
- 
+		
+        <div class="col-md-12">
+            <span id="loader"></span>
+        	<div id="resultados"></div>
+        	<div class='outer_div'></div>
+		</div>
+
         <div class="col-md-12">
           <div class="box box-primary">
           		<table class="table table-striped">

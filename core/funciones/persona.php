@@ -169,6 +169,83 @@ class Persona
 		//sqlsrv_close($db);
 	}
 
+	public static function Legajos_Totales ($cbx,$txt){
+      $db = new Conexion();
+      switch ($cbx) {
+      	case '0':
+      		$query="SELECT count(*) as CANTIDAD FROM MPERSONA A";
+      		break;
+      	case '1':
+      		$query="
+      			SELECT count(*) as CANTIDAD
+				FROM MPERSONA A
+				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				WHERE MPERS_NUMDOC='$txt'
+		  	";
+      		break;
+      	case '2':
+      		$query="
+		      	SELECT count(*) as CANTIDAD
+				FROM MPERSONA A
+				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%'
+		  	";
+      		break;
+      }
+
+  	  $registros = sqlsrv_query($db->getConecta(), $query);
+	  if($registros === false ){
+	    $tabla = false;
+	  } else {
+	    while($row= sqlsrv_fetch_array($registros)) {
+	        $tabla[0] = $row['CANTIDAD'];
+	        }
+	    }
+	  if (!isset($tabla)) {$tabla='';}
+	  return $tabla;
+	  sqlsrv_free_stmt( $registros);
+    } 
+
+	public static function Buscar_Legajos ($cbx,$txt,$offset,$per_page){
+      $db = new Conexion();
+      switch ($cbx) {
+      	case '0':
+      		$query="
+      			SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,B.MUBI_ALIAS,SUBSTRING(A.MPERS_FECINS,0,11) FECHA
+				FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				ORDER BY A.MPERS_ID LIMIT $offset,$per_page
+		  	";
+      		break;
+      	case '1':
+      		$query="
+		      	SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,B.MUBI_ALIAS,SUBSTRING(A.MPERS_FECINS,0,11) FECHA
+				FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				WHERE MPERS_NUMDOC='$txt' ORDER BY A.MPERS_ID LIMIT $offset,$per_page
+		  	";
+      		break;
+      	case '2':
+      		$query="
+		      	SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,B.MUBI_ALIAS,SUBSTRING(A.MPERS_FECINS,0,11) FECHA
+				FROM MPERSONA A
+				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' ORDER BY A.MPERS_ID LIMIT $offset,$per_page
+		  	";
+      		break;
+      }
+
+  	  $registros = sqlsrv_query($db->getConecta(), $query);
+	  if($registros === false ){
+	    $tabla = false;
+	  } else {
+	    while($row= sqlsrv_fetch_array($registros)) {
+	        $tabla[$row['MPERS_ID']] = $row;
+	        }
+	    }
+	  if (!isset($tabla)) {$tabla='';}
+	  return $tabla;
+	  sqlsrv_free_stmt( $registros);
+    }    
+
 }
 
 
