@@ -81,18 +81,74 @@ var_dump($clave_crypt);
  
       <div class="row">
         <div class="col-md-6">
-          <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Información</h3>
             </div>
-            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-caret-square-o-right"></i> Manual de usuario</strong>
+              <p>Puedes descargar el manual de Usurio haciendo <a href="#" download=""> click Aquí </a></p>
+              <hr> 
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
+              <p>Si Ud. encuentra dificultades en la plataforma sirvase a llamar al <b><i class="fa fa-phone"></i> (01) 201-1340 Anexo 152</b> (OFICINA GENERAL DE TECNOLOGIA Y LA INFORMACION) o al correo desarrollo.ti@dirislimanorte.gob.pe</p>
+              <hr>
+            </div>
             <div class="box-body">
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
- 
+        </div>
+        <div class="col-md-6">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Estadísticas</h3>
+              <h4><center><strong>Personal de Trabajadores en la DIRIS LN</strong></center></h4>
+              <div id="canvas-holder">
+                <canvas id="chart-area"></canvas>
+              </div>
+
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: [
+            60,
+            36,
+            40,
+            16,
+          ],
+          backgroundColor: [
+            window.chartColors.red,
+            window.chartColors.orange,
+            window.chartColors.yellow,
+            window.chartColors.green,
+          ],
+          label: 'Dataset 1'
+        }],
+        labels: [
+          'Nombrados',
+          'Contratados',
+          'Destacados',
+          'Residentado',
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('chart-area').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+
+            </div>
+            <div class="box-body">
+            </div>
+          </div>
         </div>
  
       </div><!--row-->

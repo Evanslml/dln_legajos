@@ -21,6 +21,7 @@
  require_once('funciones/tablas.' . $Extencion);
  require_once('funciones/persona.' . $Extencion);
  require_once('funciones/prueba.' . $Extencion);
+ require_once('funciones/reportes.' . $Extencion);
  require_once('funciones/pagination.' . $Extencion);
 
  //instaciamos User() para utilizarlo en el sitio

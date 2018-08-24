@@ -65,7 +65,7 @@
               <script> habilitar_subida_archivo1(); </script>\
               <input class="hidden" type="hidden" value="'+parameter+'" />\
               <div class="js">\
-                  <h5 class="input-file-title" style="margin: 8px">HABILIDAD PROFESIONAL</h5>\
+                  <h5 class="input-file-title" style="margin: 8px">CERTIFICADO / CONSTANCIA / DIPLOMA</h5>\
                   <form enctype="multipart/form-data" class="formulario_'+parameter+'">\
                       <input name="archivo" type="file" id="file-'+parameter+'" class="inputfile inputfile-6"/>\
                       <label for="file-'+parameter+'" class="mar-bot-0" style="height: 40px">\

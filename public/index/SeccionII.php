@@ -108,7 +108,7 @@ require_once 'public/overall/header.php';
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">TITULO / DOCTORADO / OTROS</h5>
+                          <h5 class="input-file-title">GRADO DE INSTRUCCIÓN</h5>
                           <form enctype="multipart/form-data" class="formulario_17">
                               <input name="archivo" type="file" id="file-17" class="inputfile inputfile-6" />
                               <label for="file-17" class="mar-bot-0" style="height: 40px">

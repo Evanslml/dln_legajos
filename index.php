@@ -8,7 +8,7 @@ if(isset($_GET['view'])) {
    //buscamos en la carpeta controlador el controlador respectivo
   if(file_exists('controller/' . strtolower($_GET['view']) . 'Controller.'. $Extencion)) {
     if(!empty($_SESSION['sesion_id'])){
-      $id=$_SESSION['sesion_id'];
+      $id=$_SESSION['sesion_perfil'];
       $_Permisos_p= Permisos::SegunAlias(strtolower($_GET['view']),$id); 
     }
     include('controller/' . strtolower($_GET['view']) . 'Controller.'. $Extencion);

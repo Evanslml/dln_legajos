@@ -15,4 +15,13 @@ $Permiso[]='';
 
 var_dump($Permiso);
 
+
+$url= "feed-icon.gif";
+$url01=base64_encode($url);
+
+echo $url01.'<br>';
+
+$url02=base64_decode($url01);
+
+echo $url02;
 ?>

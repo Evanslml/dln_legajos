@@ -119,7 +119,7 @@ require_once 'public/overall/header.php';
                           <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_moti_cese" id="cbx_moti_cese">
                             <option value=""></option>
                             <?php 
-                              $_ListaMotivos= Tabla::Lista(44);
+                              $_ListaMotivos= Tabla::Lista(45);
                               foreach ($_ListaMotivos   as $key => $value) {
                                 echo "<option value='".$value['MTABL_ID']."'>".$value['MTABL_DESCRIP']."</option>";
                               }

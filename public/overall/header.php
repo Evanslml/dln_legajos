@@ -34,7 +34,9 @@
   <script src="<?php echo URL_VIEW; ?>bootstrap-default/js/custom.js"></script>
   <!--Sweet-Alert-->
   <link rel="stylesheet" href="<?php echo URL_VIEW; ?>sweet-alert/sweetalert.css">
-
+  <!--Chart-->
+  <script src="<?php echo URL_VIEW; ?>chart.js/Chart.bundle.js"></script>
+  <script src="<?php echo URL_VIEW; ?>chart.js/utils.js"></script>
   <?php
 
     if(isset($_GET['view'])) {
@@ -54,6 +56,7 @@
         <?php
         break;
         
+
         default:
           # code...
           break;

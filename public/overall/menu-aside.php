@@ -21,7 +21,6 @@
       <li class="header">MENU OPCIONES</li>
       <?php 
       $_permiso = Permisos::PermisoSegunId($_SESSION['sesion_perfil'],1);
-        //var_dump($_permiso);
 
         foreach ($_permiso as $key => $value) {
           
