@@ -69,7 +69,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?php echo URL_WEB; ?>perfil" class="btn btn-default btn-flat">Perfil</a>
+                  <a href="<?php echo URL_WEB; ?>usuario" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo URL_WEB; ?>?view=logout&logout=desconectar" class="btn btn-default btn-flat">Desconectar</a>

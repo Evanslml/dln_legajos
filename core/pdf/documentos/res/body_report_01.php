@@ -35,8 +35,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 .tbl_total td, .tbl_detalle td {border-bottom: 1px solid #000; border-right: 1px solid #000; }
 .tbl_total, .tbl_detalle {border-top: 1px solid #000; border-left: 1px solid #000; }
 
-.tbl_detalle td, .tbl_total td{padding: 5px;}
-.tbl_detalle h4 {font-size: 13px}
+.tbl_detalle td, .tbl_total td{padding: 4px;}
+.tbl_detalle h4 {font-size: 12px;}
 </style>
 
 <page backtop="5mm" backbottom="15mm" backleft="15mm" backright="15mm" style="font-size: 12pt; font-family: arial" >
@@ -126,24 +126,76 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
         <tr><!-------------------------------------------------------------------------------------------->
           <td style="width: 20%">
             <span>GRADO DE INSTRUCCIÓN</span>
-            <h4><?php echo $query01[0][5];?></h4>
+            <h4><?php echo $query01[0][9];?></h4>
           </td>
-          <td style="width: 20%">
+          <td style="width: 40%" colspan="2">
             <span>PROFESIÓN</span>
-            <h4><?php echo $query01[0][6];?></h4>
+            <h4><?php echo $query01[0][10];?></h4>
           </td>
-          <td style="width: 20%">
+          <td style="width: 40%" colspan="2">
             <span>ESPECIALIDAD</span>
-            <h4><?php echo $query01[0][7];?></h4>
+            <h4><?php echo $query01[0][11];?></h4>
           </td>
+        </tr>
+        <tr><!-------------------------------------------------------------------------------------------->
           <td style="width: 20%">
             <span>MONTO</span>
-            <h4><?php echo $query01[0][8];?></h4>
+            <h4><?php echo $query01[0][12];?></h4>
           </td>
           <td style="width: 20%">
-            <span>ESTADO CIVIL</span>
-            <h4><?php echo $query01[0][8];?></h4>
+            <span>CARGO</span>
+            <h4><?php echo $query01[0][13];?></h4>
           </td>
+          <td style="width: 20%">
+            <span>REGIMEN DE PENSIONES</span>
+            <h4><?php echo $query01[0][14];?></h4>
+          </td>
+          <td style="width: 20%">
+            <span>REGIMEN LABORAL</span>
+            <h4><?php echo $query01[0][15];?></h4>
+          </td>
+          <td style="width: 20%">
+            <span>NIVEL REMUNERATIVO</span>
+            <h4><?php echo $query01[0][16];?></h4>
+          </td>          
+        </tr>
+        <tr><!-------------------------------------------------------------------------------------------->
+          <td style="width: 20%">
+            <span>FECHA REGIMEN</span>
+            <h4><?php echo date_format($query01[0][17],'d-m-Y');?></h4>
+          </td>  
+          <td style="width: 80%" colspan="4">
+            <span>ESTABLECIMIENTO</span>
+            <h4><?php echo $query01[0][18];?></h4>
+          </td>     
+        </tr>
+        <tr><!-------------------------------------------------------------------------------------------->
+          <td style="width: 60%" colspan="3">
+            <span>GRUPO OCUPACIONAL</span>
+            <h4><?php echo $query01[0][19];?></h4>
+          </td>
+          <td style="width: 20%">
+            <span>NUMERO DE UBICACION</span>
+            <h4><?php echo $query01[0][20];?></h4>
+          </td>     
+          <td style="width: 20%">
+            <span>FECHA DE INGRESO</span>
+            <h4><?php echo date_format($query01[0][21],'d-m-Y');?></h4>
+          </td>     
+        </tr>
+        <tr><!-------------------------------------------------------------------------------------------->
+          <td style="width: 20%">
+            <span>NÚMERO DE CONTRATO</span>
+            <h4><?php echo $query01[0][22];?></h4>
+          </td>
+          <td style="width: 20%">
+            <span>NÚMERO DE RUC</span>
+            <h4><?php echo $query01[0][23];?></h4>
+          </td>     
+          <td style="width: 20%">
+            <span>NÚMERO DE CELULAR</span>
+            <h4><?php echo $query01[0][24];?></h4>
+          </td>     
         </tr>
 
         <?php
