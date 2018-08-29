@@ -4,7 +4,7 @@ require_once 'public/overall/header.php';
     include('public/overall/nosesion.php');
    }
  else { ?>
-<script src="./view/bootstrap-default/js/busqueda_perfiles.js"></script>
+<script src="./view/bootstrap-default/js/busqueda_usuarios.js"></script>
 <?php
 
 /*  $editid = (isset($_REQUEST['editid'])&& $_REQUEST['editid'] !=NULL)?$_REQUEST['editid']:''; */
@@ -27,7 +27,7 @@ require_once 'public/overall/header.php';
       <div class="row">
         
         <div class="col-md-4 pad-bot-10">
-            <h4 class="heading-inline bold"><i class="fa fa-edit"></i> Administrador de perfiles</h4>
+            <h4 class="heading-inline bold"><i class="fa fa-user"></i> Administrador de usuarios</h4>
             <a href="#" class="btn-accion"><i class="fa fa-plus"></i> Agregar Nuevo</a>
         </div>
     
@@ -39,25 +39,6 @@ require_once 'public/overall/header.php';
 
       </div>
 
-
-<!--         <div class="col-md-12"> -->
-<!--           <h3><i class="fa fa-edit"></i>Administrador de perfiles</h3> -->
-<!--         </div> -->
-
-<!--         <div class="col-md-12"> -->
-<!--         <div class="row"> -->
-<!--           <div class="col-xs-12"> -->
-<!--             <button data-toggle="modal" title="Crear Perfil" onclick="" data-target="#nuevo_Perfil"  class="btn btn-primary" style="margin: 5px 0 15px 0"> -->
-<!--               <i class="fa fa-user"></i> Agregar Perfil -->
-<!--             </button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--           <span id="loader"></span> -->
-<!--           <div id="resultados"></div> -->
-<!--           <div class='outer_div'></div> -->
-<!--         </div> -->
-
-      <!-- </div> --><!--row-->
     </section>
   </div><!--content wrapper-->
  

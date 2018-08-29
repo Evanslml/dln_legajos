@@ -1,4 +1,5 @@
 <?php
+routes(1,6);
 if( empty($_Permisos_p)) {
 	header ('Location: ./error'); //Error
 } else{

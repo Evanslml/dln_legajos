@@ -127,8 +127,88 @@ class Usuario
       sqlsrv_free_stmt($registros);
   }
 
+  public static function Usuarios_Totales (){
+      $db = new Conexion();
+      $query="SELECT count(*) as CANTIDAD FROM MUSUARIO A";
+
+      $registros = sqlsrv_query($db->getConecta(), $query);
+      if($registros === false ){
+        $tabla = false;
+      } else {
+        while($row= sqlsrv_fetch_array($registros)) {
+            $tabla[0] = $row['CANTIDAD'];
+            }
+        }
+      if (!isset($tabla)) {$tabla='';}
+      return $tabla;
+      sqlsrv_free_stmt( $registros);
+  }
+
+  public static function Buscar_Usuarios ($offset,$per_page){
+    $db = new Conexion();
+    $query="
+    SELECT A.MUSU_ID,A.MUSU_LOGIN,B.MPERF_NOMBRE,A.MUSU_DNI,
+    A.MUSU_NOMBRES+' '+A.MUSU_APELLIDO_PAT+' '+A.MUSU_APELLIDO_MAT 'NOMBRES',C.MEST_NOMBRE
+    FROM MUSUARIO A
+    INNER JOIN MPERFIL B
+    ON A.MPERF_ID=B.MPERF_ID
+    INNER JOIN MESTABLECIMIENTO C
+    ON C.MEST_CODIGO=A.MESTA_RENAES
+    ORDER BY MUSU_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+    ";
+
+    $registros = sqlsrv_query($db->getConecta(), $query);
+    if($registros === false ){
+      $tabla = false;
+    } else {
+      while($row= sqlsrv_fetch_array($registros)) {
+          $tabla[$row['MUSU_ID']] = $row;
+          }
+      }
+    if (!isset($tabla)) {$tabla='';}
+    return $tabla;
+    sqlsrv_free_stmt( $registros);
+  }
 
 
+}
+
+
+class Auditor
+{
+  
+  protected $MUSU_ID;
+  protected $MFUN_ORDEN;
+  protected $MUSU_LOGIN;
+  protected $MOBJ_ID;
+  protected $MAUD_FECHA;
+  protected $MAUD_HOST;
+
+  function __construct($a,$b,$c,$d,$e,$f)
+  {
+      $this->MUSU_ID=$a;
+      $this->MFUN_ORDEN=$b;
+      $this->MUSU_LOGIN=$c;
+      $this->MOBJ_ID=$d;
+      $this->MAUD_FECHA=$e;
+      $this->MAUD_HOST=$f;
+  }
+
+  public function In(){
+      $db = new Conexion();
+      $query="INSERT INTO MAUDITOR(MUSU_ID,MFUN_ORDEN,MUSU_LOGIN,MOBJ_ID,MAUD_FECHA,MAUD_HOST)
+      VALUES (
+      '$this->MUSU_ID',
+      '$this->MFUN_ORDEN',
+      '$this->MUSU_LOGIN',
+      '$this->MOBJ_ID',
+      '$this->MAUD_FECHA',
+      '$this->MAUD_HOST'
+      )";
+
+    $registros = sqlsrv_query($db->getConecta(), $query);
+    sqlsrv_free_stmt($registros);
+  }
 }
 
 ?>

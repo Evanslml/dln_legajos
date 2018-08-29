@@ -48,6 +48,7 @@ $row_count = sqlsrv_num_rows( $query );
               {//buscamos pass
                 //declaramos variables todo OK
                 $_SESSION['sesion_id'] = $listado[0][0];
+                $_SESSION['login'] = $listado[0][1];
                 $_SESSION['sesion_perfil'] = $listado[0][6];
                 if($_POST['sesion']) { ini_set('session.cookie_lifetime', time() + (60*60*24)); } //Segundos 
                 $message = 1;
@@ -55,16 +56,22 @@ $row_count = sqlsrv_num_rows( $query );
               else
               {
                   $message ='<div class="alert alert-form alert-warning text-xs-center">Verifique contraseña.</div>';
+                  $auditor1 = new Auditor('0','Verifique contraseña',$email,'0',get_datetodayhour(),get_client_ip());
+                  $auditor1->In();
               }
           }//fin de buscar email
           else
           {
               $message ='<div class="alert alert-form alert-danger text-xs-center">Email deshabilitado o no existe en nuestro sistema.</div>';
+              $auditor1 = new Auditor('0','Email deshabilitado',$email,'0',get_datetodayhour(),get_client_ip());
+              $auditor1->In();
           }
         }//fin validar mail
         else
         {
           $message = '<div class="alert alert-form alert-danger text-xs-center">Email inválido.</div>';
+          $auditor1 = new Auditor('0','Email inválido',$email,'0',get_datetodayhour(),get_client_ip());
+          $auditor1->In();
         }
     }//fin validar datos
     else

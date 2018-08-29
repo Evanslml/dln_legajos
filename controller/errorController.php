@@ -1,5 +1,19 @@
 <?php
 
+if(!empty($_SESSION['login'])){  
+  $auditor1 = new Auditor('0','Error logueado',$_SESSION['login'],'0',get_datetodayhour(),get_client_ip());
+  $auditor1->In();
+}else{
+  if(isset($_GET['view'])) {    
+  $vista = $_GET['view'];
+  $auditor1 = new Auditor('0','Error no logueado','URL:'.' /'.$vista,'0',get_datetodayhour(),get_client_ip());
+  $auditor1->In();
+  }else{
+  $auditor1 = new Auditor('0','Error no logueado','','0',get_datetodayhour(),get_client_ip());
+  $auditor1->In();
+  }
+  
+}
 //llamamos desde una carpeta publica el header
 require_once 'public/overall/header.php'; 
    if (!isset($_SESSION['sesion_id'])){

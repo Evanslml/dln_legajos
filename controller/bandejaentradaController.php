@@ -1,5 +1,6 @@
 <?php
 //cargamos el index.php desde una carpeta publica
+routes(1,22);
 if( empty($_Permisos_p)) {
 	header ('Location: ./error'); //Error
 } else{

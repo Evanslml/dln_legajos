@@ -4,27 +4,64 @@ PERFIL
 **************************************************************************************************/
 class Perfil 
 {
+
   protected $MPERF_ID;
-  protected $MPERF_ROL;
+  protected $MPERF_ALIAS;
   protected $MPERF_NOMBRE;
-  protected $MPERF_DESCRIPCION;
-  protected $MPERF_FECIN;
+  protected $MPERF_DESCRIP;
+  protected $MPERF_FECINS;
   protected $MPERF_HOST;
-  protected $MPERF_USERIN;
+  protected $MPERF_USERINS;
   protected $MPERF_ESTADO;
   
   function __construct($a,$b,$c,$d,$e,$f,$g,$h)
   {
-      $this->MPERF_ID=$a;
-      $this->MPERF_ROL=$b;
-      $this->MPERF_NOMBRE=$c;
-      $this->MPERF_DESCRIPCION=$d;
-      $this->MPERF_FECIN=$e;
-      $this->MPERF_HOST=$f;
-      $this->MPERF_USERIN=$g;
-      $this->MPERF_ESTADO=$h;
+        $this->MPERF_ID=$a;
+        $this->MPERF_ALIAS=$b;
+        $this->MPERF_NOMBRE=$c;
+        $this->MPERF_DESCRIP=$d;
+        $this->MPERF_FECINS=$e;
+        $this->MPERF_HOST=$f;
+        $this->MPERF_USERINS=$g;
+        $this->MPERF_ESTADO=$h;
   }
 
+  public static function Perfiles_Totales (){
+      $db = new Conexion();
+      $query="SELECT count(*) as CANTIDAD FROM MPERFIL A";
+
+      $registros = sqlsrv_query($db->getConecta(), $query);
+      if($registros === false ){
+        $tabla = false;
+      } else {
+        while($row= sqlsrv_fetch_array($registros)) {
+            $tabla[0] = $row['CANTIDAD'];
+            }
+        }
+      if (!isset($tabla)) {$tabla='';}
+      return $tabla;
+      sqlsrv_free_stmt( $registros);
+  }
+
+  public static function Buscar_Perfiles ($offset,$per_page){
+    $db = new Conexion();
+    $query="
+    SELECT MPERF_ID,MPERF_NOMBRE,MPERF_DESCRIP FROM MPERFIL
+    ORDER BY MPERF_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+    ";
+
+    $registros = sqlsrv_query($db->getConecta(), $query);
+    if($registros === false ){
+      $tabla = false;
+    } else {
+      while($row= sqlsrv_fetch_array($registros)) {
+          $tabla[$row['MPERF_ID']] = $row;
+          }
+      }
+    if (!isset($tabla)) {$tabla='';}
+    return $tabla;
+    sqlsrv_free_stmt( $registros);
+  }
 /*  public function NuevoPerfil(){
     $db = new Conexion();
     $sql = $db->query("INSERT INTO mperfil ( 

@@ -1,4 +1,5 @@
 <?php
+routes(1,0);
     //obtenenmos el modo desconectar.
     if(isset($_GET['logout']) == 'desconectar')
     {

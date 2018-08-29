@@ -50,5 +50,9 @@
       return utf8_encode($cadena);
     }
 
+    function routes($mfun_orden,$mobj_id){
+      $auditor1 = new Auditor($_SESSION['sesion_id'],$mfun_orden,$_SESSION['login'],$mobj_id,get_datetodayhour(),get_client_ip());
+      $auditor1->In();
+    }
 
 ?>
