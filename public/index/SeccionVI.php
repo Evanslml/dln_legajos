@@ -6,7 +6,7 @@ require_once 'public/overall/header.php';
  else { ?>
 <?php include 'public/overall/menu-header.php'; ?>
 <?php include 'public/overall/menu-aside.php'; ?>
-<script src="./view/bootstrap-default/js/init_seccionv.js"></script>
+<script src="./view/bootstrap-default/js/init_seccionvi.js"></script>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -80,7 +80,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion">
                         <h5>FECHA DE EMISIÓN RES. <i class="danger">*</i></h5>
-                        <div id="fecha_ingreso3" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
+                        <div id="fecha_ingreso1" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
                             <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> 
                             <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
@@ -94,8 +94,8 @@ require_once 'public/overall/header.php';
                         </div>
                     </div>
                     <div class="col-md-3 border-seccion">
-                        <h5>FECHA DE CESE</h5>
-                        <div id="fecha_ingreso4" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
+                        <h5>FECHA DE EMISIÓN DE RES.</h5>
+                        <div id="fecha_ingreso2" class="input-group date" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
                             <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> 
                             <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>

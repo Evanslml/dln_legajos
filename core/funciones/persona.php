@@ -622,5 +622,32 @@ class Renuncia extends Persona
 }
 
 
+class Resumen
+{
+
+	protected $MPERS_NUMDOC;
+	protected $MOBJ_ID;
+	protected $MRES_ESTADO;
+	
+	function __construct($MPERS_NUMDOC,$MOBJ_ID,$MRES_ESTADO)
+	{
+		$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+		$this->MOBJ_ID=$MOBJ_ID;
+		$this->MRES_ESTADO=$MRES_ESTADO;
+	}
+
+	public function In(){
+	    $db = new Conexion();
+	    $query="INSERT INTO MCONTRATO(MPERS_NUMDOC,MOBJ_ID,MRES_ESTADO)
+		VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MOBJ_ID',
+			'$this->MRES_ESTADO')";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+}
+
+
 
 ?>

@@ -26,7 +26,7 @@ require_once 'public/overall/header.php';
  
       <div class="row">
         
-        <div class="col-md-4 pad-bot-10">
+        <div class="col-md-6 pad-bot-10">
             <h4 class="heading-inline bold"><i class="fa fa-edit"></i> Administrador de perfiles</h4>
             <a href="#" class="btn-accion"><i class="fa fa-plus"></i> Agregar Nuevo</a>
         </div>

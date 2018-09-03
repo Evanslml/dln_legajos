@@ -50,7 +50,8 @@ $row_count = sqlsrv_num_rows( $query );
                 $_SESSION['sesion_id'] = $listado[0][0];
                 $_SESSION['login'] = $listado[0][1];
                 $_SESSION['sesion_perfil'] = $listado[0][6];
-                if($_POST['sesion']) { ini_set('session.cookie_lifetime', time() + (60*60*24)); } //Segundos 
+                if($_POST['sesion']) { ini_set('session.cookie_lifetime', time() + (60*60*24)); 
+                } //Segundos 
                 $message = 1;
               }//fin de buscar pass
               else
