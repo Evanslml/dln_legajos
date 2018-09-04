@@ -60,6 +60,9 @@
 				<li <?php if($vista_seccion=='seccionxi'){ echo 'class="active"'; }?>>
 					<a href="./seccionxi"><i class="fa fa-edit"></i><h5>Remuneración Familiar</h5></a>
 				</li>
+				<li <?php if($vista_seccion=='seccionxi'){ echo 'class="active"'; }?>>
+					<a href="./seccionxi"><i class="fa fa-edit"></i><h5>Evaluaciones</h5></a>
+				</li>
 				<li <?php if($vista_seccion=='seccionxii'){ echo 'class="active"'; }?>>
 					<a href="./seccionxii"><i class="fa fa-edit"></i><h5>Meritos</h5></a>
 				</li>
@@ -69,9 +72,7 @@
 				<li <?php if($vista_seccion=='seccionxiv'){ echo 'class="active"'; }?>>
 					<a href="./seccionxiv"><i class="fa fa-edit"></i><h5>Otros</h5></a>
 				</li>
-				<li style="background: transparent">
-					<!--<a href="./seccionxv"><i class="fa fa-edit"></i><h5>Remuneración Personal</h5></a>-->
-				</li>
+
 				<!--
 				<li><a href="#"><i class="fa fa-edit"></i><h5>Filiación E Identificación de Personal</h5></a></li>
 				<li><a href="#"><i class="fa fa-edit"></i><h5>Nivel Educativo</h5></a></li>

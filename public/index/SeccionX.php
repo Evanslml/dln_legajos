@@ -23,7 +23,7 @@ require_once 'public/overall/header.php';
           <div class="box box-primary">
             <div class="content" style="margin-bottom: 150px">
                 <div>
-                  <h3 class="text-center">DESPLAZAMIENTO Y CARGOS DESEMPEÑADOS</h3>
+                  <h3 class="text-center">REMUNERACIÓN PERSONAL</h3>
               </div>
               <div>
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_1" role="button" aria-expanded="true" aria-controls="legajos_1">

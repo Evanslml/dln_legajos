@@ -29,6 +29,14 @@
         case 'seccioniv':
         case 'seccionv':
         case 'seccionvi':
+        case 'seccionvii':
+        case 'seccionviii':
+        case 'seccionix':
+        case 'seccionx':
+        case 'seccionxi':
+        case 'seccionxii':
+        case 'seccionxiii':
+        case 'seccionxiv':
         ?>
           <script src="<?php echo URL_VIEW; ?>chosen/js/chosen.jquery.js" type="text/javascript"></script>
           <script src="<?php echo URL_VIEW; ?>chosen/js/init.js" type="text/javascript" charset="utf-8"></script>
