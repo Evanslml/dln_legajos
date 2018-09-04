@@ -60,17 +60,17 @@
 				<li <?php if($vista_seccion=='seccionxi'){ echo 'class="active"'; }?>>
 					<a href="./seccionxi"><i class="fa fa-edit"></i><h5>Remuneración Familiar</h5></a>
 				</li>
-				<li <?php if($vista_seccion=='seccionxi'){ echo 'class="active"'; }?>>
-					<a href="./seccionxi"><i class="fa fa-edit"></i><h5>Evaluaciones</h5></a>
-				</li>
 				<li <?php if($vista_seccion=='seccionxii'){ echo 'class="active"'; }?>>
-					<a href="./seccionxii"><i class="fa fa-edit"></i><h5>Meritos</h5></a>
+					<a href="./seccionxii"><i class="fa fa-edit"></i><h5>Evaluaciones</h5></a>
 				</li>
 				<li <?php if($vista_seccion=='seccionxiii'){ echo 'class="active"'; }?>>
-					<a href="./seccionxiii"><i class="fa fa-edit"></i><h5>Demeritos</h5></a>
+					<a href="./seccionxiii"><i class="fa fa-edit"></i><h5>Meritos</h5></a>
 				</li>
 				<li <?php if($vista_seccion=='seccionxiv'){ echo 'class="active"'; }?>>
-					<a href="./seccionxiv"><i class="fa fa-edit"></i><h5>Otros</h5></a>
+					<a href="./seccionxiv"><i class="fa fa-edit"></i><h5>Demeritos</h5></a>
+				</li>
+				<li <?php if($vista_seccion=='seccionxv'){ echo 'class="active"'; }?>>
+					<a href="./seccionxv"><i class="fa fa-edit"></i><h5>Otros</h5></a>
 				</li>
 
 				<!--
