@@ -42,8 +42,8 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="CAPACITACIÓN" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
-                            <option value="">SELECCIONE EL TIPO</option>
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                            <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(62);
                               foreach ($_ListaGraInstruccion   as $key => $value) {

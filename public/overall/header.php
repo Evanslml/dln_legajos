@@ -58,6 +58,7 @@
         case 'seccionxii':
         case 'seccionxiii':
         case 'seccionxiv':
+        case 'seccionxv':
         ?>
         <link rel="stylesheet" href="<?php echo URL_VIEW; ?>chosen/css/chosen.css">
         <link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-datepicker/1.3.0/css/datepicker.css">

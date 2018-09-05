@@ -638,7 +638,7 @@ class Resumen
 
 	public function In(){
 	    $db = new Conexion();
-	    $query="INSERT INTO MCONTRATO(MPERS_NUMDOC,MOBJ_ID,MRES_ESTADO)
+	    $query="INSERT INTO MRESUMEN(MPERS_NUMDOC,MOBJ_ID,MRES_ESTADO)
 		VALUES (
 			'$this->MPERS_NUMDOC',
 			'$this->MOBJ_ID',

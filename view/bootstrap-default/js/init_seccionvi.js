@@ -1,230 +1,183 @@
   var $ = jQuery.noConflict();
   $(document).ready(function(){
 
-    $("#fecha_ingreso1").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    }).datepicker('update', '01-01-1970');
-
-    $("#fecha_ingreso2").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    }).datepicker('update', '01-01-1970');
-
-
-
-
-
-  }); /*FIN READY FUNCTION*/ 
-
-
-/*********************************************************************************************************************************/
-//FUNCIONES 
-/*********************************************************************************************************************************/
-
-function get_data_form() {
-
-    var array = new Array();
-
-    var MPERS_NUMDOC1     =$('#dni1').val();
-    var MREN_FECRESOL1    =$('#fecha_ingreso1 input').val();
-    var MREN_FECINIRESOL1 =$('#fecha_ingreso2 input').val();
-    var MREN_NUMRESOL1    =$('#txt_num_res1').val().toUpperCase();
-    var MTABLA_ID1        =$('#cbx_reg_pension').find('option:selected').prop('value');
-
-    if(MPERS_NUMDOC1 !=''){
-        if(!isNumeric(MPERS_NUMDOC1) || MPERS_NUMDOC1.length != 8 ){
-          var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
-        }else if(MTABLA_ID1 == ''){
-          var mensaje = 'Seleccione el Regimen de Pensiones'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_FECRESOL1 == ''){
-          var mensaje = 'Seleccione la fecha de Resolucón'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_NUMRESOL1 == ''){
-          var mensaje = 'Ingrese el número de Resolucón de contrato de regimen pensionario'; swal_mensaje_error(mensaje); return false;
-        }else{
-          array.push(MPERS_NUMDOC1,MREN_FECRESOL1,MREN_FECINIRESOL1,'',MREN_NUMRESOL1,MTABLA_ID1,'','CONTRATO DE REGIMEN PENSIONARIO','1','1');
-        }
-    }else{
-        array.push('','','','','','','','','','');
-    }
-
-    var MPERS_NUMDOC2     =$('#dni2').val();
-    var MREN_FECRESOL2    =$('#fecha_ingreso3 input').val();
-    var MREN_FECCESE2     =$('#fecha_ingreso4 input').val();
-    var MREN_NUMRESOL2    =$('#txt_num_res2').val().toUpperCase();
-    var MTABLA_ID2        =$('#cbx_moti_cese').find('option:selected').prop('value');  
-
-    if(MPERS_NUMDOC2 !=''){
-        if(!isNumeric(MPERS_NUMDOC2) || MPERS_NUMDOC2.length != 8 ){
-          var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_FECRESOL2 ==''){
-          var mensaje = 'Seleccione la fecha de emisión de Resolución'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_NUMRESOL2 ==''){
-          var mensaje = 'Ingresar el número de Resolución'; swal_mensaje_error(mensaje); return false;
-        }else if(MTABLA_ID2 ==''){
-          var mensaje = 'Seleccione el motivo de cese'; swal_mensaje_error(mensaje); return false;
-        }else{
-          array.push(MPERS_NUMDOC2,MREN_FECRESOL2,'',MREN_FECCESE2,MREN_NUMRESOL2,MTABLA_ID2,'','RESOLUCIÓN DE CESE','2','1')
-        }
-    }else{
-        array.push('','','','','','','','','','');
-    }
-
-    var MPERS_NUMDOC3     =$('#dni3').val();
-    var MREN_FECRESOL3    =$('#fecha_ingreso5 input').val();
-    var MREN_NUMRESOL3    =$('#txt_num_res3').val().toUpperCase();
-    var MREN_MOTIVO3      =$('#txt_motivo').val().toUpperCase();
-
-    if(MPERS_NUMDOC3 !=''){
-        if(!isNumeric(MPERS_NUMDOC3) || MPERS_NUMDOC3.length != 8 ){
-          var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_FECRESOL3 == ''){
-          var mensaje = 'Seleccione la fecha de emisión de resolucón'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_NUMRESOL3 == ''){
-          var mensaje = 'Ingrese el número de resolucón'; swal_mensaje_error(mensaje); return false;
-        }else if(MREN_MOTIVO3 == ''){
-          var mensaje = 'Ingrese el motivos'; swal_mensaje_error(mensaje); return false;
-        }else{
-          array.push(MPERS_NUMDOC3,MREN_FECRESOL3,'','',MREN_NUMRESOL3,'',MREN_MOTIVO3,'RESOLUCIÓN DE BENEFICIOS SOCIALES','3','1')
-        }
-    }else{
-        array.push('','','','','','','','','','');
-    }
-
-    var MPERS_NUMDOC4     =$('#dni4').val();
-    var MREN_FECRESOL4    =$('#fecha_ingreso6 input').val();
-    var MREN_FECINIRESOL4 =$('#fecha_ingreso7 input').val();
-    var MREN_NUMRESOL4    =$('#txt_num_res4').val().toUpperCase();
-
-    if(MPERS_NUMDOC4 !=''){
-      if(!isNumeric(MPERS_NUMDOC4) || MPERS_NUMDOC4.length != 8 ){
-          var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
-      }else if(MREN_FECRESOL4 == ''){
-          var mensaje = 'Seleccione la fecha de emisión de resolucón'; swal_mensaje_error(mensaje); return false;
-      }else if(MREN_FECINIRESOL4 == ''){
-          var mensaje = 'Seleccione la fecha de inicio de resolucón'; swal_mensaje_error(mensaje); return false;
-      }else if(MREN_NUMRESOL4 == ''){
-          var mensaje = 'Ingrese el número de resolucón'; swal_mensaje_error(mensaje); return false;
-      }else{
-          array.push(MPERS_NUMDOC4,MREN_FECRESOL4,MREN_FECINIRESOL4,'',MREN_NUMRESOL4,'','','RESOLUCIÓN DE PENSION','4','1')
-      }
-    }else{
-      array.push('','','','','','','','','','');
-    }
-
-    //console.log(array);
-    subida_ajax(array);
-    
-
-}
-
-function subida_ajax($parameter){
-
-  $.ajax({
-          type: 'POST',
-          url: './public/user/ajax/secciones/seccionv.php?action=formulario',
-          data: { 'data1':JSON.stringify($parameter) } ,
-          beforeSend: function(objeto){
-              before_process();
-          },
-          success: function (response) {
-              if(response ==0){
-                  subida_realizada(0);
-                  console.log("listo");
-              } else{
-                  after_process();
-                  var mensaje = 'El usuario ya ha sido registrado';
-                  swal_mensaje_error(mensaje); return false;
-              }
-          },
-         error: function () {
-              alert("error");
-          }
-      }); 
-}
-
-/*********************************************************************************************************************************/
-//LOAD IMAGES
-/*********************************************************************************************************************************/
-
-function subida_realizada(i){
-
-  var MPERS_NUMDOC1=$('#dni1').val();    
-  var MPERS_NUMDOC2=$('#dni2').val();    
-  var MPERS_NUMDOC3=$('#dni3').val();    
-  var MPERS_NUMDOC4=$('#dni4').val();    
-
-  if(MPERS_NUMDOC1 != ''){
-    var MPERS_NUMDOC=MPERS_NUMDOC1;
-  }else if(MPERS_NUMDOC2 != ''){
-    var MPERS_NUMDOC=MPERS_NUMDOC2;
-  }else if(MPERS_NUMDOC3 != ''){
-    var MPERS_NUMDOC=MPERS_NUMDOC3;
-  }else if(MPERS_NUMDOC4 != ''){
-    var MPERS_NUMDOC=MPERS_NUMDOC4;
-  }
-
-  var MOBJ_ID='5';
-
-  var archivos = [ 
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE CONTRATO', arc : '19', fil : '19'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RENOVACIÓN DE CONTRATO', arc : '20', fil : '20'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE NOMBRAMIENTO', arc : '21', fil : '21'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'TÉRMINO DE LA RELACIÓN LABORAL', arc : '22', fil : '22'}
-    ];  
-
-  var inew= Number(i)+1;
-  var maxi= archivos.length
-
-  if (inew <= maxi ){
-    for (var n = i; i < inew; i++) {
-          console.log(archivos[i].fil);
-          subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
-    }
-  }else{
-      after_process();
-      var mensaje= "Se guardo el registro satisfactoriamente";
-      swal_mensaje_success(mensaje);
-  }
-
-}
-
-
-/**/
-function subida_archivos(dni,obj,nombre,arch,num,i){
-  var formulario= '.formulario_'+num;
-  var file= '#file-'+num;
-  var archivo = formulario +' '+ file;
-  var file1 = $(archivo)[0].files[0];
-      if (file1 !== undefined) {
-          var MPERS_NUMDOC = dni;
-          var MADJ_NOMBRES = nombre;
-          var MOBJ_ID = obj;
-          var fileName = file1.name;
-          var formData = new FormData($(formulario)[0]);
-          formData.append('MPERS_NUMDOC',MPERS_NUMDOC);
-          formData.append('MADJ_NOMBRES',MADJ_NOMBRES);
-          formData.append('MOBJ_ID',MOBJ_ID);
-          formData.append('MADJ_URL',fileName);
-          formData.append('MARCH_ID',arch);
-
-          $.ajax({
-              url: './public/user/ajax/includes/upload.php?type=data_imagen',
-              type: 'POST',
-              data: formData,
-              cache: false,
-              contentType: false,
-              processData: false,
-              success: function(data){
-                  var inew = Number(i)+1;
-                  subida_realizada(inew);
-              },
+      $(function () {
+          $("#btnAdd-resolucion").bind("click", function () {
+              count_click_add1();
           });
-      }else{
-        var inew = Number(i)+1;
-        subida_realizada(inew);
-      }
+          $("#btnAdd-cargo").bind("click", function () {
+              count_click_add2();
+          });
+         $("body").on("click", ".remove-resolucion", function () {
+              $(this).closest(".row-agregado-resolucion").remove();
+          });
+      });
 
-}
+
+/*       $('.btn-save').click(function(evt){*/
+/*          evt.preventDefault();*/
+/*          get_data_form();*/
+/*       });*/
+
+   });
+
+
+     var count_click = 26;
+    function count_click_add1() {
+        count_click += 1;
+        console.log(count_click);
+        var div = $("<div class='row-agregado-resolucion'>");
+        div.html(AddCertificado1(count_click));
+        $(".datos_certificados1").append(div);
+    }
+
+    function count_click_add2() {
+        count_click += 1;
+        console.log(count_click);
+        var div = $("<div class='row-agregado-resolucion'>");
+        div.html(AddCertificado2(count_click));
+        $(".datos_certificados2").append(div);
+    }
+
+/*********************************************************************************************************************************/
+//FUNCIONES DATOS DE FORMULARIO
+/*********************************************************************************************************************************/
+  
+  function AddCertificado1(parameter) {
+      return '<div class="col-md-2 border-seccion">\
+                <h6 class="subtitle" style="margin:9px">TIPO <i class="danger">*</i></h6>\
+                  <script> combocertificado(); </script>\
+                  <select data-placeholder="SELECCIONE" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
+                      <option value=""></option>\
+                      <option value="81">REASIGNACION</option>\
+                      <option value="82">DESIGNACION</option>\
+                      <option value="83">PERMUTA</option>\
+                      <option value="84">ROTACION DE PLAZA</option>\
+                      <option value="85">ROTACION</option>\
+                      <option value="86">COMISION DE SERVICIO</option>\
+                      <option value="87">DESTAQUE</option>\
+                      <option value="88">RESIDENTADO</option>\
+                  </select>\
+            </div>\
+            <div class="col-md-3 border-seccion formulario-legajos">\
+                <div class="group">\
+                  <input class="inputMaterial" type="text"  id="txt_estudios" name="txt_estudios" required>\
+                  <span class="highlight"></span>\
+                  <span class="bar"></span>\
+                  <label>LUGAR DE PROCEDENCIA <i class="danger">*</i></label>\
+                </div>\
+            </div>\
+            <div class="col-md-3 border-seccion formulario-legajos">\
+                <div class="group">\
+                  <input class="inputMaterial" type="text"  id="txt_casa_estudios" name="txt_casa_estudios" required>\
+                  <span class="highlight"></span>\
+                  <span class="bar"></span>\
+                  <label>LUGAR DE DESTINO</label>\
+                </div>\
+            </div>\
+            <div class="col-md-4 border-seccion relative">\
+              <script> habilitar_subida_archivo1(); </script>\
+              <input class="hidden" type="hidden" value="'+parameter+'" />\
+              <div class="js">\
+                  <h5 class="input-file-title" style="margin: 8px">CONSTANCIA DE TRABAJO</h5>\
+                  <form enctype="multipart/form-data" class="formulario_'+parameter+'">\
+                      <input name="archivo" type="file" id="file-'+parameter+'" class="inputfile inputfile-6"/>\
+                      <label for="file-'+parameter+'" class="mar-bot-0" style="height: 40px">\
+                      <span></span>\
+                      <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>\
+                  </form>\
+              </div>\
+              <button type="button" class="btn btn-danger remove-resolucion" style="position: absolute;top: 20px;right: -10px;"><i class="glyphicon glyphicon-remove-sign"></i></button>\
+            </div>\
+            ';
+  }  
+
+  function AddCertificado2(parameter) {
+      return '<div class="col-md-3 border-seccion">\
+                <h6 class="subtitle" style="margin:9px">TIPO <i class="danger">*</i></h6>\
+                  <script> combocertificado(); </script>\
+                  <select data-placeholder="SELECCIONE" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
+                      <option value=""></option>\
+                      <option value="90">RES. DE DESIGNACION</option>\
+                      <option value="91">RES. DE ASIGNACION</option>\
+                      <option value="92">ENCARGATURA</option>\
+                  </select>\
+            </div>\
+            <div class="col-md-3 border-seccion formulario-legajos">\
+                <div class="group">\
+                  <input class="inputMaterial" type="text"  id="txt_estudios" name="txt_estudios" required>\
+                  <span class="highlight"></span>\
+                  <span class="bar"></span>\
+                  <label>Nº DE DOCUMENTO<i class="danger">*</i></label>\
+                </div>\
+            </div>\
+            <div class="col-md-2 border-seccion formulario-legajos">\
+                <div class="group">\
+                  <input class="inputMaterial" type="text"  id="txt_casa_estudios" name="txt_casa_estudios" required>\
+                  <span class="highlight"></span>\
+                  <span class="bar"></span>\
+                  <label>OBSERVACIÓN</label>\
+                </div>\
+            </div>\
+            <div class="col-md-4 border-seccion relative">\
+              <script> habilitar_subida_archivo1(); </script>\
+              <input class="hidden" type="hidden" value="'+parameter+'" />\
+              <div class="js">\
+                  <h5 class="input-file-title" style="margin: 8px">DOCUMENTO</h5>\
+                  <form enctype="multipart/form-data" class="formulario_'+parameter+'">\
+                      <input name="archivo" type="file" id="file-'+parameter+'" class="inputfile inputfile-6"/>\
+                      <label for="file-'+parameter+'" class="mar-bot-0" style="height: 40px">\
+                      <span></span>\
+                      <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>\
+                  </form>\
+              </div>\
+              <button type="button" class="btn btn-danger remove-resolucion" style="position: absolute;top: 20px;right: -10px;"><i class="glyphicon glyphicon-remove-sign"></i></button>\
+            </div>\
+            ';
+  }
+
+  function combocertificado(){
+    var $select_elem = $(".cbx_grado1");
+    $select_elem.chosen({
+      allow_single_deselect: false,
+      disable_search_threshold: 10,
+      no_results_text: "Oops, ningun resultado",
+      width: "95%"
+    });
+  }
+
+  function habilitar_subida_archivo1(){
+
+  'use strict';
+
+  ;( function( $, window, document, undefined )
+  {
+      $( '.inputfile' ).each( function()
+      {
+          var $input   = $( this ),
+              $label   = $input.next( 'label' ),
+              labelVal = $label.html();
+
+          $input.on( 'change', function( e )
+          {
+              var fileName = '';
+
+              if( this.files && this.files.length > 1 )
+                  fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+              else if( e.target.value )
+                  fileName = e.target.value.split( '\\' ).pop();
+
+              if( fileName )
+                  $label.find( 'span' ).html( fileName );
+              else
+                  $label.html( labelVal );
+          });
+
+          // Firefox bug fix
+          $input
+          .on( 'focus', function(){ $input.addClass( 'has-focus' ); })
+          .on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
+      });
+  })( jQuery, window, document );
+
+  }

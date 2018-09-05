@@ -131,7 +131,7 @@ require_once 'public/overall/header.php';
               </div>
               <div>
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_3" role="button" aria-expanded="true" aria-controls="legajos_3">
-                  <i class="fa fa-plus"></i> Reslución de Beneficios Sociales</h5>
+                  <i class="fa fa-plus"></i> Resolución de Beneficios Sociales</h5>
               </div>
                <!---->
               <div id="legajos_3" class="collapse row datos_estudios formulario-legajos border-seccion-left border-seccion-right border-seccion-top border-seccion-bottom">

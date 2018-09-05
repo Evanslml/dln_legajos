@@ -42,8 +42,8 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="CAPACITACIÓN" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
-                            <option value="">SELECCIONE EL TIPO</option>
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                            <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(55);
                               foreach ($_ListaGraInstruccion   as $key => $value) {
@@ -65,7 +65,7 @@ require_once 'public/overall/header.php';
                           <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
-                          <label>MOTIVO <i class="danger">*</i></label>
+                          <label>MOTIVO </label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">

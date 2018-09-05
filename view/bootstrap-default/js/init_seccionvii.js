@@ -34,15 +34,15 @@
 /*********************************************************************************************************************************/
   
   function AddCertificado(parameter) {
-      return '<div class="col-md-2 border-seccion">\
+      return '<div class="col-md-3 border-seccion">\
                 <h6 class="subtitle" style="margin:9px">TIPO <i class="danger">*</i></h6>\
                   <script> combocertificado(); </script>\
-                  <select data-placeholder="CAPACITACIÓN" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
-                      <option value="">SELECCIONE EL TIPO</option>\
-                      <option value="56">CON GOCE</option><option value="57">SIN GOCE</option>\
+                  <select data-placeholder="SELECCIONE" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
+                      <option value=""></option>\
+                      <option value="56">RES. DE LIC. CON GOCE</option><option value="57">RES. DE LIC. SIN GOCE</option>\
                   </select>\
             </div>\
-            <div class="col-md-3 border-seccion formulario-legajos">\
+            <div class="col-md-2 border-seccion formulario-legajos">\
                 <div class="group">\
                   <input class="inputMaterial" type="text"  id="txt_estudios" name="txt_estudios" required>\
                   <span class="highlight"></span>\

@@ -248,6 +248,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 			    	}
 				}	
 
+				$summary = new Resumen($MPERS_NUMDOC,'2','1');*/
+				$summary->In();
 
 				echo '0'; //Se ingreso correctamente
 		}else{

@@ -37,8 +37,8 @@
       return '<div class="col-md-4 border-seccion">\
                 <h6 class="subtitle" style="margin:9px">TIPO <i class="danger">*</i></h6>\
                   <script> combocertificado(); </script>\
-                  <select data-placeholder="CAPACITACIÓN" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
-                      <option value="">SELECCIONE EL TIPO</option>\
+                  <select data-placeholder="SELECCIONE" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">\
+                      <option value=""></option>\
                       <option value="59">PROGRAMACIÓN DE VACACIONES</option><option value="60">POSTERGACIÓN</option><option value="61">SUSPENSIÓN DE VACACIONES</option>\
                   </select>\
             </div>\
