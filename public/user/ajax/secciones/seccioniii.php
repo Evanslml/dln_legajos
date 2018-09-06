@@ -60,6 +60,9 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 				$estudios1->IngresarEstudios();
 		}	
 
+		$summary = new Resumen($MPERS_NUMDOC,'4','1');
+		$summary->In();
+
 		echo '0';
 		}else{
 

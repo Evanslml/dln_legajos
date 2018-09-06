@@ -145,7 +145,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 			if(!empty($MPERS_NUMDOC4)){$Renuncia4->IngresarRenuncia();}
 
-
+			$summary = new Resumen($MPERS_NUMDOC,'6','1');
+			$summary->In();
 
 			echo '0';
 		}else{

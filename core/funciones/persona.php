@@ -648,6 +648,40 @@ class Resumen
 	}
 }
 
+class Documentos
+{
+	protected $MPERS_NUMDOC;
+	protected $MTABL_ID;
+	protected $MOBJ_ID;
+	protected $MDOC_DESCRIPCION;
+	protected $MDOC_ALIAS;
+	protected $MDOC_ESTADO;
 
+	function __construct($MPERS_NUMDOC,$MTABL_ID,$MOBJ_ID,$MDOC_DESCRIPCION,$MDOC_ALIAS,$MDOC_ESTADO)
+	{
+			$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+			$this->MTABL_ID=$MTABL_ID;
+			$this->MOBJ_ID=$MOBJ_ID;
+			$this->MDOC_DESCRIPCION=$MDOC_DESCRIPCION;
+			$this->MDOC_ALIAS=$MDOC_ALIAS;
+			$this->MDOC_ESTADO=$MDOC_ESTADO;
+	}
+
+	public function In(){
+		$db = new Conexion();
+	    $query="INSERT INTO MDOCUMENTOS(MPERS_NUMDOC,MTABL_ID,MOBJ_ID,MDOC_DESCRIPCION,MDOC_ALIAS,MDOC_ESTADO)
+		VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MTABL_ID',
+			'$this->MOBJ_ID',
+			'$this->MDOC_DESCRIPCION',
+			'$this->MDOC_ALIAS',
+			'$this->MDOC_ESTADO')";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+
+	
+}
 
 ?>

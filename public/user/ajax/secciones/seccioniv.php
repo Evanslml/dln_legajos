@@ -47,6 +47,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 			$Contrato->IngresarContrato();
 
 			//echo $Contrato;
+		$summary = new Resumen($MPERS_NUMDOC,'5','1');
+		$summary->In();
 
 		echo '0';
 		}else{

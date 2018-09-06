@@ -14,10 +14,10 @@
       });
 
 
-/*       $('.btn-save').click(function(evt){*/
-/*          evt.preventDefault();*/
-/*          get_data_form();*/
-/*       });*/
+       $('.btn-save').click(function(evt){
+          evt.preventDefault();
+          get_data_form();
+       });
 
    });
 
@@ -146,6 +146,17 @@
     });
   }
 
+
+/*********************************************************************************************************************************/
+//FUNCIONES 
+/*********************************************************************************************************************************/
+
+  function get_data_form() {
+
+    console.log("HELLO");
+    
+  }
+
   function habilitar_subida_archivo1(){
 
   'use strict';
@@ -181,3 +192,4 @@
   })( jQuery, window, document );
 
   }
+
