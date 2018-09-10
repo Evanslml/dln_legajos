@@ -646,6 +646,24 @@ class Resumen
 		$registros = sqlsrv_query($db->getConecta(), $query);
 	    sqlsrv_free_stmt($registros);
 	}
+
+	public static function Busqueda_resumen_dni($dni,$mob_id){
+		$db = new Conexion();
+		$query="select * from [dbo].[MRESUMEN] WHERE MPERS_NUMDOC='$dni' AND MOBJ_ID='$mob_id' AND MRES_ESTADO='1'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MRES_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
 }
 
 class Documentos

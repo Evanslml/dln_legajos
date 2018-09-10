@@ -42,7 +42,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_tipo_desplazamiento" id="cbx_tipo_desplazamiento">
                             <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(80);
@@ -54,7 +54,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_lugar_procedencia" name="txt_lugar_procedencia" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>LUGAR DE PROCEDENCIA <i class="danger">*</i></label>
@@ -62,19 +62,19 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_lugar_destino" name="txt_lugar_destino" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>LUGAR DE DESTINO </label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">
-                      <input class="hidden" type="hidden" value="18" />
+                      <input class="hidden" type="hidden" value="28" />
                       <div class="js pad-top-10">
                           <h5 class="input-file-title" style="margin: 3px">CONSTANCIA DE TRABAJO</h5>
-                          <form enctype="multipart/form-data" class="formulario_18">
-                              <input name="archivo" type="file" id="file-18" class="inputfile inputfile-6"/>
-                              <label for="file-18" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_28">
+                              <input name="archivo" type="file" id="file-28" class="inputfile inputfile-6"/>
+                              <label for="file-28" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>
                           </form>
@@ -93,7 +93,7 @@ require_once 'public/overall/header.php';
                 <div class="row-agregado-cargo"> 
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_tipo_cargo" id="cbx_tipo_cargo">
                             <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(89);
@@ -105,7 +105,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_num_documento" name="txt_num_documento" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>Nº DE DOCUMENTO <i class="danger">*</i></label>
@@ -113,19 +113,19 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_observacion" name="txt_observacion" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>OBSERVACION </label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">
-                      <input class="hidden" type="hidden" value="18" />
+                      <input class="hidden" type="hidden" value="29" />
                       <div class="js pad-top-10">
                           <h5 class="input-file-title" style="margin: 3px">DOCUMENTO</h5>
-                          <form enctype="multipart/form-data" class="formulario_18">
-                              <input name="archivo" type="file" id="file-18" class="inputfile inputfile-6"/>
-                              <label for="file-18" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_29">
+                              <input name="archivo" type="file" id="file-29" class="inputfile inputfile-6"/>
+                              <label for="file-29" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>
                           </form>
