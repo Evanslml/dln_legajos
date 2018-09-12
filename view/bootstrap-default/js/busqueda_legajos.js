@@ -27,14 +27,41 @@
   }
 
   function ingresar_foto(parameter){
-    $("#new_dni").val(parameter);
+    $("#new_dni").val(zeroPad(parameter,8));
+  }
+
+  function eliminar1(dni){
+    $("#mod_dni").val(zeroPad(dni,8));
   }
 
   function SubirFoto(){
-     before_process();
+    before_process();
     subida_realizada(0);      
   }
 
+  function Eliminar_Legajo(){
+
+      var MPERS_NUMDOC=$('#mod_dni').val();
+
+      $.ajax({
+          type: 'POST',
+          url: './public/user/ajax/busqueda_legajos.php?action=delete&MPERS_NUMDOC='+MPERS_NUMDOC,
+          beforeSend: function(objeto){
+              before_process();
+          },
+          success: function (response) {
+                $('#eliminar_legajos').modal('hide');
+                after_process();
+                var mensaje = 'El legajo ha sido eliminado satisfactoriamente';
+                swal_mensaje_success(mensaje);
+                load(1);
+          },
+         error: function () {
+              alert("error");
+          }
+      }); //AJAX
+
+  }
 
 function subida_realizada(i){
   var MPERS_NUMDOC=$('#new_dni').val();    
@@ -104,7 +131,7 @@ function subida_archivos(dni,obj,nombre,arch,num,i){
 
 function escalafon1(dni){
 
-    var new_dni= utf8_to_b64(dni);
+    var new_dni= utf8_to_b64(zeroPad(dni,8));
     var parametros = 'd='+new_dni;
     var url='./core/pdf/documentos/reporte_01.php?'+parametros;
     VentanaCentrada(url,'Formulario','','1024','768','true');

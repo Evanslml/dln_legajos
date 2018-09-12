@@ -43,7 +43,9 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 	    }
 
 /*PROCESO DE GUARDADO*/
-		$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'C');
+		$MOBJ_ID='4';
+		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
+		//$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'C');
 		if($Existe_Persona ==''){
 
 		for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
@@ -60,7 +62,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 				$estudios1->IngresarEstudios();
 		}	
 
-		$summary = new Resumen($MPERS_NUMDOC,'4','1');
+		$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
 		$summary->In();
 
 		echo '0';

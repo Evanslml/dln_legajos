@@ -42,7 +42,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_tipo_remuneracion" id="cbx_tipo_remuneracion">
                             <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(93);
@@ -54,19 +54,19 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_num_resolucion" name="txt_num_resolucion" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>Nº DE RESOLUCION <i class="danger">*</i></label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">
-                      <input class="hidden" type="hidden" value="18" />
+                      <input class="hidden" type="hidden" value="33" />
                       <div class="js pad-top-10">
                           <h5 class="input-file-title" style="margin: 3px">RESOLUCION</h5>
-                          <form enctype="multipart/form-data" class="formulario_18">
-                              <input name="archivo" type="file" id="file-18" class="inputfile inputfile-6"/>
-                              <label for="file-18" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_33">
+                              <input name="archivo" type="file" id="file-33" class="inputfile inputfile-6"/>
+                              <label for="file-33" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>
                           </form>
@@ -84,9 +84,9 @@ require_once 'public/overall/header.php';
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">CERTIFICADO ANUAL DE HABERES Y DESCUENTOS</h5>
-                          <form enctype="multipart/form-data" class="formulario_23">
-                              <input name="archivo" type="file" id="file-23" class="inputfile inputfile-6"/>
-                              <label for="file-23" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_34">
+                              <input name="archivo" type="file" id="file-34" class="inputfile inputfile-6"/>
+                              <label for="file-34" class="mar-bot-0" style="height: 40px">
                                 <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>

@@ -22,10 +22,8 @@
           get_data_form();
        });
 
-   });
+    var count_click = 29;
 
-
-     var count_click = 27;
     function count_click_add1() {
         count_click += 1;
         console.log(count_click);
@@ -41,6 +39,8 @@
         div.html(AddCertificado2(count_click));
         $(".datos_certificados2").append(div);
     }
+
+});
 
 /*********************************************************************************************************************************/
 //FUNCIONES DATOS DE FORMULARIO

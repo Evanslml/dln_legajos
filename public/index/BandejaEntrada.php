@@ -8,6 +8,7 @@ require_once 'public/overall/header.php';
 <?php include 'public/overall/menu-aside.php'; ?>
 <script src="./view/bootstrap-default/js/busqueda_legajos.js"></script>
 <?php include 'public/modal/modal_foto.php'; ?>
+<?php include 'public/modal/modal_delete.php'; ?>
 
 
   <!-- Content Wrapper. Contains page content -->

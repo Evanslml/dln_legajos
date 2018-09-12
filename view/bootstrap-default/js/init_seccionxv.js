@@ -11,15 +11,13 @@
       });
 
 
-/*       $('.btn-save').click(function(evt){*/
-/*          evt.preventDefault();*/
-/*          get_data_form();*/
-/*       });*/
+     $('.btn-save').click(function(evt){
+        evt.preventDefault();
+        get_data_form();
+     });
 
-   });
-
-
-     var count_click = 26;
+ 
+    var count_click = 39;
 
     function count_click_add() {
         count_click += 1;
@@ -29,6 +27,8 @@
         $(".datos_certificados").append(div);
     }
 
+  });
+
 /*********************************************************************************************************************************/
 //FUNCIONES DATOS DE FORMULARIO
 /*********************************************************************************************************************************/
@@ -36,7 +36,7 @@
   function AddCertificado(parameter) {
       return '<div class="col-md-4 border-seccion formulario-legajos">\
                 <div class="group">\
-                  <input class="inputMaterial" type="text"  id="txt_estudios" name="txt_estudios" required>\
+                  <input class="inputMaterial" type="text"  id="txt_tipo_otros" name="txt_tipo_otros" required>\
                   <span class="highlight"></span>\
                   <span class="bar"></span>\
                   <label>TIPO <i class="danger">*</i></label>\
@@ -44,7 +44,7 @@
             </div>\
             <div class="col-md-4 border-seccion formulario-legajos">\
                 <div class="group">\
-                  <input class="inputMaterial" type="text"  id="txt_estudios" name="txt_estudios" required>\
+                  <input class="inputMaterial" type="text"  id="txt_num_documento" name="txt_num_documento" required>\
                   <span class="highlight"></span>\
                   <span class="bar"></span>\
                   <label>Nº DE DOCUMENTO <i class="danger">*</i></label>\
@@ -112,3 +112,142 @@
   })( jQuery, window, document );
 
   }
+
+
+/*********************************************************************************************************************************/
+//FUNCIONES 
+/*********************************************************************************************************************************/
+
+  function get_data_form() {
+
+    var nFilas_childs = $(".datos_certificados .row-agregado-resolucion").length;
+    var MPERS_NUMDOC=$('#dni').val();
+
+    if(MPERS_NUMDOC ==''){
+      var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); return false;
+    }else if(!isNumeric(MPERS_NUMDOC) || MPERS_NUMDOC.length != 8 ){
+      var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
+    }else{
+
+    var array = new Array();
+    array.push(nFilas_childs,MPERS_NUMDOC);
+
+    for (var i = 1; i <= nFilas_childs; i++) {
+          var MDOC_ALIAS        = $('.datos_certificados .row-agregado-resolucion:nth-child('+i+') input#txt_tipo_otros').val().toUpperCase();
+          var MDOC_DESCRIPCION  = $('.datos_certificados .row-agregado-resolucion:nth-child('+i+') input#txt_num_documento').val().toUpperCase();
+
+          if(MDOC_ALIAS.length == 0){
+              var mensaje = 'Debe Ingresar el tipo de resolución'; swal_mensaje_error(mensaje); return false;
+          }else if(MDOC_DESCRIPCION.length == 0){
+              var mensaje = 'Debe Ingresar el número de resolucion'; swal_mensaje_error(mensaje); return false;
+          }
+          array.push(MDOC_ALIAS,MDOC_DESCRIPCION);
+    }
+    
+    
+//    console.log(array);
+
+      $.ajax({
+          type: 'POST',
+          url: './public/user/ajax/secciones/seccionxv.php?action=formulario',
+          data: { 'data1':JSON.stringify(array) } ,
+          beforeSend: function(objeto){
+              before_process();
+          },
+          success: function (response) {
+
+                if(response ==0){
+                    subida_realizada(0);
+                } else{
+                    after_process();
+                    var mensaje = 'El usuario ya ha sido registrado';
+                    swal_mensaje_error(mensaje); return false;
+                }
+          },
+         error: function () {
+              alert("error");
+          }
+      }); //AJAX
+
+
+    }
+
+
+  }
+
+/*********************************************************************************************************************************/
+//LOAD IMAGES
+/*********************************************************************************************************************************/
+
+function subida_realizada(i){
+  var MPERS_NUMDOC=$('#dni').val();
+  var nFilas_childs = $(".datos_certificados .row-agregado-resolucion").length;
+  var MOBJ_ID='23';
+  var NOMBRE='RESOLUCION';
+
+  var archivos = [];  
+
+  for (var m = 1; m <= nFilas_childs; m++) {
+      var input = $('.datos_certificados .row-agregado-resolucion:nth-child('+m+') input.hidden').val();
+      archivos.push({dni:MPERS_NUMDOC, obj:MOBJ_ID, nom:NOMBRE, arc: '39'+'.'+i, fil: input  });
+  }  
+
+  //console.log(archivos);
+
+  var inew= Number(i)+1;
+  var maxi= Number(archivos.length);
+
+/*  console.log(inew);*/
+/*  console.log(maxi);*/
+
+  if (inew <= maxi ){
+    for (var n = i; i < inew; i++) {
+          console.log(archivos[i].fil);
+          subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+    }
+  }else{
+      after_process();
+      var mensaje= "Se guardo el registro satisfactoriamente";
+      swal_mensaje_success(mensaje);
+  }
+
+}
+
+
+function subida_archivos(dni,obj,nombre,arch,num,i){
+  var formulario= '.formulario_'+num;
+  var file= '#file-'+num;
+  var archivo = formulario +' '+ file;
+  var file1 = $(archivo)[0].files[0];
+      if (file1 !== undefined) {
+          var MPERS_NUMDOC = dni;
+          var MADJ_NOMBRES = nombre;
+          var MOBJ_ID = obj;
+          var fileName = file1.name;
+          var formData = new FormData($(formulario)[0]);
+          formData.append('MPERS_NUMDOC',MPERS_NUMDOC);
+          formData.append('MADJ_NOMBRES',MADJ_NOMBRES);
+          formData.append('MOBJ_ID',MOBJ_ID);
+          formData.append('MADJ_URL',fileName);
+          formData.append('MARCH_ID',arch);
+
+          $.ajax({
+              url: './public/user/ajax/includes/upload.php?type=data_imagen',
+              type: 'POST',
+              data: formData,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function(data){
+                if(i.length != 0){
+                    var inew = Number(i)+1;
+                    subida_realizada(inew);
+                }
+              },
+          });
+      }else{
+        var inew = Number(i)+1;
+        subida_realizada(inew);
+      }
+
+}

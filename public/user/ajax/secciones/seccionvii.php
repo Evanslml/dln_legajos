@@ -25,7 +25,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		} //FOREACH
 
 		/*array 2*/
-		$CRT_2 				= $nFilas_childs1*3;
+		$CRT_2 				= $nFilas_childs*3;
 		$TMPDATA2 			= array_slice($data, $CRT_1, $CRT_2);
 		$MTABL_ID 			= array();
 		$MDOC_DESCRIPCION 	= array();
@@ -47,7 +47,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
 		if($Existe_Persona ==''){
 
-			for ($i=0; $i <= ($nFilas_childs1-1); $i++) { 
+			for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
 					
 					$documento1= new Documentos(
 						$MPERS_NUMDOC,

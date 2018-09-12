@@ -42,7 +42,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="dni" name="dni" required>
+                          <input class="inputMaterial" type="text" id="txt_tipo_otros" name="txt_tipo_otros" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>TIPO <i class="danger">*</i></label>
@@ -50,19 +50,19 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_num_documento" name="txt_num_documento" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>Nº DE DOCUMENTO <i class="danger">*</i></label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">
-                      <input class="hidden" type="hidden" value="18" />
+                      <input class="hidden" type="hidden" value="39" />
                       <div class="js pad-top-10">
                           <h5 class="input-file-title" style="margin: 3px">DOCUMENTO</h5>
-                          <form enctype="multipart/form-data" class="formulario_18">
-                              <input name="archivo" type="file" id="file-18" class="inputfile inputfile-6"/>
-                              <label for="file-18" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_39">
+                              <input name="archivo" type="file" id="file-39" class="inputfile inputfile-6"/>
+                              <label for="file-39" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>
                           </form>

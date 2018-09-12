@@ -81,7 +81,10 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		if(!empty($MREN_FECINIRESOL4)){ $MREN_FECINIRESOL4 = date('Y-m-d', strtotime($MREN_FECINIRESOL4)); }
 		if(!empty($MREN_FECCESE4)){ $MREN_FECCESE4 = date('Y-m-d', strtotime($MREN_FECCESE4)); }
 
-		$Existe_Persona = Renuncia::Busqueda_renuncia_dni($MPERS_NUMDOC1);
+
+		$MOBJ_ID='6';
+		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
+//		$Existe_Persona = Renuncia::Busqueda_renuncia_dni($MPERS_NUMDOC1);
 		if($Existe_Persona ==''){
 
 

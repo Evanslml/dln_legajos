@@ -8,6 +8,7 @@
    else { 
 
     $dni = base64_decode($_GET['d']);
+    //$dni = $_GET['d'];
     $query01 = Reportes::Reporte_Escalafon_01($dni);
     $query02 = Reportes::Busqueda_Foto($dni);
     

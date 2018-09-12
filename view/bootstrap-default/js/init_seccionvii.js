@@ -16,10 +16,7 @@
           get_data_form();
        });
 
-   });
-
-
-     var count_click = 29;
+     var count_click = 30;
 
     function count_click_add() {
         count_click += 1;
@@ -28,6 +25,8 @@
         div.html(AddCertificado(count_click));
         $(".datos_certificados").append(div);
     }
+
+});
 
 /*********************************************************************************************************************************/
 //FUNCIONES DATOS DE FORMULARIO
@@ -153,11 +152,11 @@
     }
     
     
-    console.log(array);
+    //console.log(array);
 
       $.ajax({
           type: 'POST',
-          url: './public/user/ajax/secciones/seccionvi.php?action=formulario',
+          url: './public/user/ajax/secciones/seccionvii.php?action=formulario',
           data: { 'data1':JSON.stringify(array) } ,
           beforeSend: function(objeto){
               before_process();
@@ -168,7 +167,7 @@
                     subida_realizada(0);
                 } else{
                     after_process();
-                    var mensaje = 'El usuario ya ha sido registrado1';
+                    var mensaje = 'El usuario ya ha sido registrado';
                     swal_mensaje_error(mensaje); return false;
                 }
           },
@@ -195,7 +194,7 @@ function subida_realizada(i){
 
   var archivos = [];  
 
-  for (var m = 1; m <= nFilas_childs1; m++) {
+  for (var m = 1; m <= nFilas_childs; m++) {
       var input = $('.datos_certificados .row-agregado-resolucion:nth-child('+m+') input.hidden').val();
       archivos.push({dni:MPERS_NUMDOC, obj:MOBJ_ID, nom:NOMBRE, arc: '30'+'.'+i, fil: input  });
   }  

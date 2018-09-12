@@ -107,8 +107,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 
 /*PROCESO DE GUARDADO*/
-
-		$Existe_Persona = Persona::Busqueda_persona_dni($MPERS_NUMDOC);
+		$MOBJ_ID='2';
+		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
 		if($Existe_Persona ==''){
 
 		/*   $MPERS_APEPAT='demo';*/
@@ -248,7 +248,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 			    	}
 				}	
 
-				$summary = new Resumen($MPERS_NUMDOC,'2','1');
+				$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
 				$summary->In();
 
 				echo '0'; //Se ingreso correctamente

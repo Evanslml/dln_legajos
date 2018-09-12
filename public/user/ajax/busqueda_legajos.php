@@ -68,11 +68,22 @@ require_once('../../../core/core.php');
                         echo '<td>',$value[4],'</td>';
                         echo '<td class="text-right">';
                             if($is_foto !='1'){
-                            echo '<a href="#" onclick="ingresar_foto('.$list_dni.')" data-toggle="modal" data-target="#nueva_foto" class="btn btn-accion" title="" onclick=""><i class="fa fa-eye"></i></a>';
+                            echo '<a href="#" onclick="ingresar_foto('.$list_dni.')" data-toggle="modal" 
+                            data-target="#nueva_foto" class="btn btn-accion" title="" onclick="">
+                            <i class="fa fa-eye"></i>
+                            </a>';
                             }
-                            echo '<a href="#" onclick="escalafon1('.$list_dni.')" class="btn btn-accion" title="" onclick=""><i class="fa fa-print"></i></a>';
-                            echo '<a href="#" class="btn btn-accion" title="" onclick=""><i class="fa fa-pencil"></i></a>';
-                            echo '<a href="#" class="btn btn-accion" title="" onclick=""><i class="fa fa-trash"></i></a>';
+                            echo '<a href="#" onclick="escalafon1('.$list_dni.')" 
+                            class="btn btn-accion" title="" onclick="">
+                            <i class="fa fa-print"></i>
+                            </a>';
+                            echo '<a href="#" onclick="" class="btn btn-accion">
+                            <i class="fa fa-pencil"></i>
+                            </a>';
+                            echo '<a href="#" onclick="eliminar1('.$list_dni.')" class="btn btn-accion" 
+                            data-toggle="modal" data-target="#eliminar_legajos" title="" onclick="">
+                            <i class="fa fa-trash"></i>
+                            </a>';
 /*                             if ($a_cre=='1'){ echo '<a href="#" class="btn btn-accion" title="" onclick=""><i class="fa fa-eye"></i></a>'; }*/
 /*                             if ($a_ver=='1'){ echo '<a href="#" class="btn btn-accion" title="" onclick=""><i class="fa fa-print"></i></a>'; }*/
 /*                             if ($a_act=='1'){ echo '<a href="#" class="btn btn-accion" title="" onclick=""><i class="fa fa-pencil"></i></a>'; }*/
@@ -98,5 +109,13 @@ require_once('../../../core/core.php');
         }else{
             echo 'No hay registros encontrados';
         }
+    }
+    
+    //delete
+    else if($action == 'delete'){
+
+        $MPERS_NUMDOC = $_REQUEST['MPERS_NUMDOC'];
+        $query = Persona::Eliminar_Legajos($MPERS_NUMDOC);
+
     }
 ?>

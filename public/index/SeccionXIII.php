@@ -42,7 +42,7 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <h6 class="subtitle pad-top-10"> TIPO <i class="danger">*</i></h6>
-                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_capacitacion" id="cbx_capacitacion">
+                        <select data-placeholder="SELECCIONE" class="chosen-select-deselect" tabindex="2" name="cbx_tipo_merito" id="cbx_tipo_merito">
                             <option value=""></option>
                             <?php 
                               $_ListaGraInstruccion= Tabla::Lista(71);
@@ -54,19 +54,19 @@ require_once 'public/overall/header.php';
                     </div>
                     <div class="col-md-3 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="txt_casa_estudios" name="txt_casa_estudios" required>
+                          <input class="inputMaterial" type="text" id="txt_num_resolucion" name="txt_num_resolucion" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>Nº DE RESOLUCIÓN <i class="danger">*</i></label>
                         </div>
                     </div>
                     <div class="col-md-4 border-seccion relative">
-                      <input class="hidden" type="hidden" value="18" />
+                      <input class="hidden" type="hidden" value="37" />
                       <div class="js pad-top-10">
                           <h5 class="input-file-title" style="margin: 3px">RESOLUCIÓN</h5>
-                          <form enctype="multipart/form-data" class="formulario_18">
-                              <input name="archivo" type="file" id="file-18" class="inputfile inputfile-6"/>
-                              <label for="file-18" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_37">
+                              <input name="archivo" type="file" id="file-37" class="inputfile inputfile-6"/>
+                              <label for="file-37" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>
                           </form>
