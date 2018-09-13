@@ -106,6 +106,9 @@ var_dump($clave_crypt);
                 <canvas id="chart-area"></canvas>
               </div>
 
+<?php
+$resumen = Persona::Resumen_Personal();
+?>
   <script>
 
     var config = {
@@ -113,10 +116,10 @@ var_dump($clave_crypt);
       data: {
         datasets: [{
           data: [
-            60,
-            36,
-            40,
-            16,
+            <?php echo $resumen[0]?>,
+            <?php echo $resumen[1]?>,
+            <?php echo $resumen[2]?>,
+            <?php echo $resumen[3]?>
           ],
           backgroundColor: [
             window.chartColors.red,
@@ -130,7 +133,7 @@ var_dump($clave_crypt);
           'Nombrados',
           'Contratados',
           'Destacados',
-          'Residentado',
+          'Otros',
         ]
       },
       options: {

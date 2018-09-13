@@ -38,10 +38,15 @@ require_once 'public/overall/header.php';
 		  	<div class="row">
 		  		<div class="col-md-12">
 		  			<ul class="lista-resumen no-padding">
-		  				<li>Todos<b>(166)</b></li>
-		  				<li>Nombrados<b>(56)</b></li>
-		  				<li>Contratados<b>(36)</b></li>
-		  				<li>Destacados<b>(16)</b></li>
+		  				<?php 
+		  					$resumen = Persona::Resumen_Personal();
+		  					//var_dump($resumen);
+		  				?>
+		  				<li>Todos<b><?php echo ' ('.$resumen[4].')'; ?></b></li>
+		  				<li>Nombrados<b><?php echo ' ('.$resumen[0].')'; ?></b></li>
+		  				<li>Contratados<b><?php echo ' ('.$resumen[1].')'; ?></b></li>
+		  				<li>Destacados<b><?php echo ' ('.$resumen[2].')'; ?></b></li>
+		  				<li>Otros<b><?php echo ' ('.$resumen[3].')'; ?></b></li>
 		  			</ul>
 				</div>
 		  	</div>
