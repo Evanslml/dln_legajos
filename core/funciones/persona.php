@@ -212,6 +212,55 @@ class Persona
 		  sqlsrv_free_stmt( $registros);
 	}
 
+	public static function Resumen_Personal_porcentaje(){
+		$db = new Conexion();
+		$query="
+		SELECT 
+		CAST(ROUND(CAST(B.NOMBRADOS AS FLOAT)/CAST(B.TOTAL AS FLOAT)*100,2) AS NUMERIC (11,2)) AS PORCENTAJE1,
+		CAST(ROUND(CAST(B.CONTRATADOS AS FLOAT)/CAST(B.TOTAL AS FLOAT)*100,2) AS NUMERIC (11,2)) AS PORCENTAJE2,
+		CAST(ROUND(CAST(B.DESTACADOS AS FLOAT)/CAST(B.TOTAL AS FLOAT)*100,2) AS NUMERIC (11,2)) AS PORCENTAJE3,
+		CAST(ROUND(CAST(B.OTROS AS FLOAT)/CAST(B.TOTAL AS FLOAT)*100,2) AS NUMERIC (11,2)) AS PORCENTAJE4
+		FROM(
+		SELECT 
+		SUM(A.NOMBRADOS)NOMBRADOS,SUM(A.CONTRATADOS)CONTRATADOS,SUM(A.DESTACADOS)DESTACADOS,SUM(A.OTROS)OTROS,
+		SUM(A.NOMBRADOS + A.CONTRATADOS + A.DESTACADOS + A.OTROS) TOTAL
+		FROM (
+		SELECT 
+		CASE WHEN (X.MUBI_ID >=1 AND X.MUBI_ID <=4) THEN 1
+		ELSE '0' END AS 'NOMBRADOS',
+		CASE WHEN (X.MUBI_ID >=5 AND X.MUBI_ID <=8) THEN 1
+		ELSE '0' END AS 'CONTRATADOS',
+		CASE WHEN (X.MUBI_ID >=9 AND X.MUBI_ID <=10) THEN 1
+		ELSE '0' END AS 'DESTACADOS',
+		CASE WHEN (X.MUBI_ID >=11 AND X.MUBI_ID <=14) THEN 1
+		ELSE '0' END AS 'OTROS',
+		*
+		FROM (
+		SELECT B.MUBI_ID,B.MUBI_ALIAS FROM MPERSONA A
+		INNER JOIN MUBICACION B
+		ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+		WHERE A.MPERS_ESTADO='1'
+		)X
+		)A
+		)B
+		";
+
+	  	  $registros = sqlsrv_query($db->getConecta(), $query);
+		  if($registros === false ){
+		    $tabla = false;
+		  } else {
+		    while($row= sqlsrv_fetch_array($registros)) {
+		        $tabla[0] = $row['PORCENTAJE1'];
+		        $tabla[1] = $row['PORCENTAJE2'];
+		        $tabla[2] = $row['PORCENTAJE3'];
+		        $tabla[3] = $row['PORCENTAJE4'];
+		        }
+		    }
+		  if (!isset($tabla)) {$tabla='';}
+		  return $tabla;
+		  sqlsrv_free_stmt( $registros);
+	}
+
 	public static function Legajos_Totales ($cbx,$txt){
       $db = new Conexion();
       switch ($cbx) {
@@ -274,9 +323,10 @@ class Persona
       		$query="
 		      	SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
 		      	CAST(B.MUBI_ALIAS AS VARCHAR(5))+' - '+ CAST(A.MPERS_NUMUBI AS VARCHAR(10)) AS 'UBICACION',SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
-				FROM MPERSONA A AND A.MPERS_ESTADO='1' 
+				FROM MPERSONA A 
 				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
-				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' ORDER BY A.MPERS_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' AND A.MPERS_ESTADO='1'  
+				ORDER BY A.MPERS_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
 		  	";
       		break;
       }

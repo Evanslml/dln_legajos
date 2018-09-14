@@ -90,7 +90,7 @@ var_dump($clave_crypt);
               <p>Puedes descargar el manual de Usurio haciendo <a href="#" download=""> click Aquí </a></p>
               <hr> 
               <strong><i class="fa fa-file-text-o margin-r-5"></i> Notas</strong>
-              <p>Si Ud. encuentra dificultades en la plataforma sirvase a llamar al <b><i class="fa fa-phone"></i> (01) 201-1340 Anexo 152</b> (OFICINA GENERAL DE TECNOLOGIA Y LA INFORMACION) o al correo desarrollo.ti@dirislimanorte.gob.pe</p>
+              <p>Si Ud. encuentra dificultades en la plataforma sirvase a llamar al <b><i class="fa fa-phone"></i> (01) 201-1340 Anexo 152</b> (OFICINA GENERAL DE TECNOLOGIA Y LA INFORMACION) o al correo <b>soporte.ti@dirislimanorte.gob.pe</b></p>
               <hr>
             </div>
             <div class="box-body">
@@ -98,21 +98,21 @@ var_dump($clave_crypt);
           </div>
         </div>
         <div class="col-md-6">
+<?php
+$resumen = Persona::Resumen_Personal();
+?>
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Estadísticas</h3>
-              <h4><center><strong>Personal de Trabajadores en la DIRIS LN</strong></center></h4>
+              <h4><center><strong>Personal de Trabajadores en la DIRIS LN </strong>(<?php echo $resumen[4]?> personas)</center></h4>
               <div id="canvas-holder">
                 <canvas id="chart-area"></canvas>
               </div>
 
-<?php
-$resumen = Persona::Resumen_Personal();
-?>
   <script>
 
-    var config = {
-      type: 'pie',
+var config = {
+      type: 'doughnut',
       data: {
         datasets: [{
           data: [
@@ -121,6 +121,14 @@ $resumen = Persona::Resumen_Personal();
             <?php echo $resumen[2]?>,
             <?php echo $resumen[3]?>
           ],
+
+          percentage: [
+            <?php echo number_format(($resumen[0]/$resumen[4])*100,2,'.',''); ?>,
+            <?php echo number_format(($resumen[1]/$resumen[4])*100,2,'.',''); ?>,
+            <?php echo number_format(($resumen[2]/$resumen[4])*100,2,'.',''); ?>,
+            <?php echo number_format(($resumen[3]/$resumen[4])*100,2,'.',''); ?>,
+          ],
+
           backgroundColor: [
             window.chartColors.red,
             window.chartColors.orange,
@@ -137,7 +145,22 @@ $resumen = Persona::Resumen_Personal();
         ]
       },
       options: {
-        responsive: true
+        responsive: true,
+        animateScale: true,
+        animateRotate: true,
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              /*var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';*/
+/*              var label = data.labels[tooltipItem.index];*/
+/*              var data1 = data.datasets[tooltipItem.data] || '';*/
+/*              return label + ': ' + data1+ '%';*/
+
+              var indice = tooltipItem.index;                 
+              return  data.labels[indice] +': ('+ data.datasets[0].data[indice] + ') '+ data.datasets[0].percentage[indice] + ' % ';
+            }
+          }
+        }
       }
     };
 

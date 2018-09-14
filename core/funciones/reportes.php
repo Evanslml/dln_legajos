@@ -71,6 +71,49 @@ class Reportes
 	}
 
 
+	Public static function Distrito_x_Reporte(){
+		$db = new Conexion();
+	    $query="
+			SELECT A.MEST_UBIGEO,B.MDIST_NOMBRE FROM MESTABLECIMIENTO A 
+			INNER JOIN MDISTRITO B ON A.MEST_UBIGEO=B.MDIST_ID
+			GROUP BY A.MEST_UBIGEO,B.MDIST_NOMBRE
+		";
+	    $registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[] = $row;
+		      }
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		sqlsrv_close($db);
+
+	}
+
+	Public static function Establecimiento_x_Reporte(){
+		$db = new Conexion();
+	    $query="
+			SELECT A.MEST_CODIGO,A.MEST_NOMBRE FROM MESTABLECIMIENTO A 
+		";
+	    $registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[] = $row;
+		      }
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		sqlsrv_close($db);
+
+	}
+
+
 
 
 
