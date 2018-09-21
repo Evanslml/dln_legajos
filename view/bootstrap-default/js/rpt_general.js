@@ -6,11 +6,11 @@
         $('#cbx_tipo_nivel').on('change',function(){
             var nivel  = $(this).val();
             switch(nivel){
-              case "02":
+              case "2":
                 $("#form-distrito").show();
                 $("#form-establecimientos").hide();
                 break; 
-              case "03":
+              case "3":
                 $("#form-distrito").hide();
                 $("#form-establecimientos").show();
                 break;
@@ -23,6 +23,68 @@
         });
         
 
+
+      function reporte($data){
+          event.preventDefault();
+
+          var cbx_tipo_reporte = $("#cbx_tipo_reporte").find('option:selected').prop('value');
+          var cbx_tipo_nivel = $("#cbx_tipo_nivel").find('option:selected').prop('value');
+
+          if(cbx_tipo_reporte=='0'){
+          var mensaje = 'Debe Ingresar el tipo de reporte'; swal_mensaje_error(mensaje); return false;
+          }
+
+          switch(cbx_tipo_nivel){
+            case '0':
+              var mensaje = 'Debe Ingresar el tipo de reporte'; swal_mensaje_error(mensaje); return false;
+            break;
+
+            case '2':
+              var cbx_distrito = $("#cbx_distrito").find('option:selected').prop('value');
+              if(cbx_distrito =='0'){
+                  var mensaje = 'Debe Ingresar el distrito'; swal_mensaje_error(mensaje); return false;
+              }
+              var cbx_establecimiento='0';
+            break;
+
+            case '3':
+              var cbx_establecimiento = $("#cbx_establecimiento").find('option:selected').prop('value');
+              if(cbx_establecimiento =='0'){
+                  var mensaje = 'Debe Ingresar el distrito'; swal_mensaje_error(mensaje); return false;
+              }
+              var cbx_distrito='0';
+            break;
+
+            default:
+             var cbx_distrito='0';
+             var cbx_establecimiento='0';
+            break;
+          }
+
+          //var array = new Array();
+          //array.push(cbx_tipo_reporte,cbx_tipo_nivel,cbx_distrito,cbx_establecimiento);
+
+          var parametros = 'cbx_tipo_reporte='+cbx_tipo_reporte+'&cbx_tipo_nivel='+cbx_tipo_nivel+'&cbx_distrito='+cbx_distrito+'&cbx_establecimiento='+cbx_establecimiento;
+          var pageexc01='./core/excel/report_01.php?'+parametros;
+
+          if($data =='excel'){
+              $.ajax({
+                    url: pageexc01,
+                    beforeSend: function(datos){
+                      $(".loading").show();
+                    },
+                    success: function(datos){
+                      window.location = pageexc01;
+                    }
+              }).done(function(){
+                   $(".loading").hide();
+              });
+          } else if($data =='pdf'){
+
+          }
+
+
+      }
 
       function imprimir(in_data){
           event.preventDefault();
@@ -59,7 +121,7 @@
 
              case '02':
              var distrito = $('#cbx_nivel_distrito').val();
-             var lbl_distrito = $('#cbx_nivel_distrito option:selected').text();;
+             var lbl_distrito = $('#cbx_nivel_distrito option:selected').text();
              $('.lbl_tipo_nivel').css('color','#000');
 
                if(distrito=='0'){
@@ -123,25 +185,7 @@
           if(in_data=='excel'){
             switch(tipo_reporte){
               case '01':
-              $.ajax({
-                        url: pageexc01,
-                        beforeSend: function(datos){
-                           $("#resultados").html('<div class="alert alert-warning" role="alert">\
-                           <button type="button" class="close" data-dismiss="alert">&times;</button>\
-                           <strong>En Proceso!</strong> \
-                           Cargando...</div>');
-                          $(".loading").show();
-                          },
-                        success: function(datos){
-                          window.location = pageexc01;
-                          }
-                    }).done(function(){
-                     $(".loading").hide();
-                     $("#resultados").html('<div class="alert alert-success" role="alert">\
-                     <button type="button" class="close" data-dismiss="alert">&times;</button>\
-                     <strong>Completo!</strong> \
-                     Su descarga se realizó con éxito</div>');
-                    });
+              
               break;
 
               case '02':
@@ -251,22 +295,20 @@
               VentanaCentrada(pagepdf05,'Formulario','','1024','1024','true');
               break;
             }
-          } //else PDF
+          } 
 
-/*          console.log(tipo_reporte);*/
-/*          console.log(tipo_recaudacion);*/
-/*          console.log(tipo_nivel);*/
-/*          console.log(distrito);*/
-/*          console.log(establecimiento);*/
       } //Function imprimir
 
 
       $('.exportar_excel').click(function() {
-          imprimir('excel');
+//         imprimir('excel');
+          console.log("excel");
+          reporte('excel');
       }); 
 
       $('.exportar_pdf').click(function() {
-          imprimir('pdf');
+//          imprimir('pdf');
+          console.log("pdf");
       });
 
  });

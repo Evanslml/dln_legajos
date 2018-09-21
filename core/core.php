@@ -8,7 +8,9 @@
  define('URL_WEB','http://172.16.20.48:8080/dln_legajos/');
  define('NOMBRE_WEB','LEGAJOS');
  
- define('WWW','http://dirislimanorte.gob.pe/');
+ define('WWW','http://www.dirislimanorte.gob.pe/');
+ define('FACE','https://www.facebook.com/DIRISLimaNorte/');
+ define('YOU','https://www.youtube.com/channel/UCfDJTgs1TWTgZYlmc4CVdMw');
  //definimos url de inicios
  $Extencion = substr(strrchr(__FILE__, '.'), 1);
  //Conexion a la bases de datos
@@ -33,6 +35,7 @@
  $_ListaUbicacion = Ubicacion::listaGrupoOcupacional();
  $_ListaDistritosLima = Distrito::listaDistritoLima();
  $_ListaCargo = Cargo::listaCargo();
+ $_ListaTipo_contrato = Persona::Listar_tipo_contrato();
 
 
  

@@ -13,10 +13,10 @@
   		<div class="col-md-8">
   			<div class="panel-tools">
 			    <div class="button btn-save">
-			    	<a href="#"><i class="fa fa-file-excel-o"></i><span>Guardar</span></a>
+			    	<a href="#" class="exportar_excel"><i class="fa fa-file-excel-o"></i><span>Excel</span></a>
 			    </div>
 				<div class="button btn-secciones">
-					<a href="#"><i class="fa fa-file-pdf-o"></i><span>Secciones</span></a>
+					<a href="#" class="exportar_pdf"><i class="fa fa-file-pdf-o"></i><span>Pdf</span></a>
 				</div>
 			   	<div class="button btn-cancel">
 			   		<a href="./"><i class="fa fa-times"></i><span>Cancelar</span></a>

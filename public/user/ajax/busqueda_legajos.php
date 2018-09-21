@@ -7,8 +7,9 @@ require_once('../../../core/core.php');
     //PAGINATION
     if($action == 'ajax'){
   
-        $cbx_busqueda =   $_REQUEST['cbx_busqueda'];
-        $txt_datos    =   $_REQUEST['txt_datos'];
+        $cbx_busqueda           =   $_REQUEST['cbx_busqueda'];
+        $txt_datos              =   $_REQUEST['txt_datos'];
+        $cbx_tipo_contrato      =   $_REQUEST['cbx_tipo_contrato'];
 
         $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
         $per_page = 25; //how much records you want to show
@@ -16,7 +17,7 @@ require_once('../../../core/core.php');
         $offset = ($page - 1) * $per_page;
         //Count the total number of row in your table*/
 
-        $numrows = Persona::Legajos_Totales($cbx_busqueda,$txt_datos);
+        $numrows = Persona::Legajos_Totales($cbx_busqueda,$txt_datos,$cbx_tipo_contrato);
         $numrows_f=$numrows[0];
 
         $total_pages = ceil($numrows_f/$per_page);
@@ -24,7 +25,7 @@ require_once('../../../core/core.php');
         $reload = './public/index/BandejaEntrada.php';
 
 
-        $query = Persona::Buscar_Legajos($cbx_busqueda,$txt_datos,$offset,$per_page);
+        $query = Persona::Buscar_Legajos($cbx_busqueda,$txt_datos,$cbx_tipo_contrato,$offset,$per_page);
    
         //var_dump($query);
 
@@ -42,7 +43,7 @@ require_once('../../../core/core.php');
                         <td> <span><b>#</b></span> </td> 
                         <td> <span><b>DNI</b></span> </td> 
                         <td> <span><b>NOMBRE COMPLETO</b></span> </td> 
-                        <td> <span><b>UBICACIÓN FISICA</b></span> </td> 
+                        <td> <span><b>TIPO CONTRATO</b></span> </td> 
                         <td> <span><b>FECHA REGISTRO</b></span> </td> 
                         <td> <span><b>ACCIONES</b></span> </td> 
                     </tr>
@@ -51,6 +52,13 @@ require_once('../../../core/core.php');
                 <tbody>
 
                     <?php
+                    //echo $page;
+                    if($page>1){
+                        $n= ($per_page*($page-1))+1;
+                    }else{
+                        $n= 1*($page);
+                    }
+                    
                     foreach ($query as $key => $value) {
 
                         $list_id        = $value[0];
@@ -61,7 +69,7 @@ require_once('../../../core/core.php');
                         $is_foto        = $value[5];
                         
                         echo '<tr>';
-                        echo '<td>',$value[0],'</td>';
+                        echo '<td>',$n++,'</td>';
                         echo '<td>',$value[1],'</td>';
                         echo '<td>',$value[2],'</td>';
                         echo '<td>',$value[3],'</td>';

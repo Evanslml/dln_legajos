@@ -66,6 +66,11 @@
         <?php
         break;
         
+        case 'reportegeneral':
+        ?>
+        <link rel="stylesheet" href="<?php echo URL_VIEW; ?>chosen/css/chosen.css">
+        <?php
+        break;
 
         default:
           # code...

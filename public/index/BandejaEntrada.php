@@ -30,8 +30,17 @@ require_once 'public/overall/header.php';
 		  				<option value="0">Seleccione</option>
 		  				<option value="1">DNI</option>
 		  				<option value="2">Nombres</option>
+							<option value="3">Contrato</option>
 		  			</select>
 		  			<input type="type" name="txt_datos" id="txt_datos" style="padding: 4px; margin-right: 3px;">
+						<select name="cbx_tipo_contrato" id="cbx_tipo_contrato" style='width: 163px;padding: 5px;display:none;' >
+								<option value="">Seleccione</option>
+							<?php foreach($_ListaTipo_contrato as $key=> $value) {
+								echo '<option value='.$value['MUBI_ID'].'>'.$value['MUBI_NOMBRE'].'</option>';
+							}
+							?>
+
+						</select>
 		  			<a href="#" class="btn-accion" style="padding: 6px;"><i class="fa fa-search"></i> Buscar Legajo</a>
 		  		</div>
 		  	</div>

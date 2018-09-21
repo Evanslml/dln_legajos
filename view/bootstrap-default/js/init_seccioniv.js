@@ -1,6 +1,12 @@
   var $ = jQuery.noConflict();
   $(document).ready(function(){
 
+    $(".fecha_emision").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker('update', new Date());
+
     $("#fecha_ingreso1").datepicker({ 
         autoclose: true, 
         todayHighlight: true,
@@ -18,12 +24,145 @@
       get_data_form();
    });
 
+   $(function () {
+        $("#btnAdd-certificado").bind("click", function () {
+            count_click_add();
+        });
+        $("body").on("click", ".remove-certificado", function () {
+            $(this).closest(".row-agregado-certificado").remove();
+        });
+    });
 
+    //PONE EL CONTADOR A 0
+    var count_click = 23;
+
+    //AÑADE UN CLICK AL EJECUTAR LA FUNCIÓN
+    function count_click_add() {
+        count_click += 1;
+        console.log(count_click);
+        var div = $("<div class='row-agregado-certificado'>");
+        div.html(AddCertificado(count_click));
+        $(".datos_certificados").append(div);
+    }
 
 
 
   }); /*FIN READY FUNCTION*/ 
 
+/*********************************************************************************************************************************/
+//FUNCIONES DATOS DE FORMULARIO
+/*********************************************************************************************************************************/
+function AddCertificado(parameter) {
+    return '<div class="col-md-2 border-seccion formulario-legajos">\
+                <div class="group">\
+                <input class="inputMaterial" type="text"  id="num_adenda" name="num_adenda" required>\
+                <span class="highlight"></span>\
+                <span class="bar"></span>\
+                <label>Nº ADENDA <i class="danger">*</i></label>\
+                </div>\
+            </div>\
+            <div class="col-md-3 border-seccion">\
+                <script> date_activate('+parameter+'); </script>\
+                <h5>FECHA DE INGRESO <i class="danger">*</i></h5>\
+                <div class="input-group date fecha_emision date_'+parameter+'" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">\
+                    <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> \
+                    <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>\
+                </div>\
+            </div>\
+            <div class="col-md-3 border-seccion">\
+                <h6 class="subtitle" style="margin:9px">TIEMPO DURACIÓN <i class="danger">*</i></h6>\
+                    <script> combocertificado(); </script>\
+                    <select data-placeholder="DURACION" class="chosen-select-deselect cbx_grado1" tabindex="2" name="cbx_duracion" id="cbx_duracion">\
+                        <option value=""></option>\
+                        <option value="1">1 MES</option>\
+                        <option value="2">2 MES</option>\
+                        <option value="3">3 MES</option>\
+                        <option value="4">4 MES</option>\
+                        <option value="5">5 MES</option>\
+                        <option value="6">6 MES</option>\
+                        <option value="7">7 MES</option>\
+                        <option value="8">8 MES</option>\
+                        <option value="9">9 MES</option>\
+                        <option value="10">10 MES</option>\
+                        <option value="11">11 MES</option>\
+                        <option value="12">12 MES</option>\
+                    </select>\
+            </div>\
+            <div class="col-md-4 border-seccion relative">\
+                <script> habilitar_subida_archivo1(); </script>\
+                <input class="hidden" type="hidden" value="'+parameter+'" />\
+                <div class="js">\
+                    <h5 class="input-file-title" style="margin: 8px">CERTIFICADO / CONSTANCIA / DIPLOMA</h5>\
+                    <form enctype="multipart/form-data" class="formulario_'+parameter+'">\
+                        <input name="archivo" type="file" id="file-'+parameter+'" class="inputfile inputfile-6"/>\
+                        <label for="file-'+parameter+'" class="mar-bot-0" style="height: 40px">\
+                        <span></span>\
+                        <strong><i class="fa fa-plus"></i> Subir un archivo</strong></label>\
+                    </form>\
+                </div>\
+                <button type="button" class="btn btn-danger remove-certificado" style="position: absolute;top: 20px;right: -10px;"><i class="glyphicon glyphicon-remove-sign"></i></button>\
+            </div>\
+          ';
+}
+
+
+function combocertificado(){
+  var $select_elem = $(".cbx_grado1");
+  $select_elem.chosen({
+    allow_single_deselect: false,
+    disable_search_threshold: 10,
+    no_results_text: "Oops, ningun resultado",
+    width: "95%"
+  });
+}
+
+function date_activate(parameter){
+    var fechas = '.date_'+parameter;
+    console.log(fechas);
+    $(fechas).datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).datepicker('update', new Date());
+}
+
+
+function habilitar_subida_archivo1(){
+
+    'use strict';
+  
+    ;( function( $, window, document, undefined )
+    {
+        $( '.inputfile' ).each( function()
+        {
+            var $input   = $( this ),
+                $label   = $input.next( 'label' ),
+                labelVal = $label.html();
+  
+            $input.on( 'change', function( e )
+            {
+                var fileName = '';
+  
+                if( this.files && this.files.length > 1 )
+                    fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+                else if( e.target.value )
+                    fileName = e.target.value.split( '\\' ).pop();
+  
+                if( fileName )
+                    $label.find( 'span' ).html( fileName );
+                else
+                    $label.html( labelVal );
+            });
+  
+            // Firefox bug fix
+            $input
+            .on( 'focus', function(){ $input.addClass( 'has-focus' ); })
+            .on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
+        });
+    })( jQuery, window, document );
+  
+    }
+  
 
 /*********************************************************************************************************************************/
 //FUNCIONES 
@@ -115,32 +254,68 @@ function subida_ajax($parameter){
 //LOAD IMAGES
 /*********************************************************************************************************************************/
 
-function subida_realizada(i){
-  var MPERS_NUMDOC=$('#dni').val();    
-  var MOBJ_ID='5';
-
-  var archivos = [ 
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE CONTRATO', arc : '19', fil : '19'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RENOVACIÓN DE CONTRATO', arc : '20', fil : '20'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE NOMBRAMIENTO', arc : '21', fil : '21'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'TÉRMINO DE LA RELACIÓN LABORAL', arc : '22', fil : '22'}
-    ];  
-
-  var inew= Number(i)+1;
-  var maxi= archivos.length
-
-  if (inew <= maxi ){
-    for (var n = i; i < inew; i++) {
-          console.log(archivos[i].fil);
-          subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+function subida_realizada_array(i){
+    var MPERS_NUMDOC=$('#dni').val();
+    var nFilas_childs = $(".datos_certificados .row-agregado-certificado").length;
+    var MOBJ_ID='5';
+    var NOMBRE='ADENDAS';
+  
+    var archivos = [];  
+  
+    for (var m = 1; m <= nFilas_childs; m++) {
+        var input = $('.datos_certificados .row-agregado-certificado:nth-child('+m+') input.hidden').val();
+        archivos.push({dni:MPERS_NUMDOC, obj:MOBJ_ID, nom:NOMBRE, arc: '23'+'.'+i, fil: input  });
     }
-  }else{
-      after_process();
-      var mensaje= "Se guardo el registro satisfactoriamente";
-      swal_mensaje_success(mensaje);
+  
+    console.log(archivos);
+  
+    var inew= Number(i)+1;
+    var maxi= Number(archivos.length);
+  
+    //console.log(inew);
+    //console.log(maxi);
+  
+    if (inew <= maxi ){
+      for (var n = i; i < inew; i++) {
+            console.log(archivos[i].fil);
+            subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+      }
+    }else{
+        after_process();
+        var mensaje= "Se guardo el registro satisfactoriamente";
+        swal_mensaje_success(mensaje);
+    }
+  
   }
 
+
+function subida_realizada(i){
+    var MPERS_NUMDOC=$('#dni').val();    
+    var MOBJ_ID='5';
+  
+    var archivos = [ 
+        {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE CONTRATO', arc : '19', fil : '19'},
+        {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RENOVACIÓN DE CONTRATO', arc : '20', fil : '20'},
+        {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'RESOLUCIONES DE NOMBRAMIENTO', arc : '21', fil : '21'},
+        {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'TÉRMINO DE LA RELACIÓN LABORAL', arc : '22', fil : '22'}
+      ];  
+  
+    var inew= Number(i)+1;
+    var maxi= archivos.length
+  
+    if (inew <= maxi ){
+      for (var n = i; i < inew; i++) {
+            console.log(archivos[i].fil);
+            subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+      }
+    }else{
+//        subida_realizada_array(0);
+        after_process();
+        var mensaje = "Se guardo el registro satisfactoriamente";
+        swal_mensaje_success(mensaje);
+    }  
 }
+  
 
 
 /**/

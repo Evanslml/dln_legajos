@@ -369,10 +369,6 @@ function get_data_form(){
       var mensaje = 'Debe seleccionar el establecimiento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
     }else if (MPERS_GRUPOCUPAC ==''){
       var mensaje = 'Debe seleccionar el grupo ocupacional'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_NUMUBI==''){
-      var mensaje = 'Debe ingresar el Número de Ubicación física'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (!isNumeric(MPERS_NUMUBI)){
-      var mensaje = 'Debe verificar el Número de Ubicación física'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
     }else if (MPERS_NUMCONTRA ==''){
       var mensaje = 'Debe ingresar el Número de contrtato'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
     }else if (MPERS_NUMRUC==''){

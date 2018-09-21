@@ -275,7 +275,7 @@ require_once 'public/overall/header.php';
                       <input class="inputMaterial" type="text"  id="num_ubicacion" name="num_ubicacion" required>
                       <span class="highlight"></span>
                       <span class="bar"></span>
-                      <label>N° UBIC. <i class="danger">*</i></label>
+                      <label>N° UBIC.</label>
                     </div>
                 </div>
                 <!-- /SIX-->

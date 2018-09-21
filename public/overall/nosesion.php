@@ -7,8 +7,8 @@
   <div class="col-md-4 user-login-slide">
       <div class="login-box">
         <div class="login-logo">
-          <a><b>LEGAJOS</b> WEB</a>
           <img src="<?php echo URL_VIEW;?>/bootstrap-default/img/logo.png"/>
+          <br><a><b>LEGAJOS</b> WEB</a>
         </div>
 
 
@@ -51,8 +51,8 @@
       <div class="row container-copyrigth">
         <div class="col-xs-5">
           <ul class="social no-margin">
-            <li><a href="#" target="blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" target="blank"><i class="fa fa-youtube-play"></i></a></li>
+            <li><a href="<?php echo FACE;?>" target="blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="<?php echo YOU;?>" target="blank"><i class="fa fa-youtube-play"></i></a></li>
             <li><a href="<?php echo WWW;?>" target="blank"><i class="fa fa-globe"></i></a></li>
           </ul>
         </div>
@@ -78,10 +78,11 @@
     });
 
      $(".backstrech").backstretch([
-                "view/bootstrap-default/img/slider/minsa.png",
-                "view/bootstrap-default/img/slider/contador_man.png",
-                "view/bootstrap-default/img/slider/diris.png",
                 "view/bootstrap-default/img/slider/farmaceutico.png",
+                "view/bootstrap-default/img/slider/minsa.png",
+                "view/bootstrap-default/img/slider/dentista.png",
+                "view/bootstrap-default/img/slider/diris.png",
+                "view/bootstrap-default/img/slider/doctor.png",
             ], {
                 fade: 750,
                 duration: 4000,

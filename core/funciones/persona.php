@@ -169,6 +169,24 @@ class Persona
 		//sqlsrv_close($db);
 	}
 
+	public static function Listar_tipo_contrato(){
+		$db = new Conexion();
+		$query="SELECT MUBI_ID,MUBI_ALIAS,MUBI_NOMBRE,MDEPA_ESTADO FROM MUBICACION";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MUBI_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
 	public static function Resumen_Personal(){
 		$db = new Conexion();
 		$query="
@@ -261,7 +279,7 @@ class Persona
 		  sqlsrv_free_stmt( $registros);
 	}
 
-	public static function Legajos_Totales ($cbx,$txt){
+	public static function Legajos_Totales ($cbx,$txt,$cbx_tc){
       $db = new Conexion();
       switch ($cbx) {
       	case '0':
@@ -283,6 +301,14 @@ class Persona
 				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' AND A.MPERS_ESTADO='1'
 		  	";
       		break;
+		case '3':
+			$query="
+				SELECT count(*) as CANTIDAD
+				FROM MPERSONA A
+				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+				WHERE B.MUBI_ID='$cbx_tc' AND A.MPERS_ESTADO='1'
+			";
+			break;
       }
 
   	  $registros = sqlsrv_query($db->getConecta(), $query);
@@ -298,37 +324,49 @@ class Persona
 	  sqlsrv_free_stmt( $registros);
     } 
 
-	public static function Buscar_Legajos ($cbx,$txt,$offset,$per_page){
+	public static function Buscar_Legajos ($cbx,$txt,$cbx_tc,$offset,$per_page){
       $db = new Conexion();
       switch ($cbx) {
       	case '0':
       		$query="
-      			SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
-      			CAST(B.MUBI_ALIAS AS VARCHAR(5))+' - '+ CAST(A.MPERS_NUMUBI AS VARCHAR(10)) AS 'UBICACION',SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
-				FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
-				WHERE A.MPERS_ESTADO='1'
-				ORDER BY A.MPERS_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+			  SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
+			  B.MUBI_NOMBRE AS 'TIPO CONTRATO',
+			  SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
+			  FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+			  WHERE A.MPERS_ESTADO='1'
+			  ORDER BY A.MPERS_NOMAPE_COMPLETO OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
 		  	";
       		break;
       	case '1':
       		$query="
-		      	SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
-		      	CAST(B.MUBI_ALIAS AS VARCHAR(5))+' - '+ CAST(A.MPERS_NUMUBI AS VARCHAR(10)) AS 'UBICACION',SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
-				FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
-				WHERE MPERS_NUMDOC='$txt' AND A.MPERS_ESTADO='1' 
-				ORDER BY A.MPERS_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+		      SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
+			  B.MUBI_NOMBRE AS 'TIPO CONTRATO',
+			  SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
+			  FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+			  WHERE A.MPERS_NUMDOC='$txt' AND A.MPERS_ESTADO='1' 
+			  ORDER BY A.MPERS_NOMAPE_COMPLETO OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
 		  	";
       		break;
       	case '2':
       		$query="
-		      	SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
-		      	CAST(B.MUBI_ALIAS AS VARCHAR(5))+' - '+ CAST(A.MPERS_NUMUBI AS VARCHAR(10)) AS 'UBICACION',SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
-				FROM MPERSONA A 
-				INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
-				WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' AND A.MPERS_ESTADO='1'  
-				ORDER BY A.MPERS_ID OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+			  SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
+			  B.MUBI_NOMBRE AS 'TIPO CONTRATO',
+			  SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
+			  FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+			  WHERE MPERS_NOMAPE_COMPLETO LIKE '%$txt%' AND A.MPERS_ESTADO='1'  
+			  ORDER BY A.MPERS_NOMAPE_COMPLETO OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
 		  	";
-      		break;
+			break;
+		case '3':
+			$query="
+			SELECT A.MPERS_ID,A.MPERS_NUMDOC,A.MPERS_NOMAPE_COMPLETO,
+			B.MUBI_NOMBRE AS 'TIPO CONTRATO',
+			SUBSTRING(A.MPERS_FECINS,0,11) FECHA,A.MPERS_IMAGEN
+			FROM MPERSONA A	INNER JOIN MUBICACION B ON A.MPERS_GRUPOCUPAC = B.MUBI_ID
+			WHERE B.MUBI_ID='$cbx_tc' AND A.MPERS_ESTADO='1'  
+			ORDER BY A.MPERS_NOMAPE_COMPLETO OFFSET $offset ROWS FETCH NEXT $per_page ROWS ONLY
+			";
+		break;  
       }
 
   	  $registros = sqlsrv_query($db->getConecta(), $query);

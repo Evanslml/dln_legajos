@@ -7,14 +7,29 @@
         });
         load(1);
 
+        $('#cbx_busqueda').on('change',function(){
+          var busqueda  = $(this).val();
+          switch(busqueda){
+            case "3":
+              $("#cbx_tipo_contrato").show();
+              $("#txt_datos").hide();
+              break; 
+            default:
+              $("#txt_datos").show();
+              $("#cbx_tipo_contrato").hide();
+              break;
+          }
+
+      });
   });
 
   function load(page){
-      var cbx_busqueda  =$('#cbx_busqueda').find('option:selected').prop('value');
-      var txt_datos     =$('#txt_datos').val();
+      var cbx_busqueda        = $('#cbx_busqueda').find('option:selected').prop('value');
+      var txt_datos           = $('#txt_datos').val();
+      var cbx_tipo_contrato   = $("#cbx_tipo_contrato").val();
 
           $.ajax({
-              url:'./public/user/ajax/busqueda_legajos.php?action=ajax&page='+page+'&cbx_busqueda='+cbx_busqueda+'&txt_datos='+txt_datos,
+              url:'./public/user/ajax/busqueda_legajos.php?action=ajax&page='+page+'&cbx_busqueda='+cbx_busqueda+'&txt_datos='+txt_datos+'&cbx_tipo_contrato='+cbx_tipo_contrato,
                beforeSend: function(objeto){
                $('#loader').html('<img src="./view/bootstrap-default/img/ajax-loader.gif"> Cargando...');
               },

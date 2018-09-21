@@ -44,6 +44,14 @@
           <script src="<?php echo URL_VIEW; ?>bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js" type="text/javascript" charset="utf-8"></script>
         <?php  
           break;
+
+        case 'reportegeneral':
+        ?>
+          <script src="<?php echo URL_VIEW; ?>chosen/js/chosen.jquery.js" type="text/javascript"></script>
+          <script src="<?php echo URL_VIEW; ?>chosen/js/init.js" type="text/javascript" charset="utf-8"></script>
+        <?php
+        break;
+
         
         default:
           # code...
