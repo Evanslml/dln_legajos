@@ -59,6 +59,55 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		}
 
 	} //IF ACTION
+	else if ($action == 'checkbox'){
+
+		$data2 = json_decode($_POST['data2']);
+
+		$ME_i= 2;
+		foreach($data2  as $key=>$val){
+    	 	switch ($key) {
+				case '0':$MPERS_NUMDOC=$val;break;
+				case '1':$nFilas_childs=$val;break;
+    	 	}//SWITCH
+		} //FOREACH
+
+		$ME_f = $nFilas_childs*3;
+		$TMDATA = array_slice($data2, $ME_i, $ME_f);
+		$MNUM_ADENDA = array();
+		$MFECHA_EMISION = array();
+		$MDURACION = array();
+
+
+		foreach($TMDATA  as $key=>$val){
+    	 	if(($key+3)%3 == 0){
+    	 			$MNUM_ADENDA[]= $val;
+    	 	}if(($key+2)%3 == 0){
+    	 			$MFECHA_EMISION[]= $val;
+    	 	}if(($key+1)%3 == 0){
+    	 			$MDURACION[]= $val;
+    	 	}
+		}
+
+//		var_dump($MNUM_ADENDA);
+//		var_dump($MFECHA_EMISION);
+//		var_dump($MDURACION);
+		
+/*PROCESO DE GUARDADO*/
+		$MOBJ_ID='5';
+			
+		for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
+			
+			$adendas= new Adenda(
+				$MPERS_NUMDOC,
+				$MNUM_ADENDA[$i],
+				date('Y-m-d', strtotime($MFECHA_EMISION[$i])),
+				$MDURACION[$i],
+				1
+			);
+			$adendas->In();
+		}	
+
+	} //IF ACTION
 }//ELSE
 
 ?>

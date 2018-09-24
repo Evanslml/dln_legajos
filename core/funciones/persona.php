@@ -648,6 +648,38 @@ class Contrato extends Persona
 }
 
 
+class Adenda extends Persona
+{
+
+	protected $MADE_NUM;
+	protected $MADE_FECHA;
+	protected $MADE_DURACION;
+	protected $MADE_ESTADO;
+
+	function __construct($MPERS_NUMDOC,$MADE_NUM,$MADE_FECHA,$MADE_DURACION,$MADE_ESTADO)
+	{
+		$this->MPERS_NUMDOC=$MPERS_NUMDOC;
+		$this->MADE_NUM=$MADE_NUM;
+		$this->MADE_FECHA=$MADE_FECHA;
+		$this->MADE_DURACION=$MADE_DURACION;
+		$this->MADE_ESTADO=$MADE_ESTADO;
+	}
+
+	public function In(){
+	    $db = new Conexion();
+	    $query="INSERT INTO MADENDAS(MPERS_NUMDOC,MADE_NUM,MADE_FECHA,MADE_DURACION,MADE_ESTADO)
+		VALUES (
+			'$this->MPERS_NUMDOC',
+			'$this->MADE_NUM',
+			'$this->MADE_FECHA',
+			'$this->MADE_DURACION',
+			'$this->MADE_ESTADO')";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt($registros);
+	}
+
+}
+
 
 class Renuncia extends Persona
 {

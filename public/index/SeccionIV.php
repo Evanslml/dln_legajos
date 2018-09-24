@@ -122,20 +122,29 @@ require_once 'public/overall/header.php';
               <div>
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_0" role="button" aria-expanded="true" aria-controls="legajos_0">
                   <i class="fa fa-plus"></i> ADENDAS</h5> 
+                  <div class="row">
+                    <div class="col-md-12">
+                        <label class="switch">
+                            <input type="checkbox" id="chk_adenda"> <!--checked-->
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
               </div>
                <!---->
               <div id="legajos_0" class="collapse row datos_certificados border-seccion-left border-seccion-right border-seccion-top border-seccion-bottom">
+                
                 <div class="row-agregado-certificado"> 
                     <div class="col-md-2 border-seccion formulario-legajos">
                         <div class="group">      
-                          <input class="inputMaterial" type="text" id="num_adenda" name="num_adenda" required>
+                          <input class="inputMaterial" type="text" id="num_adenda1" name="num_adenda1" required>
                           <span class="highlight"></span>
                           <span class="bar"></span>
                           <label>Nº ADENDA <i class="danger">*</i></label>
                         </div>
                     </div>
                     <div class="col-md-3 border-seccion">
-                      <h5>FECHA DE INGRESO <i class="danger">*</i></h5>
+                      <h5>FECHA DE EMISION <i class="danger">*</i></h5>
                       <div class="input-group date fecha_emision" data-date-format="mm-dd-yyyy" style="margin-top: 17px;">
                           <input class="form-control" type="text" readonly="" style="font-size: 18px; border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none; background: #fff;"> 
                           <span class="input-group-addon" style="border-bottom: 1px solid #5f5f5f; border-top: none; border-left: none; border-right: none;"><i class="glyphicon glyphicon-calendar"></i></span>

@@ -55,7 +55,7 @@
 function AddCertificado(parameter) {
     return '<div class="col-md-2 border-seccion formulario-legajos">\
                 <div class="group">\
-                <input class="inputMaterial" type="text"  id="num_adenda" name="num_adenda" required>\
+                <input class="inputMaterial" type="text"  id="num_adenda1" name="num_adenda1" required>\
                 <span class="highlight"></span>\
                 <span class="bar"></span>\
                 <label>Nº ADENDA <i class="danger">*</i></label>\
@@ -181,42 +181,82 @@ function get_data_form(){
     var MCON_ORIGEN =$('#txt_lugar_origen').val().toUpperCase();
     var MPERS_NIVREMUN =$('#txt_niv').val().toUpperCase();
 
-    
-
     if(MPERS_NUMDOC ==''){
       var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); return false;
     }else if(!isNumeric(MPERS_NUMDOC) || MPERS_NUMDOC.length != 8 ){
       var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); return false;
     }else{
 
-      var array = new Array();
+        var array = new Array();
+        if(MCON_NUMERO1.length == 0 && MCON_NUMERO2.length != 0){
+            if(MCON_MODALIDAD2 ==''){
+                var mensaje = 'Debe ingresar la modalidad del ingreso'; swal_mensaje_error(mensaje); return false;
+            }else if(MCON_ORIGEN ==''){
+                var mensaje = 'Debe ingresar el lugar de origen'; swal_mensaje_error(mensaje); return false;
+            }else if(MPERS_NIVREMUN ==''){
+                var mensaje = 'Debe ingresar el nivel remunerativo'; swal_mensaje_error(mensaje); return false;
+            }else{
+                array.push(MPERS_NUMDOC,MCON_FECHA2,MCON_NUMERO2,'',MCON_MODALIDAD2,MCON_ORIGEN,MPERS_NIVREMUN,'2','1');
+                //console.log(array);
+                subida_ajax(array);
+            }
+        }else if(MCON_NUMERO2.length == 0 && MCON_NUMERO1.length != 0){
+            if(MCON_MODALIDAD1 ==''){
+                var mensaje = 'Debe ingresar la modalidad del ingreso1'; swal_mensaje_error(mensaje); return false;
+            }else{
+                array.push(MPERS_NUMDOC,MCON_FECHA1,MCON_NUMERO1,MCON_MODALIDAD1,'','','','1','1');
+                //console.log(array);
+                subida_ajax(array);
+            }
+        }else{
+            var mensaje = 'Debe ingresar sólo un número de contrato'; swal_mensaje_error(mensaje); return false;
+        }
 
-      if(MCON_NUMERO1.length == 0 && MCON_NUMERO2.length != 0){
-          if(MCON_MODALIDAD2 ==''){
-              var mensaje = 'Debe ingresar la modalidad del ingreso'; swal_mensaje_error(mensaje); return false;
-          }else if(MCON_ORIGEN ==''){
-              var mensaje = 'Debe ingresar el lugar de origen'; swal_mensaje_error(mensaje); return false;
-          }else if(MPERS_NIVREMUN ==''){
-              var mensaje = 'Debe ingresar el nivel remunerativo'; swal_mensaje_error(mensaje); return false;
-          }else{
-              array.push(MPERS_NUMDOC,MCON_FECHA2,MCON_NUMERO2,'',MCON_MODALIDAD2,MCON_ORIGEN,MPERS_NIVREMUN,'2','1');
-              console.log(array);
-              subida_ajax(array);
-          }
+      var checkBox = document.getElementById("chk_adenda");
 
-          
-      }else if(MCON_NUMERO2.length == 0 && MCON_NUMERO1.length != 0){
-          if(MCON_MODALIDAD1 ==''){
-              var mensaje = 'Debe ingresar la modalidad del ingreso1'; swal_mensaje_error(mensaje); return false;
-          }else{
-              array.push(MPERS_NUMDOC,MCON_FECHA1,MCON_NUMERO1,MCON_MODALIDAD1,'','','','1','1');
-              console.log(array);
-              subida_ajax(array);
-          }
-      }else{
-          var mensaje = 'Debe ingresar sólo un número de contrato'; swal_mensaje_error(mensaje); return false;
-      }
+      if (checkBox.checked == true){
+        var nFilas_childs = $(".datos_certificados .row-agregado-certificado").length;
+        var array_adenda = new Array();
+        array_adenda.push(MPERS_NUMDOC,nFilas_childs);
 
+        for (var i = 1; i <= nFilas_childs; i++) {
+            var TXT_NUMADENDA   = $('.datos_certificados .row-agregado-certificado:nth-child('+i+') input#num_adenda1').val();
+            var CBX_TDURACION   = $(".datos_certificados .row-agregado-certificado:nth-child("+i+") #cbx_duracion").find('option:selected').text();
+            var CBX_FECHA       = $(".datos_certificados .row-agregado-certificado:nth-child("+i+") .fecha_emision input").val();
+            if(TXT_NUMADENDA.length == 0){
+                var mensaje = 'Debe Ingresar el número de adenda'; swal_mensaje_error(mensaje); return false;
+            }else if(CBX_FECHA.length == 0){
+                var mensaje = 'Debe Ingresar la fecha de ingreso'; swal_mensaje_error(mensaje); return false;
+            }
+            array_adenda.push(TXT_NUMADENDA,CBX_FECHA,CBX_TDURACION);
+        } //FOR
+
+        console.log(array_adenda);
+  
+        $.ajax({
+            type: 'POST',
+            url: './public/user/ajax/secciones/seccioniv.php?action=checkbox',
+            data: { 'data2':JSON.stringify(array_adenda) } ,
+            beforeSend: function(objeto){
+                before_process();
+            },
+            success: function (response) {
+                console.log(response);
+                //if(response ==0){
+                //    subida_realizada(0);
+                //} else{
+                //    after_process();
+                //    var mensaje = 'El usuario ya ha sido registrado';
+                //    swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+                //    //console.log("ya esa ingresado");
+                //}
+            },
+           error: function () {
+                alert("error");
+            }
+        }); //AJAX
+
+      } // IF CHEKBOX
 
 
     }//ELSE
