@@ -49,15 +49,27 @@
     $("#mod_dni").val(zeroPad(dni,8));
   }
 
+  function update1(dni){
+    $(".update_dni").val(zeroPad(dni,8));
+  }
+
+  function editar_1(){
+    var MPERS_NUMDOC=$('.update_dni').val();
+    var new_dni= utf8_to_b64(zeroPad(MPERS_NUMDOC,8));
+    var parametros = 'd='+new_dni;
+    window.location.href = './seccioni?'+parametros; 
+  }
+
+
   function SubirFoto(){
     before_process();
     subida_realizada(0);      
   }
 
+
   function Eliminar_Legajo(){
 
       var MPERS_NUMDOC=$('#mod_dni').val();
-
       $.ajax({
           type: 'POST',
           url: './public/user/ajax/busqueda_legajos.php?action=delete&MPERS_NUMDOC='+MPERS_NUMDOC,

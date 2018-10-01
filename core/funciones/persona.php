@@ -168,6 +168,65 @@ class Persona
 		sqlsrv_free_stmt( $registros);
 		//sqlsrv_close($db);
 	}
+	
+	public static function Listar_MPERSONA($dni){
+		$db = new Conexion();
+		$query="SELECT MPERS_ID,
+		MPERS_APEPAT,MPERS_APEMAT,MPERS_NOMBRES,
+		MPERS_FECNAC,MDEPA_ID,MPROV_ID,MDIST_ID,MPERS_NUMDOC,
+		MPERS_NACIONAL,MPERS_SEXO,MPERS_ESTACIVIL,MPERS_NOMCONYU,
+		MPERS_GRADINST,MPERS_PROFESION,MPERS_ESPECIALID,MPERS_MONTO,
+		MCARG_CODIGO,MPERS_REGPENSION,MPERS_REGLABORAL,MPERS_NIVREMUN,MPERS_FECREGIMEN,
+		MEST_CODIGO,MPERS_EMAIL,MPERS_GRUPOCUPAC,MPERS_NUMUBI,
+		MPERS_FECINGR,MPERS_NUMCONTRA,MPERS_NUMRUC,MPERS_TELMOVIL,
+		MPERS_NOMPADRE,MPERS_NOMMADRE,MPERS_DOMPADRES,MPERS_TELPADRES
+		FROM MPERSONA WHERE MPERS_NUMDOC='$dni' AND MPERS_ESTADO='1'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[] = $row;
+		    }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+	public static function Listar_MDOMICILIO($dni){
+		$db = new Conexion();
+		$query="SELECT MDOM_ID,MPERS_NUMDOC,MDOM_NOMBRE,MDIST_ID,MDOM_REFERENCIA,MDOM_TELFIJO,MDOM_ESTADO 
+		FROM MDOMICILIO WHERE MPERS_NUMDOC='$dni' AND MDOM_ESTADO='1' ORDER BY MDOM_ID ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) { $tabla[] = $row; }
+		}
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+	public static function Listar_MFILIAL($dni){
+		$db = new Conexion();
+		$query="SELECT MFIL_ID,MPERS_NUMDOC,MFIL_APEHIJO,MFIL_NOMHIJO,MFIL_FECNAC,MFIL_SEXO,MFIL_ESSALUD,MFIL_ESTADO 
+		FROM MFILIAL WHERE MPERS_NUMDOC='$dni' AND MFIL_ESTADO='1' ORDER BY MFIL_ID ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) { $tabla[] = $row; }
+		}
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
 
 	public static function Listar_tipo_contrato(){
 		$db = new Conexion();

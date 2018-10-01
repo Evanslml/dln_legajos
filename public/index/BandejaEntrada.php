@@ -6,9 +6,10 @@ require_once 'public/overall/header.php';
  else { ?>
 <?php include 'public/overall/menu-header.php'; ?>
 <?php include 'public/overall/menu-aside.php'; ?>
-<script src="./view/bootstrap-default/js/busqueda_legajos.js"></script>
+<script src="./view/bootstrap-default/js/busqueda_legajos.js?v<?php echo time();?>"></script>
 <?php include 'public/modal/modal_foto.php'; ?>
 <?php include 'public/modal/modal_delete.php'; ?>
+<?php include 'public/modal/modal_update.php'; ?>
 
 
   <!-- Content Wrapper. Contains page content -->

@@ -6,7 +6,7 @@ require_once 'public/overall/header.php';
  else { ?>
 <?php include 'public/overall/menu-header.php'; ?>
 <?php include 'public/overall/menu-aside.php'; ?>
-<script src="./view/bootstrap-default/js/init_seccioniv.js"></script>
+<script src="./view/bootstrap-default/js/init_seccioniv.js?v=<?php echo time();?>"></script>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -119,10 +119,10 @@ require_once 'public/overall/header.php';
                 </div>
               </div>
               <!--./FIRST -->
-              <div>
+              <div style="position: relative">
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_0" role="button" aria-expanded="true" aria-controls="legajos_0">
                   <i class="fa fa-plus"></i> ADENDAS</h5> 
-                  <div class="row">
+                  <div class="row" style="position: absolute; top:-8px; left: 100px">
                     <div class="col-md-12">
                         <label class="switch">
                             <input type="checkbox" id="chk_adenda"> <!--checked-->

@@ -113,18 +113,26 @@ class Reportes
 
 	}
 
-
 // Reporte
 
-	Public static function Reporte_01($MEST_CODIGO, $MEST_UBIGEO){
+	Public static function Reporte_01($NIVEL,$MEST_CODIGO, $MEST_UBIGEO){
 		$db = new Conexion();
-/*		if($MEST_CODIGO =='0'){*/
-/*			$WHERE = AND K.MEST_UBIGEO='150112'*/
-/*		}else if($MEST_UBIGEO =='0'){*/
-/*			$WHERE = AND K.MEST_CODIGO='05791';*/
-/*		}*/
-/*		*/
-	    $query="
+
+		switch ($NIVEL) {
+			case '1':
+			$WHERE="";
+			break;
+
+			case '2':
+			$WHERE=" AND K.MEST_UBIGEO='$MEST_UBIGEO' ";
+			break;
+
+			case '3':
+			$WHERE=" AND K.MEST_CODIGO='$MEST_CODIGO' ";
+			break;
+		}
+
+		$query="
 	    	SELECT 
 			A.MPERS_NOMAPE_COMPLETO,
 			A.MPERS_FECNAC,B.MDEPA_NOMBRE DEPARTAMENTO,C.MPROV_NOMBRE PROVINCIA,D.MDIST_NOMBRE DISTRITO,A.MPERS_NUMDOC,
@@ -146,8 +154,8 @@ class Reportes
 			INNER JOIN MESTABLECIMIENTO K ON A.MEST_CODIGO=K.MEST_CODIGO
 			INNER JOIN MUBICACION L ON A.MPERS_GRUPOCUPAC=L.MUBI_ID
 			WHERE A.MPERS_ESTADO='1' 
-		";
-
+			". $WHERE;
+		
 	    $registros = sqlsrv_query($db->getConecta(), $query);
 		if($registros === false ){
 		  $tabla = false;

@@ -94,7 +94,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 		
 /*PROCESO DE GUARDADO*/
 		$MOBJ_ID='5';
-			
+		
 		for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
 			
 			$adendas= new Adenda(
@@ -106,6 +106,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 			);
 			$adendas->In();
 		}	
+		echo '0';
 
 	} //IF ACTION
 }//ELSE

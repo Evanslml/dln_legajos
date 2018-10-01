@@ -198,7 +198,7 @@ function get_data_form(){
             }else{
                 array.push(MPERS_NUMDOC,MCON_FECHA2,MCON_NUMERO2,'',MCON_MODALIDAD2,MCON_ORIGEN,MPERS_NIVREMUN,'2','1');
                 //console.log(array);
-                subida_ajax(array);
+                subida_ajax_formulario(array);
             }
         }else if(MCON_NUMERO2.length == 0 && MCON_NUMERO1.length != 0){
             if(MCON_MODALIDAD1 ==''){
@@ -206,7 +206,7 @@ function get_data_form(){
             }else{
                 array.push(MPERS_NUMDOC,MCON_FECHA1,MCON_NUMERO1,MCON_MODALIDAD1,'','','','1','1');
                 //console.log(array);
-                subida_ajax(array);
+                subida_ajax_formulario(array);
             }
         }else{
             var mensaje = 'Debe ingresar sólo un número de contrato'; swal_mensaje_error(mensaje); return false;
@@ -231,31 +231,8 @@ function get_data_form(){
             array_adenda.push(TXT_NUMADENDA,CBX_FECHA,CBX_TDURACION);
         } //FOR
 
-        console.log(array_adenda);
-  
-        $.ajax({
-            type: 'POST',
-            url: './public/user/ajax/secciones/seccioniv.php?action=checkbox',
-            data: { 'data2':JSON.stringify(array_adenda) } ,
-            beforeSend: function(objeto){
-                before_process();
-            },
-            success: function (response) {
-                console.log(response);
-                //if(response ==0){
-                //    subida_realizada(0);
-                //} else{
-                //    after_process();
-                //    var mensaje = 'El usuario ya ha sido registrado';
-                //    swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-                //    //console.log("ya esa ingresado");
-                //}
-            },
-           error: function () {
-                alert("error");
-            }
-        }); //AJAX
-
+        //console.log(array_adenda);
+        subida_ajax_adenda(array_adenda);
       } // IF CHEKBOX
 
 
@@ -265,7 +242,7 @@ function get_data_form(){
 
 }
 
-function subida_ajax($parameter){
+function subida_ajax_formulario($parameter){
 
   $.ajax({
           type: 'POST',
@@ -289,6 +266,34 @@ function subida_ajax($parameter){
           }
       }); 
 }
+
+function subida_ajax_adenda($parameter){
+
+    $.ajax({
+        type: 'POST',
+        url: './public/user/ajax/secciones/seccioniv.php?action=checkbox',
+        data: { 'data2':JSON.stringify($parameter) } ,
+        beforeSend: function(objeto){
+            before_process();
+        },
+        success: function (response) {
+            //console.log(response);
+            if(response ==0){
+                subida_realizada_array(0);
+            } else{
+                after_process();
+                var mensaje = 'El usuario ya ha sido registrado';
+                swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+                //console.log("ya esa ingresado");
+            }
+        },
+       error: function () {
+            alert("error");
+        }
+    }); //AJAX
+    
+}
+
 
 /*********************************************************************************************************************************/
 //LOAD IMAGES
@@ -318,7 +323,7 @@ function subida_realizada_array(i){
     if (inew <= maxi ){
       for (var n = i; i < inew; i++) {
             console.log(archivos[i].fil);
-            subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+            subida_archivos_array(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
       }
     }else{
         after_process();
@@ -359,6 +364,45 @@ function subida_realizada(i){
 
 
 /**/
+
+function subida_archivos_array(dni,obj,nombre,arch,num,i){
+    var formulario= '.formulario_'+num;
+    var file= '#file-'+num;
+    var archivo = formulario +' '+ file;
+    var file1 = $(archivo)[0].files[0];
+        if (file1 !== undefined) {
+            var MPERS_NUMDOC = dni;
+            var MADJ_NOMBRES = nombre;
+            var MOBJ_ID = obj;
+            var fileName = file1.name;
+            var formData = new FormData($(formulario)[0]);
+            formData.append('MPERS_NUMDOC',MPERS_NUMDOC);
+            formData.append('MADJ_NOMBRES',MADJ_NOMBRES);
+            formData.append('MOBJ_ID',MOBJ_ID);
+            formData.append('MADJ_URL',fileName);
+            formData.append('MARCH_ID',arch);
+  
+            $.ajax({
+                url: './public/user/ajax/includes/upload.php?type=data_imagen',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data){
+                    var inew = Number(i)+1;
+                    subida_realizada_array(inew);
+                },
+            });
+        }else{
+          var inew = Number(i)+1;
+          subida_realizada(inew);
+        }
+  
+  }
+
+  
+
 function subida_archivos(dni,obj,nombre,arch,num,i){
   var formulario= '.formulario_'+num;
   var file= '#file-'+num;

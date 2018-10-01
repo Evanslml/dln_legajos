@@ -5,12 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo TITLE_WEB; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
- <!-- 
+  
   <meta http-equiv="Expires" content="0">
   <meta http-equiv="Last-Modified" content="0">
   <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
   <meta http-equiv="Pragma" content="no-cache">
--->
+
   <?php nocache();?>
   <link rel="icon" href="<?php echo URL_VIEW; ?>bootstrap-default/img/favicon.png" type="image/png" />
 
@@ -23,7 +23,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <!--<link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-default/css/estilo.min.css">-->
-  <link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-default/css/estilo.css">
+  <link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-default/css/estilo.css?v=<?php echo time();?>">
+
+  <link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-default/css/helpers.css?v=<?php echo time();?>">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo URL_VIEW; ?>bootstrap-default/css/icheck/square/green.css">
   <!--Estilo -->

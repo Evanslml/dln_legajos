@@ -20,7 +20,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
                 $MADJ_URL = $_POST['MADJ_URL'];
                 $MARCH_ID = $_POST['MARCH_ID'];
                 $file = myUrlEncode(eliminar_tildes($_FILES['archivo']['name']));
-                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file;
+                $time = time();
+                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file.'_'.$time;
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
                 if(!is_dir("files/".$MPERS_NUMDOC."")) 
@@ -51,7 +52,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
                 $MADJ_URL = $_POST['MADJ_URL'];
                 $MARCH_ID = $_POST['MARCH_ID'];
                 $file = myUrlEncode(eliminar_tildes($_FILES['archivo']['name']));
-                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file;
+                $time = time();
+                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file.'_'.$time;
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
                 if(!is_dir("files/".$MPERS_NUMDOC."")) 

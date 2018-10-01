@@ -41,32 +41,46 @@
 
             case '2':
               var cbx_distrito = $("#cbx_distrito").find('option:selected').prop('value');
+              var lbl_distrito = $("#cbx_distrito").find('option:selected').text();
               if(cbx_distrito =='0'){
                   var mensaje = 'Debe Ingresar el distrito'; swal_mensaje_error(mensaje); return false;
               }
               var cbx_establecimiento='0';
+              var lbl_establecimiento='';
             break;
 
             case '3':
               var cbx_establecimiento = $("#cbx_establecimiento").find('option:selected').prop('value');
+              var lbl_establecimiento = $("#cbx_establecimiento").find('option:selected').text();
               if(cbx_establecimiento =='0'){
                   var mensaje = 'Debe Ingresar el distrito'; swal_mensaje_error(mensaje); return false;
               }
               var cbx_distrito='0';
+              var lbl_distrito='';
             break;
 
             default:
              var cbx_distrito='0';
              var cbx_establecimiento='0';
+             var lbl_distrito='';
+             var lbl_establecimiento='';
             break;
           }
 
           //var array = new Array();
           //array.push(cbx_tipo_reporte,cbx_tipo_nivel,cbx_distrito,cbx_establecimiento);
 
-          var parametros = 'cbx_tipo_reporte='+cbx_tipo_reporte+'&cbx_tipo_nivel='+cbx_tipo_nivel+'&cbx_distrito='+cbx_distrito+'&cbx_establecimiento='+cbx_establecimiento;
+          var parametros =  'cbx_tipo_reporte='+cbx_tipo_reporte+
+                            '&cbx_tipo_nivel='+cbx_tipo_nivel+
+                            '&cbx_distrito='+cbx_distrito+
+                            '&cbx_establecimiento='+cbx_establecimiento+
+                            '&lbl_distrito='+lbl_distrito+
+                            '&lbl_establecimiento='+lbl_establecimiento
+                            ;
+
           var pageexc01='./core/excel/report_01.php?'+parametros;
 
+          //console.log(parametros);
           if($data =='excel'){
               $.ajax({
                     url: pageexc01,
@@ -81,9 +95,7 @@
               });
           } else if($data =='pdf'){
 
-          }
-
-
+          } //
       }
 
       function imprimir(in_data){

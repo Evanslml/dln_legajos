@@ -85,7 +85,8 @@ require_once('../../../core/core.php');
                             class="btn btn-accion" title="" onclick="">
                             <i class="fa fa-print"></i>
                             </a>';
-                            echo '<a href="#" onclick="" class="btn btn-accion">
+                            echo '<a href="#" onclick="update1('.$list_dni.')" class="btn btn-accion"
+                            data-toggle="modal" data-target="#update_legajos" title="" onclick="">
                             <i class="fa fa-pencil"></i>
                             </a>';
                             echo '<a href="#" onclick="eliminar1('.$list_dni.')" class="btn btn-accion" 

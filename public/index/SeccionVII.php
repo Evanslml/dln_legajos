@@ -6,7 +6,7 @@ require_once 'public/overall/header.php';
  else { ?>
 <?php include 'public/overall/menu-header.php'; ?>
 <?php include 'public/overall/menu-aside.php'; ?>
-<script src="./view/bootstrap-default/js/init_seccionvii.js"></script>
+<script src="./view/bootstrap-default/js/init_seccionvii.js?v=<?php echo time();?>"></script>
 
 
   <!-- Content Wrapper. Contains page content -->
