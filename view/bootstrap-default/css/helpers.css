@@ -41,6 +41,12 @@
 .btn-accion:focus{
     color: #fff;
 }
+.inline{
+    display: inline-block;
+}
+.color-1{
+    color: #225d77;
+}
 /*LOADING*/
 
 .loading{

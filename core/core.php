@@ -4,6 +4,7 @@
   
  //definimos ruta y titulo del sitio
  define('URL_VIEW','http://172.16.20.48:8080/dln_legajos/view/');
+ define('URL_ADJUNTOS','http://172.16.20.48:8080/dln_legajos/public/user/ajax/includes/files/');
  define('TITLE_WEB','LEGAJOS DIRIS');
  define('URL_WEB','http://172.16.20.48:8080/dln_legajos/');
  define('NOMBRE_WEB','LEGAJOS');

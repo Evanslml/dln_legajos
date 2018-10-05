@@ -7,6 +7,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 	require_once('../../../../core/core.php');
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+	$tipo = (isset($_REQUEST['tipo'])&& $_REQUEST['tipo'] !=NULL)?$_REQUEST['tipo']:'';
 
 	if($action == 'formulario'){
 
@@ -108,44 +109,143 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 /*PROCESO DE GUARDADO*/
 		$MOBJ_ID='2';
-		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
-		if($Existe_Persona ==''){
 
-		/*   $MPERS_APEPAT='demo';*/
-		/*    	$MPERS_APEMAT='demo';*/
-		/*    	$MPERS_NOMBRES='demo demo';*/
-		/*    	$MPERS_TIPDOC='1';*/
-		/*    	$MPERS_NUMDOC='46876484';*/
-		/*    	$MPERS_TIPOPER='1';*/
-		/*    	$MDEPA_ID='08';*/
-		/*    	$MPROV_ID='1243';*/
-		/*		$MDIST_ID='123456';*/
-		/*		$MPERS_FECNAC='2018-03-01';*/
-		/*		$MPERS_NACIONAL='PERUANA';*/
-		/*		$MPERS_SEXO='8';*/
-		/*		$MPERS_ESTACIVIL='4';*/
-		/*		$MPERS_NOMCONYU='';*/
-				/*$MPERS_GRADINST='4';*/
-		/*		$MPERS_PROFESION='DEMO';*/
-		/*		$MPERS_ESPECIALID='';*/
-		/*		$MPERS_MONTO='1500.00';*/
-		/*		$MCARG_CODIGO='5';*/
-		/*		$MPERS_REGPENSION='4';*/
-		/*		$MPERS_REGLABORAL='3';*/
-		/*		$MPERS_NIVREMUN='ASD';*/
-		/*		$MPERS_FECREGIMEN='2018-05-09';*/
-		/*		$MEST_CODIGO='05822';*/
-		/*		$MPERS_EMAIL='JIVANCPLML@GMAIL.COM';*/
-		/*		$MPERS_GRUPOCUPAC='3';*/
-		/*		$MPERS_NUMUBI='121';*/
-		/*		$MPERS_FECINGR='2018-09-12';*/
-				/*$MPERS_NUMCONTRA='800';*/
-		/*		$MPERS_NUMRUC='10468764844';*/
-		/*		$MPERS_TELMOVIL='987898767';*/
-		/*		$MPERS_NOMPADRE='DEMO DEMO DEMO';*/
-		/*		$MPERS_NOMMADRE='DEMO DEMO DEMO DEMO';*/
-		/*		$MPERS_DOMPADRES='DOMICILIO';*/
-		/*		$MPERS_TELPADRES='1212121221';*/
+			if($tipo == '0'){ //NEW
+				$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
+				if($Existe_Persona ==''){
+		
+				/*   	$MPERS_APEPAT='demo';*/
+				/*    	$MPERS_APEMAT='demo';*/
+				/*    	$MPERS_NOMBRES='demo demo';*/
+				/*    	$MPERS_TIPDOC='1';*/
+				/*    	$MPERS_NUMDOC='46876484';*/
+				/*    	$MPERS_TIPOPER='1';*/
+				/*    	$MDEPA_ID='08';*/
+				/*    	$MPROV_ID='1243';*/
+				/*		$MDIST_ID='123456';*/
+				/*		$MPERS_FECNAC='2018-03-01';*/
+				/*		$MPERS_NACIONAL='PERUANA';*/
+				/*		$MPERS_SEXO='8';*/
+				/*		$MPERS_ESTACIVIL='4';*/
+				/*		$MPERS_NOMCONYU='';*/
+						/*$MPERS_GRADINST='4';*/
+				/*		$MPERS_PROFESION='DEMO';*/
+				/*		$MPERS_ESPECIALID='';*/
+				/*		$MPERS_MONTO='1500.00';*/
+				/*		$MCARG_CODIGO='5';*/
+				/*		$MPERS_REGPENSION='4';*/
+				/*		$MPERS_REGLABORAL='3';*/
+				/*		$MPERS_NIVREMUN='ASD';*/
+				/*		$MPERS_FECREGIMEN='2018-05-09';*/
+				/*		$MEST_CODIGO='05822';*/
+				/*		$MPERS_EMAIL='JIVANCPLML@GMAIL.COM';*/
+				/*		$MPERS_GRUPOCUPAC='3';*/
+				/*		$MPERS_NUMUBI='121';*/
+				/*		$MPERS_FECINGR='2018-09-12';*/
+						/*$MPERS_NUMCONTRA='800';*/
+				/*		$MPERS_NUMRUC='10468764844';*/
+				/*		$MPERS_TELMOVIL='987898767';*/
+				/*		$MPERS_NOMPADRE='DEMO DEMO DEMO';*/
+				/*		$MPERS_NOMMADRE='DEMO DEMO DEMO DEMO';*/
+				/*		$MPERS_DOMPADRES='DOMICILIO';*/
+				/*		$MPERS_TELPADRES='1212121221';*/
+						$MPERS_ESTADO='1';
+						$MPERS_NOMAPE_COMPLETO= $MPERS_APEPAT.' '.$MPERS_APEMAT.' '.$MPERS_NOMBRES;
+						$MPERS_FECINS=get_datetodayhour();
+						$MPERS_FECACT='';
+						$MPERS_USERINS=$_SESSION['sesion_id'];
+						$MPERS_USERACT='';
+						$MPERS_HOST=get_client_ip();
+						$MPERS_IMAGEN='';
+		
+						$persona1 = new Persona(
+							$MPERS_APEPAT, 
+							$MPERS_APEMAT, 
+							$MPERS_NOMBRES, 
+							$MPERS_TIPDOC, 
+							$MPERS_NUMDOC, 
+							$MPERS_TIPOPER, 
+							$MDEPA_ID, 
+							$MPROV_ID,
+							$MDIST_ID, 
+							date('Y-m-d', strtotime($MPERS_FECNAC)),
+							$MPERS_NACIONAL, 
+							$MPERS_SEXO, 
+							$MPERS_ESTACIVIL, 
+							$MPERS_NOMCONYU, 
+							$MPERS_GRADINST, 
+							$MPERS_PROFESION, 
+							$MPERS_ESPECIALID, 
+							$MPERS_MONTO, 
+							$MCARG_CODIGO, 
+							$MPERS_REGPENSION, 
+							$MPERS_REGLABORAL, 
+							$MPERS_NIVREMUN, 
+							date('Y-m-d', strtotime($MPERS_FECREGIMEN)),
+							$MEST_CODIGO, 
+							$MPERS_EMAIL, 
+							$MPERS_GRUPOCUPAC, 
+							$MPERS_NUMUBI, 
+							date('Y-m-d', strtotime($MPERS_FECINGR)),
+							$MPERS_NUMCONTRA, 
+							$MPERS_NUMRUC, 
+							$MPERS_TELMOVIL,
+							$MPERS_NOMPADRE, 
+							$MPERS_NOMMADRE, 
+							$MPERS_DOMPADRES, 
+							$MPERS_TELPADRES, 
+							$MPERS_ESTADO, 
+							$MPERS_NOMAPE_COMPLETO, 
+							$MPERS_FECINS, 
+							$MPERS_FECACT, 
+							$MPERS_USERINS, 
+							$MPERS_USERACT, 
+							$MPERS_HOST,
+							$MPERS_IMAGEN
+						);
+					   $persona1 ->IngresarPersona();
+		
+						for ($i=0; $i <= ($nFilas_address-1); $i++) { 
+							$domicilio1 = new Domicilio(
+								$MPERS_NUMDOC,
+								$A_MDOM_NOMBRE[$i],
+								$A_MDIST_ID[$i],
+								$A_MDOM_REFERENCIA[$i],
+								$A_MDOM_TELFIJO[$i],
+								1
+							);
+							$domicilio1->IngresarDomicilio();
+						}
+		
+						for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
+							if($C_MFIL_APEHIJO[$i] !=='' && $C_MFIL_NOMHIJO[$i] !==''){
+								$filial1 = new Filial(
+									$MPERS_NUMDOC,
+									$C_MFIL_APEHIJO[$i],
+									$C_MFIL_NOMHIJO[$i],
+									//$C_MFIL_FECNAC[$i],
+									date('Y-m-d', strtotime($C_MFIL_FECNAC[$i])),
+									$C_MFIL_SEXO[$i],
+									$C_MFIL_ESSALUD[$i],
+									1
+								);
+								$filial1->IngresarFilial();
+							}
+						}	
+		
+						$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
+						$summary->In();
+		
+						echo '0'; //Se ingreso correctamente
+				}else{
+					echo '1'; //Ya Existe el usuario
+				} //*FIN EXISTE*/
+			}else{
+
+				$EliminarPersona = Persona::EliminarPersona($MPERS_NUMDOC);
+				$EliminarDomicilio = Domicilio::EliminarDomicilio($MPERS_NUMDOC);
+				$EliminarFilial = Filial::EliminarFilial($MPERS_NUMDOC);
+
 				$MPERS_ESTADO='1';
 				$MPERS_NOMAPE_COMPLETO= $MPERS_APEPAT.' '.$MPERS_APEMAT.' '.$MPERS_NOMBRES;
 				$MPERS_FECINS=get_datetodayhour();
@@ -155,21 +255,16 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 				$MPERS_HOST=get_client_ip();
 				$MPERS_IMAGEN='';
 
-		/*		$prueba =new Pruebas('1','data');*/
-		/*		$prueba->IngresarPrueba();*/
-
-				
-			    $persona1 = new Persona(
-			    	$MPERS_APEPAT, 
-			    	$MPERS_APEMAT, 
-			    	$MPERS_NOMBRES, 
-			    	$MPERS_TIPDOC, 
-			    	$MPERS_NUMDOC, 
-			    	$MPERS_TIPOPER, 
-			    	$MDEPA_ID, 
-			    	$MPROV_ID,
+				$persona1 = new Persona(
+					$MPERS_APEPAT, 
+					$MPERS_APEMAT, 
+					$MPERS_NOMBRES, 
+					$MPERS_TIPDOC, 
+					$MPERS_NUMDOC, 
+					$MPERS_TIPOPER, 
+					$MDEPA_ID, 
+					$MPROV_ID,
 					$MDIST_ID, 
-					//$MPERS_FECNAC, 
 					date('Y-m-d', strtotime($MPERS_FECNAC)),
 					$MPERS_NACIONAL, 
 					$MPERS_SEXO, 
@@ -183,13 +278,11 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 					$MPERS_REGPENSION, 
 					$MPERS_REGLABORAL, 
 					$MPERS_NIVREMUN, 
-					//$MPERS_FECREGIMEN,
 					date('Y-m-d', strtotime($MPERS_FECREGIMEN)),
 					$MEST_CODIGO, 
 					$MPERS_EMAIL, 
 					$MPERS_GRUPOCUPAC, 
 					$MPERS_NUMUBI, 
-					//$MPERS_FECINGR, 
 					date('Y-m-d', strtotime($MPERS_FECINGR)),
 					$MPERS_NUMCONTRA, 
 					$MPERS_NUMRUC, 
@@ -207,9 +300,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 					$MPERS_HOST,
 					$MPERS_IMAGEN
 				);
-			   $persona1 ->IngresarPersona();
-
-
+				$persona1 ->IngresarPersona();
 
 				for ($i=0; $i <= ($nFilas_address-1); $i++) { 
 					$domicilio1 = new Domicilio(
@@ -219,18 +310,12 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 						$A_MDOM_REFERENCIA[$i],
 						$A_MDOM_TELFIJO[$i],
 						1
-			    	);
-			    	$domicilio1->IngresarDomicilio();
-
+					);
+					$domicilio1->IngresarDomicilio();
 				}
 
-
-
 				for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
-					
 					if($C_MFIL_APEHIJO[$i] !=='' && $C_MFIL_NOMHIJO[$i] !==''){
-
-
 						$filial1 = new Filial(
 							$MPERS_NUMDOC,
 							$C_MFIL_APEHIJO[$i],
@@ -240,23 +325,13 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 							$C_MFIL_SEXO[$i],
 							$C_MFIL_ESSALUD[$i],
 							1
-				    	);
-
-
-				    	$filial1->IngresarFilial();
-				 
-			    	}
+						);
+						$filial1->IngresarFilial();
+					}
 				}	
-
-				$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
-				$summary->In();
-
 				echo '0'; //Se ingreso correctamente
-		}else{
-			echo '1'; //Ya Existe el usuario
-		} //*FIN EXISTE*/
-			    
-		
+			}
+
 	} //IF ACTION
 }//ELSE
 

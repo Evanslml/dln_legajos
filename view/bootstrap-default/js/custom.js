@@ -48,7 +48,7 @@ function swal_mensaje_success(texto){
         title: "Listo",
         text: texto,
         type: "success",
-        showCancelButton: true,
+        showCancelButton: false,
         closeOnConfirm: false,
         showLoaderOnConfirm: true
     });
@@ -56,16 +56,10 @@ function swal_mensaje_success(texto){
 
 function before_process(){
     $(".loading").show();
-    $(".btn-save a").attr("disabled", true);
-    $(".btn-secciones a").attr("disabled", true);
-    $(".btn-cancel a").attr("disabled", true);
 }
 
 function after_process(){
     $(".loading").hide();
-    $(".btn-save a").attr("disabled", false);
-    $(".btn-secciones a").attr("disabled", false);
-    $(".btn-cancel a").attr("disabled", false);
 }
 
 $( document ).ready(function() {

@@ -1,121 +1,122 @@
-  var $ = jQuery.noConflict();
-  $(document).ready(function(){
+var $ = jQuery.noConflict();
+$(document).ready(function () {
 
-      $("#fecha_nacimiento").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-      }).datepicker('update', '01-01-1970');
+  $("#fecha_nacimiento").datepicker({
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  }).datepicker('update', '01-01-1970');
 
-      $("#fecha_regimen").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-      }).datepicker('update', new Date());
+  $("#fecha_regimen").datepicker({
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  }).datepicker('update', new Date());
 
-      $("#fecha_ingreso").datepicker({ 
-        /*format: "mm-yyyy",*/
-        /*viewMode: "months", */
-        /*minViewMode: "months"*/
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-      }).datepicker('update', new Date());
+  $("#fecha_ingreso").datepicker({
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  }).datepicker('update', new Date());
 
-      formatdate();
+  formatdate();
 
-      $('.type-price').priceFormat({
-          prefix: 'S/. ',
-          centsSeparator: '.',
-          thousandsSeparator: ','
-      });
+  $('.type-price').priceFormat({
+    prefix: 'S/. ',
+    centsSeparator: '.',
+    thousandsSeparator: ','
+  });
 
-      $(function () {
-          $("#btnAdd-child").bind("click", function () {
-              var div = $("<div class='row-agregado-child'>");
-              div.html(AddDateChilds(""));
-              $(".datos_hijos").append(div);
-          });
-          $("#btnAdd-address").bind("click", function () {
-              var div = $("<div class='row-agregado-address'>");
-              div.html(AddDateAddres(""));
-              $(".datos_direccion").append(div);
-          });
-         $("body").on("click", ".remove-child", function () {
-              $(this).closest(".row-agregado-child").remove();
-          });
-         $("body").on("click", ".remove-address", function () {
-              $(this).closest(".row-agregado-address").remove();
-          });
-      });
+  $(function () {
+    $("#btnAdd-child").bind("click", function () {
+      var div = $("<div class='row-agregado-child'>");
+      div.html(AddDateChilds(""));
+      $(".datos_hijos").append(div);
+    });
+    $("#btnAdd-address").bind("click", function () {
+      var div = $("<div class='row-agregado-address'>");
+      div.html(AddDateAddres(""));
+      $(".datos_direccion").append(div);
+    });
+    $("body").on("click", ".remove-child", function () {
+      $(this).closest(".row-agregado-child").remove();
+    });
+    $("body").on("click", ".remove-address", function () {
+      $(this).closest(".row-agregado-address").remove();
+    });
+  });
 
-   $('#cbx_departamento').on('change', function(evt, params) {
+  $('#cbx_departamento').on('change', function (evt, params) {
     reset_distrito();
-/*  MULTIPLE
-    var SelectedIds = $(this).find('option:selected').map(function () {return $(this).prop('value') }).get(); console.log(SelectedIds);
-*/
-    var Id_departamento= $(this).find('option:selected').prop('value');
-    var texto_departamento= $(this).siblings('.chosen-container').find("span").text();
-//https://stackoverflow.com/questions/32757874/how-can-i-load-data-from-ajax-to-chosen-jquery
-//https://es.stackoverflow.com/questions/40754/crear-elementos-del-dom-con-jquery
-      $.ajax({
-              type: 'POST',
-              url: './public/user/ajax/includes/get_ubicacion.php?action=get_provincia',
-              data: { Id_departamento: Id_departamento } ,
-              success: function (data) {
-                  var temporal_provincial = $(".col-provincia .temporal_provincia");
-                  temporal_provincial.remove();
+    /*  MULTIPLE
+        var SelectedIds = $(this).find('option:selected').map(function () {return $(this).prop('value') }).get(); console.log(SelectedIds);
+    */
+    var Id_departamento = $(this).find('option:selected').prop('value');
+    var texto_departamento = $(this).siblings('.chosen-container').find("span").text();
+    //https://stackoverflow.com/questions/32757874/how-can-i-load-data-from-ajax-to-chosen-jquery
+    //https://es.stackoverflow.com/questions/40754/crear-elementos-del-dom-con-jquery
+    $.ajax({
+      type: 'POST',
+      url: './public/user/ajax/includes/get_ubicacion.php?action=get_provincia',
+      data: { Id_departamento: Id_departamento },
+      success: function (data) {
+        var temporal_provincial = $(".col-provincia .temporal_provincia");
+        temporal_provincial.remove();
 
-                  $("<div>", {
-                      'class': 'temporal_provincia'
-                  }).append(
-                      $('<h6>', {
-                          'class': 'subtitle',
-                          'text': 'PROVINCIA'
-                      }),
-                      $('<select>', {
-                          'data-placeholder': 'Provincia',
-                          'name':'cbx_provincia',
-                          'id':'cbx_provincia',
-                          'class':'chosen-select-deselect'
-                      })
+        $("<div>", {
+          'class': 'temporal_provincia'
+        }).append(
+          $('<h6>', {
+            'class': 'subtitle',
+            'text': 'PROVINCIA'
+          }),
+          $('<select>', {
+            'data-placeholder': 'Provincia',
+            'name': 'cbx_provincia',
+            'id': 'cbx_provincia',
+            'class': 'chosen-select-deselect'
+          })
 
-                  ).appendTo('.col-provincia');
+        ).appendTo('.col-provincia');
 
-                  var $select_elem = $("#cbx_provincia");
-                  $select_elem.empty();
-                  $select_elem.html(data);
-                  $select_elem.chosen({
-                    allow_single_deselect: true,
-                    disable_search_threshold: 10,
-                    no_results_text: "Oops, ningun resultado",
-                    width: "95%"
-                  });
-                  //$select_elem.chosen({ width: "95%" });
-                  get_distrito();
-              },
-              error: function () {
-                  alert("error");
-              }
-            }); 
+        var $select_elem = $("#cbx_provincia");
+        $select_elem.empty();
+        $select_elem.html(data);
+        $select_elem.chosen({
+          allow_single_deselect: true,
+          disable_search_threshold: 10,
+          no_results_text: "Oops, ningun resultado",
+          width: "95%"
+        });
+        //$select_elem.chosen({ width: "95%" });
+        get_distrito();
+      },
+      error: function () {
+        alert("error");
+      }
+    });
   });
 
 
-
-   $('.btn-save').click(function(evt){
+  $('.btn-save').click(function (evt) {
+    if (save_click == 0) {
       evt.preventDefault();
       get_data_form();
-   });
+    } else {
+      console.log("Envio de varios clicks")
+    }
+    save_click += 1;
+  });
 
+});
 
-  }); /*FIN READY FUNCTION*/ 
-
+var save_click = 0;
 
 /*********************************************************************************************************************************/
 //FUNCIONES DATOS DE FORMULARIO
 /*********************************************************************************************************************************/
-  function AddDateAddres(value) {
-      return '<div class="col-md-4 border-seccion">\
+function AddDateAddres(value) {
+  return '<div class="col-md-4 border-seccion">\
                 <div class="group">\
                   <input class="inputMaterial" type="text"  id="domicilio" name="domicilio" required>\
                   <span class="highlight"></span>\
@@ -148,10 +149,10 @@
                 </div>\
                 <button type="button" class="btn btn-danger remove-address" style="position: absolute;top: 20px;right: -10px;"><i class="glyphicon glyphicon-remove-sign"></i></button>\
             </div>';
-  }
+}
 
-  function AddDateChilds(value) {
-      return '<div class="col-md-7 border-seccion">\
+function AddDateChilds(value) {
+  return '<div class="col-md-7 border-seccion">\
                 <div class="row">\
                   <div class="col-md-6">\
                     <div class="group">\
@@ -200,359 +201,363 @@
                   </div>\
               <button type="button" class="btn btn-danger remove-child" style="position: absolute;top: 20px;right: -10px;"><i class="glyphicon glyphicon-remove-sign"></i></button>\
               </div>';
-  }
+}
 
-  function formatdate(){
-    $(".fecha_hijo").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: 'dd-mm-yyyy'
-    });
-  }
+function formatdate() {
+  $(".fecha_hijo").datepicker({
+    autoclose: true,
+    todayHighlight: true,
+    format: 'dd-mm-yyyy'
+  });
+}
 
-  function combosexo(){
-    var $select_elem = $(".cbx_sexo1");
-    $select_elem.chosen({
-      allow_single_deselect: false,
-      disable_search_threshold: 10,
-      no_results_text: "Oops, ningun resultado",
-      width: "95%"
-    });
-  }
+function combosexo() {
+  var $select_elem = $(".cbx_sexo1");
+  $select_elem.chosen({
+    allow_single_deselect: false,
+    disable_search_threshold: 10,
+    no_results_text: "Oops, ningun resultado",
+    width: "95%"
+  });
+}
 
-  function combodistrito(){
-    var $select_elem = $(".cbx_distrito1");
-    $select_elem.chosen({
-      allow_single_deselect: false,
-      disable_search_threshold: 10,
-      no_results_text: "Oops, ningun resultado",
-      width: "95%"
-    });
-  }
+function combodistrito() {
+  var $select_elem = $(".cbx_distrito1");
+  $select_elem.chosen({
+    allow_single_deselect: false,
+    disable_search_threshold: 10,
+    no_results_text: "Oops, ningun resultado",
+    width: "95%"
+  });
+}
 
 /*********************************************************************************************************************************/
 //FUNCIONES COMBO 
 /*********************************************************************************************************************************/
 
-  function get_distrito(){
-   $('#cbx_provincia').on('change', function(evt, params) {
-        var Id_provincia= $(this).find('option:selected').prop('value');
-        var texto_provincia= $(this).siblings('.chosen-container').find("span").text();
-        $.ajax({
-                type: 'POST',
-                url: './public/user/ajax/includes/get_ubicacion.php?action=get_distrito',
-                data: { Id_provincia: Id_provincia } ,
-                success: function (data) {
-                    reset_distrito(data);
-                    //$select_elem.chosen({ width: "95%" });
-                },
-                error: function () {
-                    alert("error");
-                }
-              }); 
+function get_distrito() {
+  $('#cbx_provincia').on('change', function (evt, params) {
+    var Id_provincia = $(this).find('option:selected').prop('value');
+    var texto_provincia = $(this).siblings('.chosen-container').find("span").text();
+    $.ajax({
+      type: 'POST',
+      url: './public/user/ajax/includes/get_ubicacion.php?action=get_distrito',
+      data: { Id_provincia: Id_provincia },
+      success: function (data) {
+        reset_distrito(data);
+        //$select_elem.chosen({ width: "95%" });
+      },
+      error: function () {
+        alert("error");
+      }
     });
-  }
+  });
+}
 
-  function reset_distrito($data){
-      var temporal_distrito = $(".col-distrito .temporal_distrito");
-      temporal_distrito.remove();
+function reset_distrito($data) {
+  var temporal_distrito = $(".col-distrito .temporal_distrito");
+  temporal_distrito.remove();
 
-      $("<div>", {
-          'class': 'temporal_distrito'
-      }).append(
-          $('<h6>', {
-              'class': 'subtitle',
-              'text': 'DISTRITO'
-          }),
-          $('<select>', {
-              'data-placeholder': 'Distrito',
-              'name':'cbx_distrito',
-              'id':'cbx_distrito',
-              'class':'chosen-select-deselect'
-          })
+  $("<div>", {
+    'class': 'temporal_distrito'
+  }).append(
+    $('<h6>', {
+      'class': 'subtitle',
+      'text': 'DISTRITO'
+    }),
+    $('<select>', {
+      'data-placeholder': 'Distrito',
+      'name': 'cbx_distrito',
+      'id': 'cbx_distrito',
+      'class': 'chosen-select-deselect'
+    })
 
-      ).appendTo('.col-distrito');
-      //).hide().appendTo('.col-distrito').fadeIn('fast');
+  ).appendTo('.col-distrito');
+  //).hide().appendTo('.col-distrito').fadeIn('fast');
 
-      var $select_elem = $("#cbx_distrito");
-      $select_elem.empty();
-      $select_elem.html($data);
-      $select_elem.chosen({
-        allow_single_deselect: true,
-        disable_search_threshold: 10,
-        no_results_text: "Oops, ningun resultado",
-        width: "95%"
-      });
-  }
+  var $select_elem = $("#cbx_distrito");
+  $select_elem.empty();
+  $select_elem.html($data);
+  $select_elem.chosen({
+    allow_single_deselect: true,
+    disable_search_threshold: 10,
+    no_results_text: "Oops, ningun resultado",
+    width: "95%"
+  });
+}
 
 /*********************************************************************************************************************************/
 //FUNCIONES 
 /*********************************************************************************************************************************/
+function get_data_form() {
+  //console.log("function seleccionado");
+  //$('#btn-save a').attr("disabled", true);
 
-function get_data_form(){
-    //console.log("function seleccionado");
-    //$('#btn-save a').attr("disabled", true);
+  var nFilas_address = $(".datos_direccion .row-agregado-address").length;
+  var nFilas_childs = $(".datos_hijos .row-agregado-child").length;
+  var form_edit = $('.form_edit').val();
+  var MPERS_APEPAT = $('#ape_pat').val().toUpperCase();
+  var MPERS_APEMAT = $('#ape_mat').val().toUpperCase();
+  var MPERS_NOMBRES = $('#nombres').val().toUpperCase();
+  var MPERS_TIPDOC = '1';
+  var MPERS_NUMDOC = $('#dni').val();
+  var MPERS_TIPOPER = '1';
+  var MDEPA_ID = $('#cbx_departamento').find('option:selected').prop('value');
+  var MPROV_ID = $('#cbx_provincia').find('option:selected').prop('value');
+  var MDIST_ID = $('#cbx_distrito').find('option:selected').prop('value');
+  var MPERS_FECNAC = $('#fecha_nacimiento input').val();
+  var MPERS_NACIONAL = $('#nacionalidad').val().toUpperCase();
+  var MPERS_SEXO = $('#cbx_sexo').find('option:selected').prop('value');
+  var MPERS_ESTACIVIL = $('#cbx_est_civil').find('option:selected').prop('value');
+  var MPERS_NOMCONYU = $('#nombre_conyugue').val().toUpperCase();
+  var MPERS_GRADINST = $('#grado_instruccion').find('option:selected').prop('value');
+  var MPERS_PROFESION = $('#profesion').val().toUpperCase();
+  var MPERS_ESPECIALID = $('#especialidad').val().toUpperCase();
+  var MPERS_MONTO = $('#monto').val();
+  var MPERS_MONTO = MPERS_MONTO.slice(4);
+  var MCARG_CODIGO = $('#cbx_cargo').find('option:selected').prop('value');
+  var MPERS_REGPENSION = $('#cbx_reg_pensiones').find('option:selected').prop('value');
+  var MPERS_REGLABORAL = $('#cbx_reg_laboral').find('option:selected').prop('value');
+  var MPERS_NIVREMUN = $('#nivel_remunerativo').val().toUpperCase();
+  var MPERS_FECREGIMEN = $('#fecha_regimen input').val().toUpperCase();
+  var MEST_CODIGO = $('#cbx_establecimiento').find('option:selected').prop('value');
+  var MPERS_EMAIL = $('#correo').val().toUpperCase();
+  var MPERS_GRUPOCUPAC = $('#cbx_grupo_ocupacional').find('option:selected').prop('value');
+  var MPERS_NUMUBI = $('#num_ubicacion').val();
+  var MPERS_FECINGR = $('#fecha_ingreso input').val();
+  var MPERS_NUMCONTRA = $('#num_contrato').val().toUpperCase();
+  var MPERS_NUMRUC = $('#num_ruc').val();
+  var MPERS_TELMOVIL = $('#num_celular').val();
+  var MPERS_NOMPADRE = $('#datos_padre').val().toUpperCase();
+  var MPERS_NOMMADRE = $('#datos_madre').val().toUpperCase();
+  var MPERS_DOMPADRES = $('#domicilio_padres').val().toUpperCase();
+  var MPERS_TELPADRES = $('#num_padres').val();
 
-    var nFilas_address = $(".datos_direccion .row-agregado-address").length;
-    var nFilas_childs = $(".datos_hijos .row-agregado-child").length;
+  if (MPERS_APEPAT == '') {
+    var mensaje = 'Debe ingresar el apellido paterno'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_APEMAT == '') {
+    var mensaje = 'Debe ingresar el apellido materno'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NOMBRES == '') {
+    var mensaje = 'Debe ingresar nombre completo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NUMDOC == '') {
+    var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (!isNumeric(MPERS_NUMDOC) || MPERS_NUMDOC.length != 8) {
+    var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MDEPA_ID == '' || MPROV_ID == '' || MDIST_ID == '') {
+    var mensaje = 'Debe seleccionar lugar de nacimiento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NACIONAL == '') {
+    var mensaje = 'Debe ingresar la nacionalidad'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_SEXO == '') {
+    var mensaje = 'Debe seleccionar el sexo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_ESTACIVIL == '') {
+    var mensaje = 'Debe seleccionar el estado civil'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_GRADINST == '') {
+    var mensaje = 'Debe seleccionar el grado de instrucción'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_MONTO == '0.00') {
+    var mensaje = 'Debe ingresar un monto'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MCARG_CODIGO == '') {
+    var mensaje = 'Debe seleccionar el cargo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_EMAIL !== '' && !validateEmail(MPERS_EMAIL)) {
+    var mensaje = 'Correo no valido'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_REGPENSION == '') {
+    var mensaje = 'Debe seleccionar el regimen de pensiones'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_REGLABORAL == '') {
+    var mensaje = 'Debe seleccionar el regimen laboral'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NIVREMUN == '') {
+    var mensaje = 'Debe seleccionar el nivel de remunerativo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MEST_CODIGO == '') {
+    var mensaje = 'Debe seleccionar el establecimiento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_GRUPOCUPAC == '') {
+    var mensaje = 'Debe seleccionar el grupo ocupacional'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NUMCONTRA == '') {
+    var mensaje = 'Debe ingresar el Número de contrtato'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NUMRUC == '') {
+    var mensaje = 'Debe ingresar el Número de R.U.C.'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (!isNumeric(MPERS_NUMRUC) || MPERS_NUMRUC.length != 11) {
+    var mensaje = 'Debe verificar el Número de R.U.C.'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  } else if (MPERS_NOMPADRE == '' || MPERS_NOMMADRE == '' || MPERS_DOMPADRES == '') {
+    var mensaje = 'Debe verificar los datos de los padres'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+  }
 
-    var MPERS_APEPAT=$('#ape_pat').val().toUpperCase();
-    var MPERS_APEMAT=$('#ape_mat').val().toUpperCase();
-    var MPERS_NOMBRES=$('#nombres').val().toUpperCase();
-    var MPERS_TIPDOC='1';
-    var MPERS_NUMDOC=$('#dni').val();
-    var MPERS_TIPOPER='1';
-    var MDEPA_ID=$('#cbx_departamento').find('option:selected').prop('value');
-    var MPROV_ID=$('#cbx_provincia').find('option:selected').prop('value');
-    var MDIST_ID=$('#cbx_distrito').find('option:selected').prop('value');
-    var MPERS_FECNAC=$('#fecha_nacimiento input').val();
-    var MPERS_NACIONAL=$('#nacionalidad').val().toUpperCase();
-    var MPERS_SEXO=$('#cbx_sexo').find('option:selected').prop('value');
-    var MPERS_ESTACIVIL=$('#cbx_est_civil').find('option:selected').prop('value');
-    var MPERS_NOMCONYU=$('#nombre_conyugue').val().toUpperCase();
-    var MPERS_GRADINST=$('#grado_instruccion').find('option:selected').prop('value');
-    var MPERS_PROFESION=$('#profesion').val().toUpperCase();
-    var MPERS_ESPECIALID=$('#especialidad').val().toUpperCase();
-    var MPERS_MONTO=$('#monto').val();
-    var MPERS_MONTO=MPERS_MONTO.slice(4);
-    var MCARG_CODIGO=$('#cbx_cargo').find('option:selected').prop('value');
-    var MPERS_REGPENSION=$('#cbx_reg_pensiones').find('option:selected').prop('value');
-    var MPERS_REGLABORAL=$('#cbx_reg_laboral').find('option:selected').prop('value');
-    var MPERS_NIVREMUN=$('#nivel_remunerativo').val().toUpperCase();
-    var MPERS_FECREGIMEN=$('#fecha_regimen input').val().toUpperCase();
-    var MEST_CODIGO=$('#cbx_establecimiento').find('option:selected').prop('value');
-    var MPERS_EMAIL=$('#correo').val().toUpperCase();
-    var MPERS_GRUPOCUPAC=$('#cbx_grupo_ocupacional').find('option:selected').prop('value');
-    var MPERS_NUMUBI=$('#num_ubicacion').val();
-    var MPERS_FECINGR=$('#fecha_ingreso input').val();
-    var MPERS_NUMCONTRA=$('#num_contrato').val().toUpperCase();
-    var MPERS_NUMRUC=$('#num_ruc').val();
-    var MPERS_TELMOVIL=$('#num_celular').val();
-    var MPERS_NOMPADRE=$('#datos_padre').val().toUpperCase();
-    var MPERS_NOMMADRE=$('#datos_madre').val().toUpperCase();
-    var MPERS_DOMPADRES=$('#domicilio_padres').val().toUpperCase();
-    var MPERS_TELPADRES=$('#num_padres').val();
-
-    if(MPERS_APEPAT ==''){
-      var mensaje = 'Debe ingresar el apellido paterno'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_APEMAT ==''){
-      var mensaje = 'Debe ingresar el apellido materno'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_NOMBRES ==''){
-      var mensaje = 'Debe ingresar nombre completo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_NUMDOC ==''){
-      var mensaje = 'Debe ingresar número de documento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(!isNumeric(MPERS_NUMDOC) || MPERS_NUMDOC.length != 8 ){
-      var mensaje = 'Verifique el número de documento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MDEPA_ID =='' || MPROV_ID =='' || MDIST_ID ==''){
-      var mensaje = 'Debe seleccionar lugar de nacimiento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_NACIONAL ==''){
-      var mensaje = 'Debe ingresar la nacionalidad'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_SEXO ==''){
-      var mensaje = 'Debe seleccionar el sexo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_ESTACIVIL ==''){
-      var mensaje = 'Debe seleccionar el estado civil'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_GRADINST ==''){
-      var mensaje = 'Debe seleccionar el grado de instrucción'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_MONTO =='0.00'){
-      var mensaje = 'Debe ingresar un monto'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MCARG_CODIGO ==''){
-      var mensaje = 'Debe seleccionar el cargo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_EMAIL !=='' && !validateEmail(MPERS_EMAIL)){
-      var mensaje = 'Correo no valido'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_REGPENSION ==''){
-      var mensaje = 'Debe seleccionar el regimen de pensiones'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_REGLABORAL ==''){
-      var mensaje = 'Debe seleccionar el regimen laboral'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_NIVREMUN ==''){
-      var mensaje = 'Debe seleccionar el nivel de remunerativo'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MEST_CODIGO ==''){
-      var mensaje = 'Debe seleccionar el establecimiento'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_GRUPOCUPAC ==''){
-      var mensaje = 'Debe seleccionar el grupo ocupacional'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_NUMCONTRA ==''){
-      var mensaje = 'Debe ingresar el Número de contrtato'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (MPERS_NUMRUC==''){
-      var mensaje = 'Debe ingresar el Número de R.U.C.'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if (!isNumeric(MPERS_NUMRUC) || MPERS_NUMRUC.length != 11){
-      var mensaje = 'Debe verificar el Número de R.U.C.'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }else if(MPERS_NOMPADRE=='' || MPERS_NOMMADRE=='' || MPERS_DOMPADRES==''){
-      var mensaje = 'Debe verificar los datos de los padres'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-    }
-
-  else{
+  else {
 
     var array = new Array();
     array.push(
-    MPERS_APEPAT,MPERS_APEMAT,MPERS_NOMBRES,MPERS_TIPDOC,
-    MPERS_NUMDOC,MPERS_TIPOPER,MDEPA_ID,MPROV_ID,MDIST_ID,MPERS_FECNAC,
-    MPERS_NACIONAL,MPERS_SEXO,MPERS_ESTACIVIL,MPERS_NOMCONYU,
-    MPERS_GRADINST, MPERS_PROFESION, MPERS_ESPECIALID, MPERS_MONTO, MCARG_CODIGO, MPERS_REGPENSION,
-    MPERS_REGLABORAL, MPERS_NIVREMUN, MPERS_FECREGIMEN, MEST_CODIGO, MPERS_EMAIL, MPERS_GRUPOCUPAC, MPERS_NUMUBI,
-    MPERS_FECINGR, MPERS_NUMCONTRA, MPERS_NUMRUC, MPERS_TELMOVIL,
-    MPERS_NOMPADRE,MPERS_NOMMADRE,MPERS_DOMPADRES,MPERS_TELPADRES,
-    nFilas_address,nFilas_childs
+      MPERS_APEPAT, MPERS_APEMAT, MPERS_NOMBRES, MPERS_TIPDOC,
+      MPERS_NUMDOC, MPERS_TIPOPER, MDEPA_ID, MPROV_ID, MDIST_ID, MPERS_FECNAC,
+      MPERS_NACIONAL, MPERS_SEXO, MPERS_ESTACIVIL, MPERS_NOMCONYU,
+      MPERS_GRADINST, MPERS_PROFESION, MPERS_ESPECIALID, MPERS_MONTO, MCARG_CODIGO, MPERS_REGPENSION,
+      MPERS_REGLABORAL, MPERS_NIVREMUN, MPERS_FECREGIMEN, MEST_CODIGO, MPERS_EMAIL, MPERS_GRUPOCUPAC, MPERS_NUMUBI,
+      MPERS_FECINGR, MPERS_NUMCONTRA, MPERS_NUMRUC, MPERS_TELMOVIL,
+      MPERS_NOMPADRE, MPERS_NOMMADRE, MPERS_DOMPADRES, MPERS_TELPADRES,
+      nFilas_address, nFilas_childs
     );
 
-        for (var i = 1; i <= nFilas_address; i++) {
-              var A_MDOM_NOMBRE = $(".datos_direccion .row-agregado-address:nth-child("+i+") input#domicilio").val().toUpperCase();
-              var A_MDIST_ID=$('.datos_direccion .row-agregado-address:nth-child('+i+') #cbx_distrito_filial').find('option:selected').prop('value');
-              var A_MDOM_REFERENCIA = $(".datos_direccion .row-agregado-address:nth-child("+i+") input#referencia").val().toUpperCase();
-              var A_MDOM_TELFIJO = $(".datos_direccion .row-agregado-address:nth-child("+i+") input#num_telefono").val();
+    for (var i = 1; i <= nFilas_address; i++) {
+      var A_MDOM_NOMBRE = $(".datos_direccion .row-agregado-address:nth-child(" + i + ") input#domicilio").val().toUpperCase();
+      var A_MDIST_ID = $('.datos_direccion .row-agregado-address:nth-child(' + i + ') #cbx_distrito_filial').find('option:selected').prop('value');
+      var A_MDOM_REFERENCIA = $(".datos_direccion .row-agregado-address:nth-child(" + i + ") input#referencia").val().toUpperCase();
+      var A_MDOM_TELFIJO = $(".datos_direccion .row-agregado-address:nth-child(" + i + ") input#num_telefono").val();
 
-              if(A_MDOM_NOMBRE.length == 0){
-                  var mensaje = 'Debe Ingresar el Domicilio'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-              }else if(A_MDIST_ID.length == 0){
-                  var mensaje = 'Debe Ingresar el Distrito'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-              }else if(A_MDOM_REFERENCIA.length == 0){
-                  var mensaje = 'Debe Ingresar la referencia'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-              }
+      if (A_MDOM_NOMBRE.length == 0) {
+        var mensaje = 'Debe Ingresar el Domicilio'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+      } else if (A_MDIST_ID.length == 0) {
+        var mensaje = 'Debe Ingresar el Distrito'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+      } else if (A_MDOM_REFERENCIA.length == 0) {
+        var mensaje = 'Debe Ingresar la referencia'; swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
+      }
 
-              array.push(A_MDOM_NOMBRE,A_MDIST_ID,A_MDOM_REFERENCIA,A_MDOM_TELFIJO);
-        }
+      array.push(A_MDOM_NOMBRE, A_MDIST_ID, A_MDOM_REFERENCIA, A_MDOM_TELFIJO);
+    }
 
-        for (var i = 1; i <= nFilas_childs; i++) {
-              var C_MFIL_APEHIJO = $(".datos_hijos .row-agregado-child:nth-child("+i+") input#apellidos_hijo").val().toUpperCase();
-              var C_MFIL_NOMHIJO = $(".datos_hijos .row-agregado-child:nth-child("+i+") input#nombres_hijo").val().toUpperCase();
-              var C_MFIL_FECNAC = $(".datos_hijos .row-agregado-child:nth-child("+i+") .fecha_hijo input").val();
-              var C_MFIL_SEXO=$(".datos_hijos .row-agregado-child:nth-child("+i+") #cbx_sexo_child").find("option:selected").prop("value");
-              var C_MFIL_ESSALUD = $(".datos_hijos .row-agregado-child:nth-child("+i+") input#txt_essalud_child").val().toUpperCase();
-              array.push(C_MFIL_APEHIJO,C_MFIL_NOMHIJO,C_MFIL_FECNAC,C_MFIL_SEXO,C_MFIL_ESSALUD);
-        }
+    for (var i = 1; i <= nFilas_childs; i++) {
+      var C_MFIL_APEHIJO = $(".datos_hijos .row-agregado-child:nth-child(" + i + ") input#apellidos_hijo").val().toUpperCase();
+      var C_MFIL_NOMHIJO = $(".datos_hijos .row-agregado-child:nth-child(" + i + ") input#nombres_hijo").val().toUpperCase();
+      var C_MFIL_FECNAC = $(".datos_hijos .row-agregado-child:nth-child(" + i + ") .fecha_hijo input").val();
+      var C_MFIL_SEXO = $(".datos_hijos .row-agregado-child:nth-child(" + i + ") #cbx_sexo_child").find("option:selected").prop("value");
+      var C_MFIL_ESSALUD = $(".datos_hijos .row-agregado-child:nth-child(" + i + ") input#txt_essalud_child").val().toUpperCase();
+      array.push(C_MFIL_APEHIJO, C_MFIL_NOMHIJO, C_MFIL_FECNAC, C_MFIL_SEXO, C_MFIL_ESSALUD);
+    }
 
-    //console.log(array);
+    if (form_edit == 0) {
+      var link = './public/user/ajax/secciones/seccioni.php?action=formulario&tipo=0';
+    } else {
+      var link = './public/user/ajax/secciones/seccioni.php?action=formulario&tipo=1';
+    }
+    //console.log(link);
     $.ajax({
-        type: 'POST',
-        url: './public/user/ajax/secciones/seccioni.php?action=formulario',
-        data: { 'data1':JSON.stringify(array) } ,
-        beforeSend: function(objeto){
-            before_process();
-        },
-        success: function (response) {
+      type: 'POST',
+      url: link,
+      data: { 'data1': JSON.stringify(array) },
+      beforeSend: function (objeto) {
+        before_process();
+      },
+      success: function (response) {
 
-            //console.log(response);
-            if(response ==0){
-              /*
-                subida_archivos(MPERS_NUMDOC,'2','FICHA DE RESUMEN','01','1');
-                subida_archivos(MPERS_NUMDOC,'2','FICHA DE ACTUALIZACIÓN DE PERSONAL','02','2');
-                subida_archivos(MPERS_NUMDOC,'2','SOLICITUD DE TRABAJO','03','3');
-                subida_archivos(MPERS_NUMDOC,'2','DECLARACIÓN JURADA DE BIENES Y RENTAS','04','4');
-                subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE SALUD','05','5');
-                subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE ANTECEDENTES JUDICIALES','06','6');
-                subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE ANTECEDENTES PENALES','07','7');
-                subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO','08','8');
-                subida_archivos(MPERS_NUMDOC,'2','COPIA DE DNI O LIBRETA ELECTORAL','09','9');
-                subida_archivos(MPERS_NUMDOC,'2','COPIA DE LIBRETA MILITAR','10','10');
-                subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DOMICILIARIO','11','11');
-                subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE MATRIMONIO','12','12');
-                subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI','13','13');
-                subida_archivos(MPERS_NUMDOC,'2','OTROS','14','14');
-              */
-                subida_realizada(0);
-                
-            } else{
-                after_process();
-                var mensaje = 'El usuario ya ha sido registrado';
-                swal_mensaje_error(mensaje); /*console.log(mensaje);*/ return false;
-                //console.log("ya esa ingresado");
-            }
-            
-            
-        },
-       error: function () {
-            alert("error");
+        //console.log(response);
+        if (response == 0) {
+          /*
+            subida_archivos(MPERS_NUMDOC,'2','FICHA DE RESUMEN','01','1');
+            subida_archivos(MPERS_NUMDOC,'2','FICHA DE ACTUALIZACIÓN DE PERSONAL','02','2');
+            subida_archivos(MPERS_NUMDOC,'2','SOLICITUD DE TRABAJO','03','3');
+            subida_archivos(MPERS_NUMDOC,'2','DECLARACIÓN JURADA DE BIENES Y RENTAS','04','4');
+            subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE SALUD','05','5');
+            subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE ANTECEDENTES JUDICIALES','06','6');
+            subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DE ANTECEDENTES PENALES','07','7');
+            subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO','08','8');
+            subida_archivos(MPERS_NUMDOC,'2','COPIA DE DNI O LIBRETA ELECTORAL','09','9');
+            subida_archivos(MPERS_NUMDOC,'2','COPIA DE LIBRETA MILITAR','10','10');
+            subida_archivos(MPERS_NUMDOC,'2','CERTIFICADO DOMICILIARIO','11','11');
+            subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE MATRIMONIO','12','12');
+            subida_archivos(MPERS_NUMDOC,'2','PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI','13','13');
+            subida_archivos(MPERS_NUMDOC,'2','OTROS','14','14');
+          */
+          subida_realizada(0);
+
+        } else {
+          after_process();
+          var mensaje = 'El usuario ya ha sido registrado';
+          swal_mensaje_error(mensaje); return false;
         }
+
+      },
+      error: function () {
+        alert("error");
+      }
     }); //AJAX
 
-   } //FIN ELSE
+  } //FIN ELSE
 
 
 
 } //FUNCTION
 
-
-
-
 /*********************************************************************************************************************************/
 //LOAD IMAGES
 /*********************************************************************************************************************************/
+function subida_realizada(i) {
+  var MPERS_NUMDOC = $('#dni').val();
+  var MOBJ_ID = '2';
 
+  var archivos = [
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'FICHA DE RESUMEN', arc: '01', num: '0101' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'FICHA DE ACTUALIZACIÓN DE PERSONAL', arc: '02', num: '0102' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'SOLICITUD DE TRABAJO', arc: '03', num: '0103' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'DECLARACIÓN JURADA DE BIENES Y RENTAS', arc: '04', num: '0104' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'CERTIFICADO DE SALUD', arc: '05', num: '0105' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'CERTIFICADO DE ANTECEDENTES JUDICIALES', arc: '06', num: '0106' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'CERTIFICADO DE ANTECEDENTES PENALES', arc: '07', num: '0107' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO', arc: '08', num: '0108' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'COPIA DE DNI O LIBRETA ELECTORAL', arc: '09', num: '0109' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'COPIA DE LIBRETA MILITAR', arc: '10', num: '0110' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'CERTIFICADO DOMICILIARIO', arc: '11', num: '0111' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'PARTIDA DE MATRIMONIO', arc: '12', num: '0112' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI', arc: '13', num: '0113' },
+    { dni: MPERS_NUMDOC, obj: MOBJ_ID, nom: 'OTROS', arc: '14', num: '0114' }
+  ];
 
+  var inew = Number(i) + 1;
+  var maxi = archivos.length
 
-function subida_realizada(i){
-  var MPERS_NUMDOC=$('#dni').val();    
-  var MOBJ_ID='2';
-
-  var archivos = [ 
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'FICHA DE RESUMEN', arc : '01', fil : '1'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'FICHA DE ACTUALIZACIÓN DE PERSONAL', arc : '02', fil : '2'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'SOLICITUD DE TRABAJO', arc : '03', fil : '3'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'DECLARACIÓN JURADA DE BIENES Y RENTAS', arc : '04', fil : '4'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'CERTIFICADO DE SALUD', arc : '05', fil : '5'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'CERTIFICADO DE ANTECEDENTES JUDICIALES', arc : '06', fil : '6'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'CERTIFICADO DE ANTECEDENTES PENALES', arc : '07', fil : '7'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO', arc : '08', fil : '8'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'COPIA DE DNI O LIBRETA ELECTORAL', arc : '09', fil : '9'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'COPIA DE LIBRETA MILITAR', arc : '10', fil : '10'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'CERTIFICADO DOMICILIARIO', arc : '11', fil : '11'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'PARTIDA DE MATRIMONIO', arc : '12', fil : '12'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI', arc : '13', fil : '13'},
-      {dni : MPERS_NUMDOC, obj : MOBJ_ID, nom : 'OTROS', arc : '14', fil : '14'}
-    ];  
-
-  var inew= Number(i)+1;
-  var maxi= archivos.length
-
-  if (inew <= maxi ){
+  if (inew <= maxi) {
     for (var n = i; i < inew; i++) {
-          console.log(archivos[i].fil);
-          subida_archivos(archivos[i].dni,archivos[i].obj,archivos[i].nom,archivos[i].arc,archivos[i].fil,i);
+      console.log(archivos[i].num);
+      subida_archivos(archivos[i].dni, archivos[i].obj, archivos[i].nom, archivos[i].arc, zeroPad(archivos[i].num, 4), i);
     }
-  }else{
-      after_process();
-      var mensaje= "Se guardo el registro satisfactoriamente";
-      swal_mensaje_success(mensaje);
+  } else {
+    save_click = 0;
+    console.log(save_click);
+    after_process();
+    var mensaje = "Se guardo el registro satisfactoriamente";
+    swal_mensaje_success(mensaje);
   }
 
 }
 
-
-function subida_archivos(dni,obj,nombre,arch,num,i){
-  var formulario= '.formulario_'+num;
-  var file= '#file-'+num;
-  var archivo = formulario +' '+ file;
+function subida_archivos(dni, obj, nombre, arch, num, i) {
+  var form_edit = $('.form_edit').val();
+  var formulario = '.formulario_' + num;
+  var file = '#file-' + num;
+  var archivo = formulario + ' ' + file;
   //console.log(dni,nombre,obj,formulario,file,'_',archivo);
   var file1 = $(archivo)[0].files[0];
-      if (file1 !== undefined) {
-          var MPERS_NUMDOC = dni;
-          var MADJ_NOMBRES = nombre;
-          var MOBJ_ID = obj;
-          var fileName = file1.name;
-          /*var fileSize = file1.size;
-          var fileType = file1.type;*/
-          var formData = new FormData($(formulario)[0]);
-          formData.append('MPERS_NUMDOC',MPERS_NUMDOC);
-          formData.append('MADJ_NOMBRES',MADJ_NOMBRES);
-          formData.append('MOBJ_ID',MOBJ_ID);
-          formData.append('MADJ_URL',fileName);
-          formData.append('MARCH_ID',arch);
+  if (file1 !== undefined) {
+    var MPERS_NUMDOC = dni;
+    var MADJ_NOMBRES = nombre;
+    var MOBJ_ID = obj;
+    var fileName = file1.name;
+    /*var fileSize = file1.size;
+    var fileType = file1.type;*/
+    var formData = new FormData($(formulario)[0]);
+    formData.append('MPERS_NUMDOC', MPERS_NUMDOC);
+    formData.append('MADJ_NOMBRES', MADJ_NOMBRES);
+    formData.append('MOBJ_ID', MOBJ_ID);
+    formData.append('MADJ_URL', fileName);
+    formData.append('MARCH_ID', arch);
 
-          $.ajax({
-              url: './public/user/ajax/includes/upload.php?type=data_imagen',
-              type: 'POST',
-              data: formData,
-              cache: false,
-              contentType: false,
-              processData: false,
-              success: function(data){
-                  var inew = Number(i)+1;
-                  subida_realizada(inew);
-              },
-          });
-      }else{
-        //console.log("error");
-        var inew = Number(i)+1;
+    if (form_edit == 0) {
+      var link = './public/user/ajax/includes/upload.php?type=data_imagen&tipo=0';
+    } else {
+      var link = './public/user/ajax/includes/upload.php?type=data_imagen&tipo=1';
+    }
+
+    $.ajax({
+      url: link,
+      type: 'POST',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        var inew = Number(i) + 1;
         subida_realizada(inew);
-      }
+      },
+    });
+  } else {
+    //console.log("error");
+    var inew = Number(i) + 1;
+    subida_realizada(inew);
+  }
 
 }
 
@@ -602,3 +607,7 @@ function subida_1(){
 }
 
 */
+
+
+
+//}); /*FIN READY FUNCTION*/

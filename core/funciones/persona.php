@@ -151,6 +151,13 @@ class Persona
 	    sqlsrv_free_stmt( $registros);
 	}
 
+	public static function EliminarPersona($dni){
+		$db = new Conexion();
+	    $query="UPDATE MPERSONA SET MPERS_ESTADO='0' WHERE MPERS_NUMDOC='$dni'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt( $registros);
+	}
+
 	public static function Busqueda_persona_dni($dni){
 		$db = new Conexion();
 		$query="SELECT * FROM dbo.MPERSONA WHERE MPERS_NUMDOC='$dni'";
@@ -216,6 +223,22 @@ class Persona
 		$db = new Conexion();
 		$query="SELECT MFIL_ID,MPERS_NUMDOC,MFIL_APEHIJO,MFIL_NOMHIJO,MFIL_FECNAC,MFIL_SEXO,MFIL_ESSALUD,MFIL_ESTADO 
 		FROM MFILIAL WHERE MPERS_NUMDOC='$dni' AND MFIL_ESTADO='1' ORDER BY MFIL_ID ";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) { $tabla[] = $row; }
+		}
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
+	}
+
+	public static function Listar_MADJUNTOS($dni,$MOBJ_ID){
+		$db = new Conexion();
+		$query="SELECT MADJ_ID,MPERS_NUMDOC,MOBJ_ID,MARCH_ID,MADJ_NOMBRES,MADJ_URL,MADJ_ESTADO 
+		FROM MADJUNTOS WHERE MPERS_NUMDOC='$dni' AND MOBJ_ID='$MOBJ_ID' AND MADJ_ESTADO='1' ORDER BY MADJ_ID";
 		$registros = sqlsrv_query($db->getConecta(), $query);
 		if($registros === false ){
 		  $tabla = false;
@@ -496,6 +519,13 @@ class Domicilio extends Persona
 		$registros = sqlsrv_query($db->getConecta(), $query);
 	    sqlsrv_free_stmt($registros);
 	}
+	public static function EliminarDomicilio($dni){
+		$db = new Conexion();
+	    $query="UPDATE MDOMICILIO SET MDOM_ESTADO='0' WHERE MPERS_NUMDOC='$dni'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt( $registros);
+	}
+
 
 }
 
@@ -520,7 +550,6 @@ class Filial extends Persona
 		$this->MFIL_ESSALUD=$MFIL_ESSALUD;
 		$this->MFIL_ESTADO=$MFIL_ESTADO;
 	}
-
 	public function IngresarFilial(){
 	    $db = new Conexion();
 	    $query="INSERT INTO MFILIAL(MPERS_NUMDOC,MFIL_APEHIJO,MFIL_NOMHIJO,MFIL_FECNAC,MFIL_SEXO,MFIL_ESSALUD,MFIL_ESTADO)
@@ -534,7 +563,13 @@ class Filial extends Persona
 		'$this->MFIL_ESTADO')";
 
 		$registros = sqlsrv_query($db->getConecta(), $query);
-	    sqlsrv_free_stmt($registros);
+		sqlsrv_free_stmt($registros);
+	}
+	public static function EliminarFilial($dni){
+		$db = new Conexion();
+	    $query="UPDATE MFILIAL SET MFIL_ESTADO='0' WHERE MPERS_NUMDOC='$dni'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt( $registros);
 	}
 
 }
@@ -578,24 +613,27 @@ class Estudio extends Persona
 	    sqlsrv_free_stmt($registros);
 	}
 
+	public static function Eliminar_Estudios($dni,$tipo){
+		$db = new Conexion();
+	    $query="UPDATE MESTUDIOS SET MESTU_ESTADO='0' WHERE MPERS_NUMDOC='$dni' AND MESTU_TIPO='$tipo'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt( $registros);
+	}
+
 	public static function Busqueda_estudios_dni($dni,$tipo){
 		$db = new Conexion();
-		$query="SELECT * FROM dbo.MESTUDIOS WHERE MPERS_NUMDOC='$dni' AND MESTU_TIPO='$tipo' ";
+		$query="SELECT MESTU_ID,MPERS_NUMDOC,MTABL_ID,MESTU_DESC,MESTU_ESPE,MESTU_UBIC,MESTU_ESTADO,MESTU_TIPO 
+		FROM dbo.MESTUDIOS WHERE MPERS_NUMDOC='$dni' AND MESTU_TIPO='$tipo' AND MESTU_ESTADO='1'";
 		$registros = sqlsrv_query($db->getConecta(), $query);
 		if($registros === false ){
-		  $tabla = false;
+		$tabla = false;
 		} else {
-		  while($row= sqlsrv_fetch_array($registros)) {
-		      $tabla[$row['MESTU_ID']] = $row;
-		      }
-		     // return $tabla;
-		  }
+		while($row= sqlsrv_fetch_array($registros)) { $tabla[] = $row; }
+		}
 		if (!isset($tabla)) {$tabla='';}
 		return $tabla;
 		sqlsrv_free_stmt( $registros);
-		//sqlsrv_close($db);
 	}
-
 }
 
 
@@ -631,6 +669,32 @@ class Adjunto extends Persona
 
 		$registros = sqlsrv_query($db->getConecta(), $query);
 	    sqlsrv_free_stmt($registros);
+	}
+
+	public static function EliminarAdjuntos($dni,$MOBJ_ID,$MARCH_ID){
+		$db = new Conexion();
+	    $query="UPDATE MADJUNTOS SET MADJ_ESTADO='0' WHERE MOBJ_ID='$MOBJ_ID' AND MARCH_ID='$MARCH_ID' and  MPERS_NUMDOC='$dni'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+	    sqlsrv_free_stmt( $registros);
+	}
+
+	
+	public static function Busqueda_adjuntos($dni,$MOBJ_ID,$MARCH_ID){
+		$db = new Conexion();
+		$query="SELECT * FROM MADJUNTOS WHERE MPERS_NUMDOC='$dni' AND MOBJ_ID='$MOBJ_ID' AND MARCH_ID='$MARCH_ID' AND MADJ_ESTADO='1'";
+		$registros = sqlsrv_query($db->getConecta(), $query);
+		if($registros === false ){
+		  $tabla = false;
+		} else {
+		  while($row= sqlsrv_fetch_array($registros)) {
+		      $tabla[$row['MADJ_ID']] = $row;
+		      }
+		     // return $tabla;
+		  }
+		if (!isset($tabla)) {$tabla='';}
+		return $tabla;
+		sqlsrv_free_stmt( $registros);
+		//sqlsrv_close($db);
 	}
 
 	public function IngresarFoto(){
@@ -892,7 +956,7 @@ class Resumen
 
 	public static function Busqueda_resumen_dni($dni,$mob_id){
 		$db = new Conexion();
-		$query="select * from [dbo].[MRESUMEN] WHERE MPERS_NUMDOC='$dni' AND MOBJ_ID='$mob_id' AND MRES_ESTADO='1'";
+		$query="select * from MRESUMEN WHERE MPERS_NUMDOC='$dni' AND MOBJ_ID='$mob_id' AND MRES_ESTADO='1'";
 		$registros = sqlsrv_query($db->getConecta(), $query);
 		if($registros === false ){
 		  $tabla = false;

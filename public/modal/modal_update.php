@@ -21,21 +21,21 @@
 					<input type="hidden" class="update_dni">
 							<div class="col-md-12">
 									<ul class="lista-menu-legajos-2 no-padding">
-										<li><a onclick="editar_1()"><i class="fa fa-edit"></i><h5>Filiación E Identificación de Personal</h5></a></li>
-										<li><a href="./seccionii"><i class="fa fa-edit"></i><h5>Nivel Educativo</h5></a></li>
-										<li><a href="./seccioniii"><i class="fa fa-edit"></i><h5>Capacitación</h5></a></li>
-										<li><a href="./seccioniv"><i class="fa fa-edit"></i><h5>Contratos y Nombramientos</h5></a></li>
-										<li><a href="./seccionv"><i class="fa fa-edit"></i><h5>Renuncia y Liquidaciones</h5></a></li>
-										<li><a href="./seccionvi"><i class="fa fa-edit"></i><h5>Desplazamientos y cargos desempeñados</h5></a></li>
-										<li><a href="./seccionvii"><i class="fa fa-edit"></i><h5>Licencias</h5></a></li>
-										<li><a href="./seccionviii"><i class="fa fa-edit"></i><h5>Vacaciones</h5></a></li>
-										<li><a href="./seccionix"><i class="fa fa-edit"></i><h5>Ascensos</h5></a></li>
-										<li><a href="./seccionx"><i class="fa fa-edit"></i><h5>Remuneración Personal</h5></a></li>
-										<li><a href="./seccionxi"><i class="fa fa-edit"></i><h5>Remuneración Familiar</h5></a></li>
-										<li><a href="./seccionxii"><i class="fa fa-edit"></i><h5>Evaluaciones</h5></a></li>
-										<li><a href="./seccionxiii"><i class="fa fa-edit"></i><h5>Meritos</h5></a></li>
-										<li><a href="./seccionxiv"><i class="fa fa-edit"></i><h5>Demeritos</h5></a></li>
-										<li><a href="./seccionxv"><i class="fa fa-edit"></i><h5>Otros</h5></a></li>
+										<li><a onclick="editar(1)"><i class="fa fa-edit"></i><h5>Filiación E Identificación de Personal</h5></a></li>
+										<li><a onclick="editar(2)"><i class="fa fa-edit"></i><h5>Nivel Educativo</h5></a></li>
+										<li><a onclick="editar(3)"><i class="fa fa-edit"></i><h5>Capacitación</h5></a></li>
+										<li><a onclick="editar(4)"><i class="fa fa-edit"></i><h5>Contratos y Nombramientos</h5></a></li>
+										<li><a onclick="editar(5)"><i class="fa fa-edit"></i><h5>Renuncia y Liquidaciones</h5></a></li>
+										<li><a onclick="editar(6)"><i class="fa fa-edit"></i><h5>Desplazamientos y cargos desempeñados</h5></a></li>
+										<li><a onclick="editar(7)"><i class="fa fa-edit"></i><h5>Licencias</h5></a></li>
+										<li><a onclick="editar(8)"><i class="fa fa-edit"></i><h5>Vacaciones</h5></a></li>
+										<li><a onclick="editar(9)"><i class="fa fa-edit"></i><h5>Ascensos</h5></a></li>
+										<li><a onclick="editar(10)"><i class="fa fa-edit"></i><h5>Remuneración Personal</h5></a></li>
+										<li><a onclick="editar(11)"><i class="fa fa-edit"></i><h5>Remuneración Familiar</h5></a></li>
+										<li><a onclick="editar(12)"><i class="fa fa-edit"></i><h5>Evaluaciones</h5></a></li>
+										<li><a onclick="editar(13)"><i class="fa fa-edit"></i><h5>Meritos</h5></a></li>
+										<li><a onclick="editar(14)"><i class="fa fa-edit"></i><h5>Demeritos</h5></a></li>
+										<li><a onclick="editar(15)"><i class="fa fa-edit"></i><h5>Otros</h5></a></li>
 									</ul>
               </div>
 				  </div>

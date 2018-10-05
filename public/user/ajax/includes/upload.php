@@ -6,6 +6,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 }else{
     require_once('../../../../core/core.php');
     $type = isset($_GET['type']) ?  $_GET['type'] : 'default';
+    $tipo = isset($_GET['tipo']) ?  $_GET['tipo'] : 'default';
 
     switch($type){
         case 'data_imagen':
@@ -21,7 +22,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
                 $MARCH_ID = $_POST['MARCH_ID'];
                 $file = myUrlEncode(eliminar_tildes($_FILES['archivo']['name']));
                 $time = time();
-                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file.'_'.$time;
+                $file = $time.'_'.$MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file;
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
                 if(!is_dir("files/".$MPERS_NUMDOC."")) 
@@ -32,8 +33,19 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
                    sleep(3);//retrasamos la petición 3 segundos
                    echo $file;//devolvemos el nombre del archivo para pintar la imagen
                 }
-                $adjunto = new Adjunto($MPERS_NUMDOC, $MOBJ_ID, $MARCH_ID, $MADJ_NOMBRES, $file, 1);
-                $adjunto ->IngresarAdjuntos();
+
+                if($tipo =='0'){
+                    $adjunto = new Adjunto($MPERS_NUMDOC, $MOBJ_ID, $MARCH_ID, $MADJ_NOMBRES, $file, 1);
+                    $adjunto ->IngresarAdjuntos();
+                }else{
+                    $Busqueda_adjuntos = Adjunto::Busqueda_adjuntos($MPERS_NUMDOC,$MOBJ_ID,$MARCH_ID);
+                    if(!empty($Busqueda_adjuntos)){
+                    $EliminarAdjuntos = Adjunto::EliminarAdjuntos($MPERS_NUMDOC,$MOBJ_ID,$MARCH_ID);
+                    }
+                    $adjunto = new Adjunto($MPERS_NUMDOC, $MOBJ_ID, $MARCH_ID, $MADJ_NOMBRES, $file, 1);
+                    $adjunto ->IngresarAdjuntos();
+                }
+                
             }else{
                 throw new Exception("Error Processing Request", 1);   
             }
@@ -53,7 +65,8 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
                 $MARCH_ID = $_POST['MARCH_ID'];
                 $file = myUrlEncode(eliminar_tildes($_FILES['archivo']['name']));
                 $time = time();
-                $file = $MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file.'_'.$time;
+                $file = $time.'_'.$MPERS_NUMDOC.'_'.$MARCH_ID.'_'.$file;
+                
                 //comprobamos si existe un directorio para subir el archivo
                 //si no es así, lo creamos
                 if(!is_dir("files/".$MPERS_NUMDOC."")) 

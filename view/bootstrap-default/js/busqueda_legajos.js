@@ -53,13 +53,37 @@
     $(".update_dni").val(zeroPad(dni,8));
   }
 
-  function editar_1(){
+  /*
+  function editar(){
     var MPERS_NUMDOC=$('.update_dni').val();
     var new_dni= utf8_to_b64(zeroPad(MPERS_NUMDOC,8));
     var parametros = 'd='+new_dni;
     window.location.href = './seccioni?'+parametros; 
   }
+*/
+  //const helloWorld = () => 'Hello World!';
 
+  const editar = (param) =>{
+    let MPERS_NUMDOC=$('.update_dni').val();
+    let new_dni= utf8_to_b64(zeroPad(MPERS_NUMDOC,8));
+    let parametros = 'd='+new_dni;
+    let seccion = 'seccion'+romanize(param).toLowerCase()+'?'+parametros; 
+    window.location.href = './'+seccion; 
+  }
+
+  function romanize (num) {
+    if (!+num)
+        return false;
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
 
   function SubirFoto(){
     before_process();

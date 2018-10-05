@@ -7,6 +7,7 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 	require_once('../../../../core/core.php');
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
+	$tipo = (isset($_REQUEST['tipo'])&& $_REQUEST['tipo'] !=NULL)?$_REQUEST['tipo']:'';
 
 	if($action == 'formulario'){
 
@@ -47,12 +48,40 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 
 /*PROCESO DE GUARDADO*/
 		$MOBJ_ID='3';
-		$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
-		//$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'E');
-		if($Existe_Persona ==''){
 
-		for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
-			
+		if($tipo == '0'){ //NEW
+			$Existe_Persona = Resumen::Busqueda_resumen_dni($MPERS_NUMDOC,$MOBJ_ID);
+			//$Existe_Persona = Estudio::Busqueda_estudios_dni($MPERS_NUMDOC,'E');
+			if($Existe_Persona ==''){
+
+			for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
+				
+					$estudios1= new Estudio(
+						$MPERS_NUMDOC,
+						$MTABL_ID[$i],
+						$MESTU_DESC[$i],
+						$MESTU_ESPE[$i],
+						$MESTU_UBIC[$i],
+						1,
+						'E'
+					);
+					$estudios1->IngresarEstudios();
+			}	
+
+			$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
+			$summary->In();
+
+			echo '0';
+			}
+			else{
+			echo '1';
+			}
+
+		}else{
+
+			$Eliminar_Estudios = Estudio::Eliminar_Estudios($MPERS_NUMDOC,'E');
+			for ($i=0; $i <= ($nFilas_childs-1); $i++) { 
+				
 				$estudios1= new Estudio(
 					$MPERS_NUMDOC,
 					$MTABL_ID[$i],
@@ -62,18 +91,11 @@ if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 					1,
 					'E'
 				);
-				$estudios1->IngresarEstudios();
+			$estudios1->IngresarEstudios();
 		}	
 
-		$summary = new Resumen($MPERS_NUMDOC,$MOBJ_ID,'1');
-		$summary->In();
 
-		echo '0';
-		}else{
-
-		echo '1';
 		}
-
 	} //IF ACTION
 }//ELSE
 

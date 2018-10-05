@@ -15,9 +15,9 @@ $dni = base64_decode($dni);
 $MPERSONA = Persona::Listar_MPERSONA($dni);
 $MDOMICILIO = Persona::Listar_MDOMICILIO($dni);
 $MFILIAL = Persona::Listar_MFILIAL($dni);
-//var_dump($MPERSONA);
+$MADJUNTO = Persona::Listar_MADJUNTOS($dni,2);
 
-if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
+if ( $dni!='' && !empty($MPERSONA)) {?>
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -27,7 +27,6 @@ if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
       <div class="row">
         <?php include('./public/overall/menu-legajos.php');?>
       </div><!--row-->
-
       <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
@@ -35,6 +34,7 @@ if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
               <div>
                   <h3 class="text-center">FILIACIÓN E IDENTIFICACIÓN PERSONAL</h3>
               </div>
+              <input type="hidden" class="form_edit" value='1'>
               <div>
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_1" role="button" aria-expanded="true" aria-controls="legajos_1">
                   <i class="fa fa-plus"></i> INFORMACIÓN PERSONAL</h5> <!-- FILIAL -->
@@ -109,10 +109,10 @@ if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
                   <div class="col-md-2 border-seccion">
                     <h5>DOC. IDENTIDAD <i class="danger">*</i></h5>
                     <div class="group">      
-                        <input class="inputMaterial" type="text"  id="dni" name="dni" required value="<?php echo $MPERSONA[0][8];?>">
+                        <input class="inputMaterial" type="text"  id="dni" name="dni" required value="<?php echo $MPERSONA[0][8];?>" readonly>
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>DNI</label>
+                        <label style="top: -20px; color: #3399FF;">DNI</label>
                     </div>
                   </div>
                   <!-- ./SECOND-->
@@ -349,12 +349,12 @@ if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
                                 </select>
                         </div>
                         <div class="col-md-3 border-seccion">
-                        <div class="group">      
-                            <input class="inputMaterial" type="text"  id="referencia" name="referencia" required value="<?php echo $MDOMICILIO[0][4];?>">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>REFERENCIA <i class="danger">*</i></label>
-                        </div>
+                            <div class="group">      
+                                <input class="inputMaterial" type="text"  id="referencia" name="referencia" required value="<?php echo $MDOMICILIO[0][4];?>">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>REFERENCIA <i class="danger">*</i></label>
+                            </div>
                         </div>
                         <div class="col-md-2 border-seccion relative">
                             <div class="group">      
@@ -466,160 +466,257 @@ if ( $dni!='' && !empty($MPERSONA) && !empty($MDOMICILIO)) {?>
               <div id="legajos_4" class="collapse row border-seccion-left border-seccion-right border-seccion-top border-seccion-bottom">
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">FICHA DE RESUMEN</h5>
-                          <form enctype="multipart/form-data" class="formulario_001">
-                              <input name="archivo" type="file" id="file-001" class="inputfile inputfile-6"/>
-                              <label for="file-001" class="mar-bot-0" style="height: 40px">
-                                <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
+                          <h5 class="input-file-title inline">FICHA DE RESUMEN</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='1'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0101">
+                              <input name="archivo" type="file" id="file-0101" class="inputfile inputfile-6"/>
+                              <label for="file-0101" class="mar-bot-0" style="height: 40px">
+                                <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='1'){ echo substr($valor[5],23); } } ?></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">FICHA DE ACTUALIZACION DE PERSONAL</h5>
-                          <form enctype="multipart/form-data" class="formulario_002">
-                              <input name="archivo" type="file" id="file-002" class="inputfile inputfile-6" />
-                              <label for="file-002" class="mar-bot-0" style="height: 40px">
-                                <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
+                          <h5 class="input-file-title inline">FICHA DE ACTUALIZACION DE PERSONAL</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='2'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0102">
+                              <input name="archivo" type="file" id="file-0102" class="inputfile inputfile-6" />
+                              <label for="file-0102" class="mar-bot-0" style="height: 40px">
+                                <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='2'){ echo substr($valor[5],23); } } ?></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">SOLICITUD DE TRABAJO</h5>
-                          <form enctype="multipart/form-data" class="formulario_003">
-                              <input name="archivo" type="file" id="file-003" class="inputfile inputfile-6" />
-                              <label for="file-003" class="mar-bot-0" style="height: 40px">
-                                <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
+                          <h5 class="input-file-title inline">SOLICITUD DE TRABAJO</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='3'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0103">
+                              <input name="archivo" type="file" id="file-0103" class="inputfile inputfile-6" />
+                              <label for="file-0103" class="mar-bot-0" style="height: 40px">
+                                <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='3'){ echo substr($valor[5],23); } } ?></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">DECLARACIÓN JURADA DE BIENES Y RENTAS</h5>
-                          <form enctype="multipart/form-data" class="formulario_004">
-                              <input name="archivo" type="file" id="file-004" class="inputfile inputfile-6"/>
-                              <label for="file-004" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">DECLARACIÓN JURADA DE BIENES Y RENTAS</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='4'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0104">
+                              <input name="archivo" type="file" id="file-0104" class="inputfile inputfile-6"/>
+                              <label for="file-0104" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='4'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">CERTIFICADO DE SALUD</h5>
-                          <form enctype="multipart/form-data" class="formulario_005">
-                              <input name="archivo" type="file" id="file-005" class="inputfile inputfile-6" />
-                              <label for="file-005" class="mar-bot-0" style="height: 40px">
-                              <span class="demo"></span>
+                          <h5 class="input-file-title inline">CERTIFICADO DE SALUD</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='5'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0105">
+                              <input name="archivo" type="file" id="file-0105" class="inputfile inputfile-6" />
+                              <label for="file-0105" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='5'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">CERTIFICADO DE ANTECEDENTES JUDICIALES</h5>
-                          <form enctype="multipart/form-data" class="formulario_006">
-                              <input name="archivo" type="file" id="file-006" class="inputfile inputfile-6" />
-                              <label for="file-006" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">CERTIFICADO DE ANTECEDENTES JUDICIALES</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='6'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0106">
+                              <input name="archivo" type="file" id="file-0106" class="inputfile inputfile-6" />
+                              <label for="file-0106" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='6'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">CERTIFICADO DE ANTECEDENTES PENALES</h5>
-                          <form enctype="multipart/form-data" class="formulario_007">
-                              <input name="archivo" type="file" id="file-007" class="inputfile inputfile-6" />
-                              <label for="file-007" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">CERTIFICADO DE ANTECEDENTES PENALES</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='7'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0107">
+                              <input name="archivo" type="file" id="file-0107" class="inputfile inputfile-6" />
+                              <label for="file-0107" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='7'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO</h5>
-                          <form enctype="multipart/form-data" class="formulario_008">
-                              <input name="archivo" type="file" id="file-008" class="inputfile inputfile-6" />
-                              <label for="file-008" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='8'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0108">
+                              <input name="archivo" type="file" id="file-0108" class="inputfile inputfile-6" />
+                              <label for="file-0108" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='8'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">COPIA DE DNI O LIBRETA ELECTORAL</h5>
-                          <form enctype="multipart/form-data" class="formulario_009">
-                              <input name="archivo" type="file" id="file-009" class="inputfile inputfile-6" />
-                              <label for="file-009" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">COPIA DE DNI O LIBRETA ELECTORAL</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='9'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0109">
+                              <input name="archivo" type="file" id="file-0109" class="inputfile inputfile-6" />
+                              <label for="file-0109" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='9'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">COPIA DE LIBRETA MILITAR</h5>
-                          <form enctype="multipart/form-data" class="formulario_010">
-                              <input name="archivo" type="file" id="file-010" class="inputfile inputfile-6" />
-                              <label for="file-010" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">COPIA DE LIBRETA MILITAR</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='10'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0110">
+                              <input name="archivo" type="file" id="file-0110" class="inputfile inputfile-6" />
+                              <label for="file-0110" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='10'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">CERTIFICADO DOMICILIARIO</h5>
-                          <form enctype="multipart/form-data" class="formulario_011">
-                              <input name="archivo" type="file" id="file-011" class="inputfile inputfile-6" />
-                              <label for="file-011" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">CERTIFICADO DOMICILIARIO</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='11'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0111">
+                              <input name="archivo" type="file" id="file-0111" class="inputfile inputfile-6" />
+                              <label for="file-0111" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='11'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">PARTIDA DE MATRIMONIO</h5>
-                          <form enctype="multipart/form-data" class="formulario_012">
-                              <input name="archivo" type="file" id="file-012" class="inputfile inputfile-6" />
-                              <label for="file-012" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">PARTIDA DE MATRIMONIO</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='12'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0112">
+                              <input name="archivo" type="file" id="file-0112" class="inputfile inputfile-6" />
+                              <label for="file-0112" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='12'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI</h5>
-                          <form enctype="multipart/form-data" class="formulario_013">
-                              <input name="archivo" type="file" id="file-013" class="inputfile inputfile-6" />
-                              <label for="file-013" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='13'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0113">
+                              <input name="archivo" type="file" id="file-0113" class="inputfile inputfile-6" />
+                              <label for="file-0113" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='13'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
-                          <h5 class="input-file-title">OTROS</h5>
-                          <form enctype="multipart/form-data" class="formulario_014">
-                              <input name="archivo" type="file" id="file-014" class="inputfile inputfile-6" />
-                              <label for="file-014" class="mar-bot-0" style="height: 40px">
-                              <span></span>
+                          <h5 class="input-file-title inline">OTROS</h5>
+                          <?php
+                          foreach($MADJUNTO as $key=>$valor){
+                            if((int)$valor[3] =='14'){
+                                echo '(<a href="'.URL_ADJUNTOS.'/'.$dni.'/'.$valor[5].'" download class="color-1"><i class="fa fa-arrow-down"></i>Descarga</a>)';
+                                }
+                            }
+                          ?>
+                          <form enctype="multipart/form-data" class="formulario_0114">
+                              <input name="archivo" type="file" id="file-0114" class="inputfile inputfile-6" />
+                              <label for="file-0114" class="mar-bot-0" style="height: 40px">
+                              <span><?php foreach($MADJUNTO as $key=>$valor){ if((int)$valor[3] =='14'){ echo substr($valor[5],23); } } ?></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
                       </div>
                   </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -655,6 +752,7 @@ $cbx_sexo_child = $MFILIAL[0][5];
   <script>
     var $ = jQuery.noConflict();
     $(document).ready(function(){
+        document.getElementById('dni').readOnly = true;
         $("#fecha_nacimiento").datepicker({
             autoclose: true, 
             todayHighlight: true,
@@ -730,7 +828,15 @@ $cbx_sexo_child = $MFILIAL[0][5];
                 url: './public/user/ajax/includes/get_ubicacion.php?action=get_distrito',
                 data: { Id_provincia: $parameter } ,
                 success: function (data) {
-                    reset_distrito(data);
+                    var $select_elem = $("#cbx_distrito");
+                    $select_elem.empty();
+                    $select_elem.html(data);
+                    $select_elem.chosen({
+                        allow_single_deselect: true,
+                        disable_search_threshold: 10,
+                        no_results_text: "Oops, ningun resultado",
+                        width: "95%"
+                    });
                     $("#cbx_distrito").val('<?php echo $MPERSONA[0][7];?>').trigger("chosen:updated");
                 },
                 error: function () {
@@ -802,6 +908,7 @@ $j=2; while ($j <= $num_filial) {?>
               <div>
                   <h3 class="text-center">FILIACIÓN E IDENTIFICACIÓN PERSONAL</h3>
               </div>
+              <input type="hidden" class="form_edit" value='0'>
               <div>
                   <h5 class="subtitle-form subtitle-collapse" aria-expanded="true" data-toggle="collapse" href="#legajos_1" role="button" aria-expanded="true" aria-controls="legajos_1">
                   <i class="fa fa-plus"></i> INFORMACIÓN PERSONAL</h5> <!-- FILIAL -->
@@ -1233,9 +1340,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">FICHA DE RESUMEN</h5>
-                          <form enctype="multipart/form-data" class="formulario_1">
-                              <input name="archivo" type="file" id="file-1" class="inputfile inputfile-6"/>
-                              <label for="file-1" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0101">
+                              <input name="archivo" type="file" id="file-0101" class="inputfile inputfile-6"/>
+                              <label for="file-0101" class="mar-bot-0" style="height: 40px">
                                 <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
@@ -1244,9 +1351,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">FICHA DE ACTUALIZACION DE PERSONAL</h5>
-                          <form enctype="multipart/form-data" class="formulario_2">
-                              <input name="archivo" type="file" id="file-2" class="inputfile inputfile-6" />
-                              <label for="file-2" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0102">
+                              <input name="archivo" type="file" id="file-0102" class="inputfile inputfile-6" />
+                              <label for="file-0102" class="mar-bot-0" style="height: 40px">
                                 <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
@@ -1255,9 +1362,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">SOLICITUD DE TRABAJO</h5>
-                          <form enctype="multipart/form-data" class="formulario_3">
-                              <input name="archivo" type="file" id="file-3" class="inputfile inputfile-6" />
-                              <label for="file-3" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0103">
+                              <input name="archivo" type="file" id="file-0103" class="inputfile inputfile-6" />
+                              <label for="file-0103" class="mar-bot-0" style="height: 40px">
                                 <span></span><strong><i class="fa fa-plus"></i> Subir Archivo</strong>
                               </label>
                           </form>
@@ -1266,9 +1373,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">DECLARACIÓN JURADA DE BIENES Y RENTAS</h5>
-                          <form enctype="multipart/form-data" class="formulario_4">
-                              <input name="archivo" type="file" id="file-4" class="inputfile inputfile-6"/>
-                              <label for="file-4" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0104">
+                              <input name="archivo" type="file" id="file-0104" class="inputfile inputfile-6"/>
+                              <label for="file-0104" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1277,9 +1384,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">CERTIFICADO DE SALUD</h5>
-                          <form enctype="multipart/form-data" class="formulario_5">
-                              <input name="archivo" type="file" id="file-5" class="inputfile inputfile-6" />
-                              <label for="file-5" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0105">
+                              <input name="archivo" type="file" id="file-0105" class="inputfile inputfile-6" />
+                              <label for="file-0105" class="mar-bot-0" style="height: 40px">
                               <span class="demo"></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1288,9 +1395,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">CERTIFICADO DE ANTECEDENTES JUDICIALES</h5>
-                          <form enctype="multipart/form-data" class="formulario_6">
-                              <input name="archivo" type="file" id="file-6" class="inputfile inputfile-6" />
-                              <label for="file-6" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0106">
+                              <input name="archivo" type="file" id="file-0106" class="inputfile inputfile-6" />
+                              <label for="file-0106" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1299,9 +1406,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">CERTIFICADO DE ANTECEDENTES PENALES</h5>
-                          <form enctype="multipart/form-data" class="formulario_7">
-                              <input name="archivo" type="file" id="file-7" class="inputfile inputfile-6" />
-                              <label for="file-7" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0107">
+                              <input name="archivo" type="file" id="file-0107" class="inputfile inputfile-6" />
+                              <label for="file-0107" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1310,9 +1417,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">PARTIDA DE NACIMIENTO O BAUTIZO LEGALIZADO</h5>
-                          <form enctype="multipart/form-data" class="formulario_8">
-                              <input name="archivo" type="file" id="file-8" class="inputfile inputfile-6" />
-                              <label for="file-8" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0108">
+                              <input name="archivo" type="file" id="file-0108" class="inputfile inputfile-6" />
+                              <label for="file-0108" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1321,9 +1428,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">COPIA DE DNI O LIBRETA ELECTORAL</h5>
-                          <form enctype="multipart/form-data" class="formulario_9">
-                              <input name="archivo" type="file" id="file-9" class="inputfile inputfile-6" />
-                              <label for="file-9" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0109">
+                              <input name="archivo" type="file" id="file-0109" class="inputfile inputfile-6" />
+                              <label for="file-0109" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1332,9 +1439,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">COPIA DE LIBRETA MILITAR</h5>
-                          <form enctype="multipart/form-data" class="formulario_10">
-                              <input name="archivo" type="file" id="file-010" class="inputfile inputfile-6" />
-                              <label for="file-10" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0110">
+                              <input name="archivo" type="file" id="file-0110" class="inputfile inputfile-6" />
+                              <label for="file-0110" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1343,9 +1450,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">CERTIFICADO DOMICILIARIO</h5>
-                          <form enctype="multipart/form-data" class="formulario_11">
-                              <input name="archivo" type="file" id="file-11" class="inputfile inputfile-6" />
-                              <label for="file-11" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0111">
+                              <input name="archivo" type="file" id="file-0111" class="inputfile inputfile-6" />
+                              <label for="file-0111" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1354,9 +1461,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">PARTIDA DE MATRIMONIO</h5>
-                          <form enctype="multipart/form-data" class="formulario_12">
-                              <input name="archivo" type="file" id="file-12" class="inputfile inputfile-6" />
-                              <label for="file-12" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0112">
+                              <input name="archivo" type="file" id="file-0112" class="inputfile inputfile-6" />
+                              <label for="file-0112" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1365,9 +1472,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">PARTIDA DE NACIMIENTO DE LOS HIJOS - DNI</h5>
-                          <form enctype="multipart/form-data" class="formulario_13">
-                              <input name="archivo" type="file" id="file-13" class="inputfile inputfile-6" />
-                              <label for="file-13" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0113">
+                              <input name="archivo" type="file" id="file-0113" class="inputfile inputfile-6" />
+                              <label for="file-0113" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
@@ -1376,9 +1483,9 @@ $j=2; while ($j <= $num_filial) {?>
                   <div class="col-md-4 border-seccion">
                       <div class="js pad-top-10">
                           <h5 class="input-file-title">OTROS</h5>
-                          <form enctype="multipart/form-data" class="formulario_14">
-                              <input name="archivo" type="file" id="file-14" class="inputfile inputfile-6" />
-                              <label for="file-14" class="mar-bot-0" style="height: 40px">
+                          <form enctype="multipart/form-data" class="formulario_0114">
+                              <input name="archivo" type="file" id="file-0114" class="inputfile inputfile-6" />
+                              <label for="file-0114" class="mar-bot-0" style="height: 40px">
                               <span></span>
                               <strong><i class="fa fa-plus"></i> Subir Archivo</strong></label>
                           </form>
